@@ -26,10 +26,15 @@ The platform connects **donors, charity staff, and administrators** to make clot
 
 ## Set Up
 -- Open Visual Studio Code
+
 -- Press clone repisitory - git clone https://github.com/dyzzie0/LetUsDonate.uk 
+
 -- Select folder and open it 
+
 -- Open terminal type cd let-us-donate-uk
+
 -- npm install
+
 -- npm run dev
 
 ---
