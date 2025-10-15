@@ -25,19 +25,12 @@ The platform connects **donors, charity staff, and administrators** to make clot
 ---
 
 ## Set Up
-- Open terminal and go to where you want to keep the project cd ~/LetUsDonate.uk
-- If the folder doesnt exist, yet create it: mkdir -p ~/LetUsDonate.uk
-- cd ~/LetUsDonate.uk
-- git clone https://github.com/dyzzie0/LetUsDonate.uk.git
-- cd LetUsDonate.uk
-- cd let-us-donate-uk
-- ls
-- npm install
-- npm run dev
--
--
--
--
+-- Open Visual Studio Code
+-- Press clone repisitory - git clone 
+-- Select folder and open it 
+-- Open terminal type cd let-us-donate-uk
+-- npm install
+-- npm run dev
 
 ---
 
