@@ -22,15 +22,15 @@ The platform connects **donors, charity staff, and administrators** to make clot
 ---
 
 ## Tech Stack
--- Frontend:** React.js + Vite
+-- Frontend: React.js + Vite
 
--- Backend:** PHP  
+-- Backend: PHP  
 
--- Database:** MySQL  
+-- Database: MySQL  
 
--- Version Control:** Git & GitHub  
+-- Version Control: Git & GitHub  
 
--- Methodology:** Agile (Scrum)  
+-- Methodology: Agile (Scrum)  
 
 ---
 
