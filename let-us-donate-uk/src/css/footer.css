@@ -1,34 +1,28 @@
 .footer {
-    padding: 150px 100px;
-    background-color:light-dark(#79998D, #556c64);
-    position: relative;
-    text-align: center;
+  padding: 150px 100px;
+  background-color: light-dark(#79998d, #556c64);
+  position: relative;
+  text-align: center;
   /*clip-path: polygon(0 15%, 100% 0, 100% 85%, 0 100%);*/
 }
-  
-  .footer-content {
-    max-width: 900px;
-    margin: 0 auto;
-  }
-  
-  .footer-content p {
-    font-size: 30x;
-    letter-spacing: 0.5px;
-    line-height: 1.8;
-    color: #ffffff;
 
-  }
-  
-  .footer-content a {
-    font-style: italic;
-    font-weight: 500;
-  }
-  
-  .footer-content a:hover {
-    text-decoration: underline;
-  }
-  
-  
-  
+.footer-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
 
-  
+.footer-content p {
+  font-size: 30x;
+  letter-spacing: 0.5px;
+  line-height: 1.8;
+  color: #ffffff;
+}
+
+.footer-content a {
+  font-style: italic;
+  font-weight: 500;
+}
+
+.footer-content a:hover {
+  text-decoration: underline;
+}
