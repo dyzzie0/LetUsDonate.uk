@@ -51,6 +51,6 @@ The platform connects **donors, charity staff, and administrators** to make clot
 
 -- npm run dev
 
---- 
+---
 
 npx prettier . --write

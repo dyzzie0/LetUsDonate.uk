@@ -4,7 +4,8 @@
   position: relative;
 }
 
-a:link, a:visited {
+a:link,
+a:visited {
   color: inherit;
   text-decoration: none;
 }
@@ -45,7 +46,6 @@ li {
   cursor: pointer;
   display: flex;
   color: #ffffff;
-  
 }
 
 h1 {
@@ -55,7 +55,8 @@ h1 {
   color: #ffffff;
 }
 
-.h1,i {
+.h1,
+i {
   color: #23452c;
   font-size: 60px;
 }
@@ -105,13 +106,14 @@ h1 {
   margin: 20px 0;
 }
 
-.dropdown_links, p {
+.dropdown_links,
+p {
   margin-bottom: 50px;
   font-size: 16px;
 }
 
 .dropdown_links li a:hover {
-  color:#8aa377;
+  color: #8aa377;
 }
 
 .dropdown_links li a {

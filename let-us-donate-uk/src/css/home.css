@@ -11,7 +11,8 @@
 
 /* Buttons */
 
-.joinus, .login {
+.joinus,
+.login {
   font-size: 30px;
   cursor: pointer;
   text-align: center;
@@ -21,11 +22,12 @@
   transition: background-color 0.3s ease;
 }
 
-.joinus:hover, .login:hover {
-  background-color:light-dark(#8aa377, #656c5c);
+.joinus:hover,
+.login:hover {
+  background-color: light-dark(#8aa377, #656c5c);
 }
 
-.or  h3{
+.or h3 {
   font-size: 20px;
   padding: 10px;
   text-align: center;
@@ -65,7 +67,6 @@
 .charities {
   padding: 80px 100px;
   text-align: center;
-  
 }
 
 .charity_text {
@@ -95,7 +96,8 @@
   margin-top: 50px;
 }
 
-.impact_info1, .impact_info2 {
+.impact_info1,
+.impact_info2 {
   flex: 1 1 300px;
   text-align: center;
   font-size: 20px;
@@ -131,14 +133,22 @@
   counter-reset: step;
 }
 
-.step1, .step2, .step3, .step4, .step5 {
+.step1,
+.step2,
+.step3,
+.step4,
+.step5 {
   position: relative;
   padding: 25px 25px 25px 70px;
   border-radius: 8px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
 }
 
-.step1::before, .step2::before, .step3::before, .step4::before, .step5::before {
+.step1::before,
+.step2::before,
+.step3::before,
+.step4::before,
+.step5::before {
   content: counter(step);
   counter-increment: step;
   position: absolute;
@@ -154,12 +164,20 @@
   font-weight: 600;
 }
 
-.step1 h2, .step2 h2, .step3 h2, .step4 h2, .step5 h2 {
+.step1 h2,
+.step2 h2,
+.step3 h2,
+.step4 h2,
+.step5 h2 {
   font-size: 20px;
   margin-bottom: 8px;
 }
 
-.step1 p, .step2 p, .step3 p, .step4 p, .step5 p {
+.step1 p,
+.step2 p,
+.step3 p,
+.step4 p,
+.step5 p {
   font-size: 15px;
   line-height: 1.6;
 }
@@ -220,7 +238,7 @@
   transition: color 0.3s;
 }
 .Please_Donate a:hover {
-  color: light-dark(#8aa377,  #656c5c);
+  color: light-dark(#8aa377, #656c5c);
 }
 
 /*Image3 Section */
@@ -238,7 +256,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px; 
+  gap: 15px;
   max-width: 400px;
 }
 
@@ -267,9 +285,6 @@
   margin-bottom: 50px;
 }
 
-
-
-
 /* Mobile screens */
 
 @media (max-width: 600px) {
@@ -278,7 +293,8 @@
     margin: 10px;
   }
 
-  .joinus, .login {
+  .joinus,
+  .login {
     font-size: 20px;
     padding: 10px 30px;
     max-width: 150px;
@@ -306,12 +322,14 @@
     padding: 30px 10px;
   }
 
-  .impact_info1, .impact_info2 {
+  .impact_info1,
+  .impact_info2 {
     font-size: 16px;
     padding: 30px;
   }
 
-  .image2 img, .image3 img {
+  .image2 img,
+  .image3 img {
     width: 100%;
   }
 
@@ -319,7 +337,11 @@
     gap: 20px;
   }
 
-  .step1, .step2, .step3, .step4, .step5 {
+  .step1,
+  .step2,
+  .step3,
+  .step4,
+  .step5 {
     padding: 20px;
   }
 
@@ -345,4 +367,3 @@
     font-size: 14px;
   }
 }
-
