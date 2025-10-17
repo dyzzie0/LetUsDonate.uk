@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../../css/home.css';
+import '../../css/mobile.css';
 import DonateImg from '../../images/Donate.png';
+import DonateImg2 from '../../images/Donate2.png';
+import DonateImg3 from '../../images/Donate3.png';
+import DonateImg4 from '../../images/Donate4.png';
+
 
 function Home() {
   const comment = [
     'I had so many clothes I never wore — this made it easy to donate them!',
-    'Super convenient and I love that it helps real charities.',
-    'No more plastic bags through the door. So much better.',
+    'Super convenient and I love that it helps real charities!',
+    'No more plastic bags through the door. So much better!',
   ];
 
   const [currentComment, setCurrentComment] = useState(0);
@@ -24,7 +29,7 @@ function Home() {
     <section className="home" id="home">
       <div className="home_content">
         <div className="joinus">
-          <Link to="/sign_up" className="joinus_btn">
+          <Link to="/sign_up">
             Join Us
           </Link>
         </div>
@@ -32,7 +37,7 @@ function Home() {
           <h2>or</h2>
         </div>
         <div className="login">
-          <Link to="/login" className="login_btn">
+          <Link to="/login">
             Login
           </Link>
         </div>
@@ -58,17 +63,17 @@ function Home() {
           </p>
         </div>
         <div className="image">
-          <img src={DonateImg} alt="Why donate clothes" />
+          <img src={DonateImg} alt=""/>
         </div>
       </div>
 
       <div className="charities">
         <h2>Charities we are working with...</h2>
         <div className="charity_text">
-          <p>text</p>
-          <p>text</p>
-          <p>text</p>
-          <p>text</p>
+          <p>WearAgain Foundation<br></br>Helps low-income families by providing gently used clothes for work, school, and daily life.</p>
+          <p>Threads of Hope UK<br></br>Supports refugees and homeless individuals with essential clothing and footwear.</p>
+          <p>SecondChance Wardrobe<br></br>Collects and redistributes quality fashion items to women’s shelters and youth hostels.</p>
+          <p>GreenStitch Collective<br></br>Focuses on textile recycling and promoting sustainable fashion initiatives.</p>
         </div>
       </div>
 
@@ -86,36 +91,41 @@ function Home() {
         </div>
       </div>
 
-      <div className="image">
-        <img src={DonateImg} alt="Why donate clothes" />
-      </div>
-
+     
       <div className="Header">
-        <h2>How it Works</h2>
+      <div className="image2">
+          <img src={DonateImg2} alt="" />
+        </div>
+<div id="howitworks" >
+        <h2>How it Works </h2>
         <p>Donating Clothes The Easy Way</p>
+  
+        
 
         <div className="how_works_content">
           <div className="steps_container">
             <div className="step1">
-              <h2>Log your donation</h2>
-              <p>Follow the simple steps once logged in ...</p>
+              <h3>Log your donation</h3>
+              <p>Follow the simple steps once logged in to record your clothing donation online. Add short descriptions or photos so we know what you’re giving — it only takes a minute.</p>
             </div>
             <div className="step2">
-              <h2>Bag up your clothes</h2>
-              <p>Pop your clean, pre-loved clothes into any bag or box...</p>
-              <div className="image"></div>
+              <h3>Bag up your clothes</h3>
+              <p>Pop your clean, pre-loved clothes into any bag or box. Make sure everything’s washed and ready to be re-loved by someone new.</p>
+              <div className="image3">
+                <img src={DonateImg4} alt="" />
+              </div>
             </div>
             <div className="step3">
-              <h2>We collect or you drop off</h2>
-              <p>On your chosen day, we’ll either collect your donation...</p>
+              <h3>We collect or you drop off</h3>
+              <p>On your chosen day, we’ll either collect your donation or you can drop it off at one of our partner charity locations. You’ll get a reminder with your collection details</p>
             </div>
             <div className="step4">
-              <h2>We process your donation</h2>
-              <p>Once approved, our partner charities carefully sort...</p>
+              <h3>We process your donation</h3>
+              <p>Once approved, our partner charities carefully sort, categorise, and prepare your items for redistribution or resale to ensure they reach the right people.</p>
             </div>
             <div className="step5">
-              <h2>Our charity — and the planet — benefit</h2>
-              <p>Once your clothes are reused or resold...</p>
+              <h3>Our charity — and the planet — benefit</h3>
+              <p>Once your clothes are reused or resold, your chosen charity receives direct support, and you can track your sustainability impact — from CO₂ saved to people helped.</p>
             </div>
           </div>
           <div className="Please_Donate">
@@ -157,28 +167,30 @@ function Home() {
             <ul>
               <li>
                 <Link to="/FAQ" className="">
-                  What makes LetUsDonate different?
-                </Link>
+                  What makes LetUsDonate different?<br/>
+                </Link> <br/>
               </li>
               <li>
                 <Link to="/FAQ" className="">
-                  What can I donate?{' '}
-                </Link>
+                  What can I donate?<br/>
+                </Link><br/>
               </li>
               <li>
                 <Link to="/FAQ" className="">
-                  How do I book a collection?
-                </Link>
+                  How do I book a collection?<br/>
+                </Link><br/>
               </li>
               <li>
                 <Link to="/FAQ" className="">
-                  How much money goes to my chosen charity?
-                </Link>
+                  How much money goes to my chosen charity?<br/>
+                </Link><br/>
               </li>
             </ul>
           </div>
         </div>
       </div>
+      </div>
+
 
       <div className="Header">
         <h2>What people have to say about us</h2>
@@ -188,16 +200,17 @@ function Home() {
       </div>
 
       <div className="home_content">
-        <div className="image">
-          <img src="" alt="img" />
+      <div className="image3">
+          <img src={DonateImg3} alt="" />
         </div>
-        <div className="why_text">
+       
+        <div className="ready_text">
           <p>
             Ready to free up space in your wardrobe — and leave your heart
             happy?
           </p>
           <div className="joinus">
-            <Link to="/sign_up" className="joinus_btn">
+            <Link to="/sign_up">
               Join Us
             </Link>
           </div>
@@ -205,7 +218,7 @@ function Home() {
             <h3>or</h3>
           </div>
           <div className="login">
-            <Link to="/login" className="login_btn">
+            <Link to="/login">
               Login
             </Link>
           </div>

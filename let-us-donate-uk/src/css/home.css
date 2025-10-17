@@ -1,32 +1,38 @@
+/* Home Page Styles */
+
 .home_content {
   display: flex;
   align-items: center;
-  justify-content: left;
-  gap: 20px;
-  padding: 100px 70px;
-  margin: 20px;
+  justify-content: center;
+  gap: 50px;
+  padding: 100px 50px;
+  text-align: center;
 }
 
-.joinus,
-.login {
+/* Buttons */
+
+.joinus, .login {
   font-size: 30px;
   cursor: pointer;
   text-align: center;
   padding: 10px 60px;
   border-radius: 5px;
-  background-color: light-dark(#f3ead3, #79998d);
+  background-color: light-dark(#fef7e4, #2a3631);
   transition: background-color 0.3s ease;
 }
 
-.joinus:hover,
-.login:hover {
-  background-color: #c8d5b9;
+.joinus:hover, .login:hover {
+  background-color:light-dark(#8aa377, #656c5c);
 }
 
-.or {
+.or  h3{
   font-size: 20px;
+  padding: 10px;
   text-align: center;
+  margin: 0;
 }
+
+/* Why Donate Section */
 
 .why_donate {
   display: flex;
@@ -37,15 +43,15 @@
   padding: 80px 100px;
 }
 
-.why_text p {
-  font-size: 20px;
-  text-align: left;
-}
-
 .why_text h2 {
   font-size: 40px;
   text-align: left;
   margin-bottom: 20px;
+}
+
+.why_text p {
+  font-size: 20px;
+  text-align: left;
 }
 
 .image img {
@@ -54,18 +60,12 @@
   border-radius: 10px;
 }
 
+/* Charities Section */
+
 .charities {
   padding: 80px 100px;
   text-align: center;
-}
-
-.charity_text p {
-  font-size: 18px;
-  text-align: center;
-  margin: 40px 0;
-  padding: 50px 20px;
-  background-color: light-dark(#88ab9eaa, #424846);
-  border-radius: 5px;
+  
 }
 
 .charity_text {
@@ -75,10 +75,17 @@
   padding: 40px;
 }
 
-.Header {
-  padding: 80px 100px;
+.charity_text p {
+  font-size: 18px;
   text-align: center;
+  margin: 40px 0;
+  padding: 50px 20px;
+  background-color: light-dark(#f1f7ea, #424846);
+  border-radius: 5px;
 }
+
+/* Impact Section */
+
 .impact_row {
   display: flex;
   justify-content: space-around;
@@ -88,42 +95,24 @@
   margin-top: 50px;
 }
 
-.impact_info1,
-.impact_info2 {
+.impact_info1, .impact_info2 {
   flex: 1 1 300px;
   text-align: center;
   font-size: 20px;
   padding: 60px;
-  background-color: light-dark(#ebe9e5, #424846);
   border-radius: 10px;
 }
 
-.comments p {
-  margin: 40px 60px;
-  padding: 100px 60px;
-  text-align: center;
-  position: relative;
-  background-color: light-dark(#ece9e0, #79998d);
-  border-radius: 5px;
-  font-size: 20px;
-}
+/*Image2 Section */
 
-.Header {
-  text-align: center;
-  padding: 60px 40px;
-}
-
-.Header h2 {
-  font-size: 36px;
-  font-weight: 600;
-  color: #3a3a3a;
-}
-
-.Header p {
-  font-size: 18px;
-
+.image2 img {
+  width: 1000px;
+  height: auto;
+  border-radius: 10px;
   margin-bottom: 50px;
 }
+
+/* How It Works Section */
 
 .how_works_content {
   display: flex;
@@ -142,22 +131,14 @@
   counter-reset: step;
 }
 
-.step1,
-.step2,
-.step3,
-.step4,
-.step5 {
+.step1, .step2, .step3, .step4, .step5 {
   position: relative;
   padding: 25px 25px 25px 70px;
   border-radius: 8px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
 }
 
-.step1::before,
-.step2::before,
-.step3::before,
-.step4::before,
-.step5::before {
+.step1::before, .step2::before, .step3::before, .step4::before, .step5::before {
   content: counter(step);
   counter-increment: step;
   position: absolute;
@@ -173,20 +154,12 @@
   font-weight: 600;
 }
 
-.step1 h2,
-.step2 h2,
-.step3 h2,
-.step4 h2,
-.step5 h2 {
+.step1 h2, .step2 h2, .step3 h2, .step4 h2, .step5 h2 {
   font-size: 20px;
   margin-bottom: 8px;
 }
 
-.step1 p,
-.step2 p,
-.step3 p,
-.step4 p,
-.step5 p {
+.step1 p, .step2 p, .step3 p, .step4 p, .step5 p {
   font-size: 15px;
   line-height: 1.6;
 }
@@ -201,15 +174,18 @@
   margin: 15px 0;
   border-radius: 10px;
 }
+
+/* Please Donate Section Right */
+
 .Please_Donate {
   flex: 1;
-  background-color: #ffffff;
-  padding: 40px;
-  font-size: 15px;
+  padding: 50px 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  font-size: 16px;
   line-height: 1.8;
-  border-radius: 5px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
-  text-align: left;
+  max-width: 700px;
+  margin: 0 auto;
 }
 
 .Please_Donate h3 {
@@ -229,6 +205,7 @@
 
 .Please_Donate li {
   margin-bottom: 6px;
+  text-align: center;
 }
 
 .Please_Donate p {
@@ -237,11 +214,135 @@
 }
 
 .Please_Donate a {
-  color: #004b87;
+  color: light-dark(#656c5c, #8aa377);
   text-decoration: underline;
   cursor: pointer;
   transition: color 0.3s;
 }
 .Please_Donate a:hover {
-  color: #002f55;
+  color: light-dark(#8aa377,  #656c5c);
 }
+
+/*Image3 Section */
+
+.image3 img {
+  width: 500px;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 50px;
+}
+
+/* Comments Section */
+
+.ready_text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px; 
+  max-width: 400px;
+}
+
+.comments p {
+  margin: 40px 60px;
+  padding: 100px 60px;
+  text-align: center;
+  position: relative;
+  background-color: light-dark(#f1f7ea, #424846);
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+.Header {
+  text-align: center;
+  padding: 60px 40px;
+}
+
+.Header h2 {
+  font-size: 36px;
+  font-weight: 600;
+}
+
+.Header p {
+  font-size: 18px;
+  margin-bottom: 50px;
+}
+
+
+
+
+/* Mobile screens */
+
+@media (max-width: 600px) {
+  .home_content {
+    padding: 40px 20px;
+    margin: 10px;
+  }
+
+  .joinus, .login {
+    font-size: 20px;
+    padding: 10px 30px;
+    max-width: 150px;
+  }
+
+  .why_donate {
+    padding: 40px 20px;
+    gap: 20px;
+  }
+
+  .why_text h2 {
+    font-size: 28px;
+  }
+
+  .why_text p {
+    font-size: 16px;
+  }
+
+  .image img {
+    width: 100%;
+  }
+
+  .charity_text p {
+    font-size: 16px;
+    padding: 30px 10px;
+  }
+
+  .impact_info1, .impact_info2 {
+    font-size: 16px;
+    padding: 30px;
+  }
+
+  .image2 img, .image3 img {
+    width: 100%;
+  }
+
+  .steps_container {
+    gap: 20px;
+  }
+
+  .step1, .step2, .step3, .step4, .step5 {
+    padding: 20px;
+  }
+
+  .Please_Donate {
+    padding: 20px;
+    font-size: 14px;
+  }
+
+  .Please_Donate h3 {
+    font-size: 18px;
+  }
+
+  .comments p {
+    padding: 40px 20px;
+    font-size: 16px;
+  }
+
+  .Header h2 {
+    font-size: 24px;
+  }
+
+  .Header p {
+    font-size: 14px;
+  }
+}
+

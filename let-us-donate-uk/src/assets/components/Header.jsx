@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../../css/header.css';
+import '../../css/mobile.css';
 import { Link } from 'react-router-dom';
 
 function Header() {
@@ -24,7 +25,7 @@ function Header() {
 
         <div className="nav_right">
           <div className="how">
-            <a href="#how">How does this work?</a>
+            <a href="#howitworks">How does this work?</a>
           </div>
           <div className="menu_text" onClick={() => setMenuOpen(!menuOpen)}>
             {menuOpen ? 'Close ✕' : 'Menu'}
