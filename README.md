@@ -43,7 +43,7 @@ The platform connects **donors, charity staff, and administrators** to make clot
 
 -- Open terminal type cd let-us-donate-uk
 
---npm install react-router-dom
+-- npm install react-router-dom
 
 -- npm install
 
