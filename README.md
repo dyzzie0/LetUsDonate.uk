@@ -6,6 +6,7 @@ The platform connects **donors, charity staff, and administrators** to make clot
 ---
 
 ## Features
+
 -- Donors can log donations (with optional images).
 
 -- Charity staff can approve/decline donations and manage inventory.
@@ -18,32 +19,33 @@ The platform connects **donors, charity staff, and administrators** to make clot
 
 -- mResponsive design (desktop + mobile).
 
-
 ---
 
 ## Tech Stack
+
 -- Frontend: React.js + Vite
 
--- Backend: PHP  
+-- Backend: PHP
 
--- Database: MySQL  
+-- Database: MySQL
 
--- Version Control: Git & GitHub  
+-- Version Control: Git & GitHub
 
--- Methodology: Agile (Scrum)  
+-- Methodology: Agile (Scrum)
 
 ---
 
 ## Set Up
+
 -- Open Visual Studio Code
 
--- Press clone repisitory - git clone https://github.com/dyzzie0/LetUsDonate.uk 
+-- Press clone repisitory - git clone https://github.com/dyzzie0/LetUsDonate.uk
 
--- Select folder and open it 
+-- Select folder and open it
 
 -- Open terminal type cd let-us-donate-uk
 
---npm install react-router-dom
+-- npm install react-router-dom
 
 -- npm install
 
@@ -51,3 +53,4 @@ The platform connects **donors, charity staff, and administrators** to make clot
 
 ---
 
+npx prettier . --write
