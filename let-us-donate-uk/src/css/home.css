@@ -1,79 +1,369 @@
+/* Home Page Styles */
+
 .home_content {
-    display: flex;
-    align-items: center;
-    justify-content: left;
-    gap: 20px;
-    padding: 50px 100px;
-    margin: 20px;
-  }
-  
-  .joinus, .signup {
-    font-size: 30px;
-    cursor: pointer;
-    text-align: center;
-    padding: 10px 20px;
-    border-radius: 5px;
-    background-color: #F3EAD3; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  padding: 100px 50px;
+  text-align: center;
+}
+
+/* Buttons */
+
+.joinus,
+.login {
+  font-size: 30px;
+  cursor: pointer;
+  text-align: center;
+  padding: 10px 60px;
+  border-radius: 5px;
+  background-color: light-dark(#fef7e4, #2a3631);
+  transition: background-color 0.3s ease;
+}
+
+.joinus:hover,
+.login:hover {
+  background-color: light-dark(#8aa377, #656c5c);
+}
+
+.or h3 {
+  font-size: 20px;
+  padding: 10px;
+  text-align: center;
+  margin: 0;
+}
+
+/* Why Donate Section */
+
+.why_donate {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 80px 100px;
+}
+
+.why_text h2 {
+  font-size: 40px;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.why_text p {
+  font-size: 20px;
+  text-align: left;
+}
+
+.image img {
+  width: 500px;
+  height: auto;
+  border-radius: 10px;
+}
+
+/* Charities Section */
+
+.charities {
+  padding: 80px 100px;
+  text-align: center;
+}
+
+.charity_text {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding: 40px;
+}
+
+.charity_text p {
+  font-size: 18px;
+  text-align: center;
+  margin: 40px 0;
+  padding: 50px 20px;
+  background-color: light-dark(#f1f7ea, #424846);
+  border-radius: 5px;
+}
+
+/* Impact Section */
+
+.impact_row {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-top: 50px;
+}
+
+.impact_info1,
+.impact_info2 {
+  flex: 1 1 300px;
+  text-align: center;
+  font-size: 20px;
+  padding: 60px;
+  border-radius: 10px;
+}
+
+/*Image2 Section */
+
+.image2 img {
+  width: 1000px;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 50px;
+}
+
+/* How It Works Section */
+
+.how_works_content {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 80px;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.steps_container {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  counter-reset: step;
+}
+
+.step1,
+.step2,
+.step3,
+.step4,
+.step5 {
+  position: relative;
+  padding: 25px 25px 25px 70px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.step1::before,
+.step2::before,
+.step3::before,
+.step4::before,
+.step5::before {
+  content: counter(step);
+  counter-increment: step;
+  position: absolute;
+  left: 20px;
+  top: 25px;
+  width: 35px;
+  height: 35px;
+  border: 1px solid #ece8e8;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+
+.step1 h2,
+.step2 h2,
+.step3 h2,
+.step4 h2,
+.step5 h2 {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.step1 p,
+.step2 p,
+.step3 p,
+.step4 p,
+.step5 p {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.image {
+  width: 100%;
+  height: 200px;
+  background-image: url('/images/Donate.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 15px 0;
+  border-radius: 10px;
+}
+
+/* Please Donate Section Right */
+
+.Please_Donate {
+  flex: 1;
+  padding: 50px 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  font-size: 16px;
+  line-height: 1.8;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.Please_Donate h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 25px;
+  margin-bottom: 10px;
+  padding-left: 0;
+  text-align: center;
+}
+
+.Please_Donate ul {
+  list-style-position: outside;
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+.Please_Donate li {
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+.Please_Donate p {
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.Please_Donate a {
+  color: light-dark(#656c5c, #8aa377);
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+.Please_Donate a:hover {
+  color: light-dark(#8aa377, #656c5c);
+}
+
+/*Image3 Section */
+
+.image3 img {
+  width: 500px;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 50px;
+}
+
+/* Comments Section */
+
+.ready_text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  max-width: 400px;
+}
+
+.comments p {
+  margin: 40px 60px;
+  padding: 100px 60px;
+  text-align: center;
+  position: relative;
+  background-color: light-dark(#f1f7ea, #424846);
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+.Header {
+  text-align: center;
+  padding: 60px 40px;
+}
+
+.Header h2 {
+  font-size: 36px;
+  font-weight: 600;
+}
+
+.Header p {
+  font-size: 18px;
+  margin-bottom: 50px;
+}
+
+/* Mobile screens */
+
+@media (max-width: 600px) {
+  .home_content {
+    padding: 40px 20px;
+    margin: 10px;
   }
 
-  .or{
+  .joinus,
+  .login {
     font-size: 20px;
-    text-align: center;
+    padding: 10px 30px;
+    max-width: 150px;
   }
 
-  .why_section {
-    padding: 60px 100px;
-  }
-
-  .why_donate{
-    font-size: 20px;
-    text-align: left;
-    padding: 50px 100px;
-    border-radius: 5px;
-    padding-bottom: 0px;
-
-    
-  }
-  .why_donate h2 {
-    font-size: 28px;
-    margin-bottom: 10px;
-    color: #333;
-  }
-  
-  .why_donate h3 {
-    font-size: 20px;
-    margin-bottom: 20px;
-    color: #444;
-    font-weight: normal;
-  }
-  
-  .why_donate p {
-    font-size: 18px;
-    line-height: 1.6;
-    color: #555;
-  }
-  
-  .impact{
-    font-size: 20px;
-    text-align: left;
-    padding: 0px 100px;
-    border-radius: 5px;
-    
-  }
-
-  .impact p{
-    padding-bottom: 50px;
-    padding: 0px 40px;
-  }
-  
   .why_donate {
-
-    align-items: center;         /* vertically center image and text */
-    justify-content: space-between;
-    gap: 60px;                   /* space between image and text */
+    padding: 40px 20px;
+    gap: 20px;
   }
-  
-  
 
-  
-  
+  .why_text h2 {
+    font-size: 28px;
+  }
+
+  .why_text p {
+    font-size: 16px;
+  }
+
+  .image img {
+    width: 100%;
+  }
+
+  .charity_text p {
+    font-size: 16px;
+    padding: 30px 10px;
+  }
+
+  .impact_info1,
+  .impact_info2 {
+    font-size: 16px;
+    padding: 30px;
+  }
+
+  .image2 img,
+  .image3 img {
+    width: 100%;
+  }
+
+  .steps_container {
+    gap: 20px;
+  }
+
+  .step1,
+  .step2,
+  .step3,
+  .step4,
+  .step5 {
+    padding: 20px;
+  }
+
+  .Please_Donate {
+    padding: 20px;
+    font-size: 14px;
+  }
+
+  .Please_Donate h3 {
+    font-size: 18px;
+  }
+
+  .comments p {
+    padding: 40px 20px;
+    font-size: 16px;
+  }
+
+  .Header h2 {
+    font-size: 24px;
+  }
+
+  .Header p {
+    font-size: 14px;
+  }
+}
