@@ -8,4 +8,3 @@ export function My_Impact() {
 }
 
 export default My_Impact;
-
