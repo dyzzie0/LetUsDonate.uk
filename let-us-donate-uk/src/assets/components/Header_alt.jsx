@@ -20,7 +20,7 @@ function Header_Alt() {
             </h3>
           </div>
         </div>
-        </div>
+      </div>
     </header>
   );
 }
