@@ -27,15 +27,15 @@ function Home() {
   return (
     <section className="home" id="home">
       <div className="home_content">
-        <div className="joinus">
-          <Link to="/sign_up">Join Us</Link>
-        </div>
+      <button> <div className="joinus">   
+       <Link to="/sign_up">Join Us</Link>
+        </div></button>
         <div className="or">
           <h2>or</h2>
         </div>
-        <div className="login">
+        <button><div className="login">
           <Link to="/login">Login</Link>
-        </div>
+        </div></button>
       </div>
 
       <div className="why_donate">
@@ -240,15 +240,15 @@ function Home() {
             Ready to free up space in your wardrobe — and leave your heart
             happy?
           </p>
-          <div className="joinus">
-            <Link to="/sign_up">Join Us</Link>
-          </div>
-          <div className="or">
-            <h3>or</h3>
-          </div>
-          <div className="login">
-            <Link to="/login">Login</Link>
-          </div>
+          <button> <div className="joinus">   
+       <Link to="/sign_up">Join Us</Link>
+        </div></button>
+        <div className="or">
+          <h2>or</h2>
+        </div>
+        <button><div className="login">
+          <Link to="/login">Login</Link>
+        </div></button>
         </div>
       </div>
     </section>
