@@ -10,9 +10,7 @@ function Sign_up() {
         <br></br>
         <p>Quickly Create An Account</p>
 
-
         <form action="" method="post">
-
           <div class="input-box">
             <input
               type="text"
