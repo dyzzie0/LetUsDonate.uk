@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../../css/home.css';
-import '../../css/mobile.css';
 import DonateImg from '../../images/Donate.png';
 import DonateImg2 from '../../images/Donate2.png';
 import DonateImg3 from '../../images/Donate3.png';
@@ -27,15 +26,20 @@ function Home() {
   return (
     <section className="home" id="home">
       <div className="home_content">
-      <button> <div className="joinus">   
-       <Link to="/sign_up">Join Us</Link>
-        </div></button>
+        <button>
+          {' '}
+          <div className="joinus">
+            <Link to="/sign_up">Join Us</Link>
+          </div>
+        </button>
         <div className="or">
           <h2>or</h2>
         </div>
-        <button><div className="login">
-          <Link to="/login">Login</Link>
-        </div></button>
+        <button>
+          <div className="login">
+            <Link to="/login">Login</Link>
+          </div>
+        </button>
       </div>
 
       <div className="why_donate">
@@ -240,15 +244,20 @@ function Home() {
             Ready to free up space in your wardrobe — and leave your heart
             happy?
           </p>
-          <button> <div className="joinus">   
-       <Link to="/sign_up">Join Us</Link>
-        </div></button>
-        <div className="or">
-          <h2>or</h2>
-        </div>
-        <button><div className="login">
-          <Link to="/login">Login</Link>
-        </div></button>
+          <button>
+            {' '}
+            <div className="joinus">
+              <Link to="/sign_up">Join Us</Link>
+            </div>
+          </button>
+          <div className="or">
+            <h2>or</h2>
+          </div>
+          <button>
+            <div className="login">
+              <Link to="/login">Login</Link>
+            </div>
+          </button>
         </div>
       </div>
     </section>

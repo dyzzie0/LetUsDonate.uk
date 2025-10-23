@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../css/sign_up_login.css';
-import '../../css/mobile.css';
 
 function Login() {
   return (
@@ -14,6 +13,7 @@ function Login() {
         <form action="" method="post">
           <div class="input-box">
             <input type="Email" name="email" placeholder="Email" required />
+            <ii class="fa-solid fa-envelope"></ii>
           </div>
 
           <div class="input-box">
@@ -23,10 +23,10 @@ function Login() {
               placeholder="Password"
               required
             />
+            <ii class="fa-solid fa-lock"></ii>
           </div>
-
-          <Link class="print" to="/Login">
-            Forgot Password?
+          <Link class="print" to="/Sign_Up">
+            Don't have an account?
           </Link>
 
           <div class="sub-btn">

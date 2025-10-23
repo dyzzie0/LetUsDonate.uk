@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import '../../css/header.css';
-import '../../css/mobile.css';
 import { Link } from 'react-router-dom';
 
 function Header_Alt() {
