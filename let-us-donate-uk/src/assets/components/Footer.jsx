@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import '../../css/footer.css';
-import '../../css/mobile.css';
 
 export function Footer() {
   return (

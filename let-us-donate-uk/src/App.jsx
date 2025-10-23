@@ -20,9 +20,6 @@ import User_Dashboard from './assets/components/User/User_Dashboard.jsx';
 import My_Impact from './assets/components/User/my_impact.jsx';
 import My_Donations from './assets/components/User/my_donations.jsx';
 
-
-
-
 function App() {
   return (
     <Router>
@@ -38,12 +35,14 @@ function App() {
         <Route path="/user_dashboard" element={<User_Dashboard />} />
         <Route path="/view_inventory" element={<View_Inventory />} />
         <Route path="/view_donations" element={<View_Donations />} />
-        <Route path="/distribution_records" element={<Distribution_Records />} />
+        <Route
+          path="/distribution_records"
+          element={<Distribution_Records />}
+        />
         <Route path="/approve_donations" element={<Approve_Donations />} />
         <Route path="/view_users" element={<View_Users />} />
         <Route path="/my_impact" element={<My_Impact />} />
         <Route path="/my_donations" element={<My_Donations />} />
-
       </Routes>
       <Footer />
     </Router>

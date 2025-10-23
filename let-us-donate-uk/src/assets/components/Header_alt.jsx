@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import '../../css/header.css';
-import '../../css/mobile.css';
 import { Link } from 'react-router-dom';
 
 function Header_Alt() {
@@ -20,7 +19,7 @@ function Header_Alt() {
             </h3>
           </div>
         </div>
-        </div>
+      </div>
     </header>
   );
 }
