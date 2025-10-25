@@ -20,6 +20,7 @@
   border-radius: 5px;
   background-color: light-dark(#fef7e4, #2a3631);
   transition: background-color 0.3s ease;
+  text-decoration: none;
 }
 
 .joinus:hover,
@@ -238,7 +239,7 @@
   transition: color 0.3s;
 }
 .Please_Donate a:hover {
-  color: light-dark(#8aa377, #656c5c);
+  color: light-dark(#52ba09, #9ce73a);
 }
 
 /*Image3 Section */
