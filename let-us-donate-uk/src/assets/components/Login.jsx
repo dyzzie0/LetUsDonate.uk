@@ -7,6 +7,8 @@ import '../../css/mobile.css';
 function Login() {
   return (
     <div>
+      <br></br>
+      <br></br>
       <div class = "middle">
       <h2>Welcome Back</h2>
       <br></br>

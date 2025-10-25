@@ -1,0 +1,40 @@
+.charities {
+    padding: 80px 100px;
+    text-align: center;
+  }
+  
+  .charity_text {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 40px;
+  }
+  
+  .cont {
+    font-size: 10px;
+    text-align: center;
+    margin: 20px 0;
+    padding: 30px 15px;
+    background-color: light-dark(#f1f7ea, #424846);
+    border-radius: 5px;
+  }
+
+  h2{
+    font-size: 50px;
+  }
+  
+  h3{
+    margin: 18px 0;
+    font-size: 25px;
+    
+  }
+
+h4{
+    margin: 18px 0;
+    font-size: 19px;
+    
+}
+
+li{
+    margin:5px 0;
+}
