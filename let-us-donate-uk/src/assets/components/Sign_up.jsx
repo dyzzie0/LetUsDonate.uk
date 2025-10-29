@@ -6,6 +6,10 @@ function Sign_up() {
   return (
     <div>
       <div class="middle">
+         <div className="return_home">
+                 <a><Link to="/"> Return</Link></a> 
+                </div>
+        
         <h2>Create Account</h2>
         <br></br>
         <p>Quickly Create An Account</p>

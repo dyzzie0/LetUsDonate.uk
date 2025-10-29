@@ -6,9 +6,15 @@ function Login() {
   return (
     <div>
       <div class="middle">
+        <div className="return_home">
+         <a><Link to="/"> Return</Link></a> 
+        </div>
+
         <h2>Welcome Back</h2>
         <br></br>
         <p> Sign in to your account</p>
+
+     
 
         <form action="" method="post">
           <div class="input-box">
