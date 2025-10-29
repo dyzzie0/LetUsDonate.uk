@@ -1,10 +1,20 @@
-export function User_Dashboard() {
-    return (
-        <div>
-        <h2>User Dashboard</h2>
-        <p>Welcome to the user dashboard. Here you can manage your donations and profile.</p>
-        </div>
-    );
-    }
+import React from "react";
 
-export default User_Dashboard;
+function DonorDashboard() {
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  return (
+    <div className="middle">
+      <h2>Welcome, {user?.name}</h2>
+      <p>You are logged in as a {user?.role}</p>
+
+      <div>
+        <button onClick={() => alert("Add donation feature coming soon!")}>
+          Add Donation
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export default DonorDashboard;

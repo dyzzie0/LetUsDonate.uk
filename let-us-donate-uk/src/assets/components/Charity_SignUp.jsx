@@ -3,14 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import "../../css/sign_up_login.css";
 import "../../css/mobile.css";
 
-function DonorSignUp() {
+function CharitySignUp() {
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+    charityName: "",
+    contactPerson: "",
     email: "",
     password: "",
     confirmPassword: "",
-    address: "",
   });
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
@@ -29,17 +28,17 @@ function DonorSignUp() {
     }
 
     try {
-      const response = await fetch("http://localhost:8000/signup.php", {
+      const response = await fetch("http://localhost:8000/charity_signup.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, role: "charity" }),
       });
 
       const data = await response.json();
 
       if (data.status === "success") {
-        alert("✅ " + data.message);
-        navigate(data.redirect || "/donor-dashboard");
+        alert("✅ Charity account created successfully!");
+        navigate("/charity_dashboard");
       } else {
         setMessage("❌ " + data.message);
       }
@@ -50,16 +49,16 @@ function DonorSignUp() {
 
   return (
     <div className="middle">
-      <h2>Create Donor Account</h2>
-      <p>Sign up to start donating</p>
+      <h2>Register Your Charity</h2>
+      <p>Join to receive donations</p>
 
       <form onSubmit={handleSubmit}>
         <div className="input-box">
           <input
             type="text"
-            name="firstName"
-            placeholder="First Name"
-            value={formData.firstName}
+            name="charityName"
+            placeholder="Charity Name"
+            value={formData.charityName}
             onChange={handleChange}
             required
           />
@@ -68,9 +67,9 @@ function DonorSignUp() {
         <div className="input-box">
           <input
             type="text"
-            name="lastName"
-            placeholder="Last Name"
-            value={formData.lastName}
+            name="contactPerson"
+            placeholder="Contact Person"
+            value={formData.contactPerson}
             onChange={handleChange}
             required
           />
@@ -80,19 +79,8 @@ function DonorSignUp() {
           <input
             type="email"
             name="email"
-            placeholder="Email"
+            placeholder="Charity Email"
             value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="input-box">
-          <input
-            type="text"
-            name="address"
-            placeholder="Address"
-            value={formData.address}
             onChange={handleChange}
             required
           />
@@ -136,4 +124,4 @@ function DonorSignUp() {
   );
 }
 
-export default DonorSignUp;
+export default CharitySignUp;
