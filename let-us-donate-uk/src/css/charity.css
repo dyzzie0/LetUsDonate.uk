@@ -1,103 +1,17 @@
-/* Main container */
-.staff-overview {
+.inventory-chart {
   display: flex;
-  background: light-dark(#fffefc, #2c2c2c);
-  border: 1px solid light-dark(#ccc, #444);
   border-radius: 6px;
-  overflow: hidden;
-  width: 95%;
+  padding: 2rem;
+  width: 100%;
   margin: 50px 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+  height: fit-content;
+  background: light-dark(#fffefc, #2c2c2c);
 }
 
-/* Sidebar In Main Container*/
-.staff-links {
-  background-color: #8a9b8e;
-  width: 200px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.staff-links ul {
-  list-style: none;
-  width: 100%;
-  padding: 0;
-}
-
-.staff-links li {
-  color: #ffffff;
-  font-weight: 600;
-  font-size: 1.1rem;
-  padding: 3.5rem 2rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  cursor: pointer;
-  transition: 0.3s;
+.inventory-chart h3 {
   text-align: center;
-  flex-direction: column;
-}
-
-.staff-links li:hover {
-  background-color: #738678;
-}
-
-.staff-links i {
-  font-size: 1.5rem;
-  color: #fff;
-}
-
-/* Staff Dashboard */
-.staff-dashboard-main {
-  flex: 1;
-  padding: 2rem 3rem;
-}
-
-.staff-dashboard-main h2 {
-  font-size: 1.4rem;
   margin-bottom: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 600;
-}
-
-/* Stats */
-.staff-stats {
-  display: flex;
-  gap: 2rem;
-  justify-content: center;
-  align-items: center;
-}
-
-.staff-card {
-  background-color: #819688;
-  color: #fff;
-  padding: 3.5rem 2rem;
-  border-radius: 8px;
-  text-align: center;
-  width: 180px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s ease-in-out;
-}
-
-.staff-stats p {
-  margin: 0.5rem 0;
-}
-
-.staff-stats:hover {
-  transform: translateY(-5px);
-}
-
-.staff-number {
-  font-size: 1.7rem;
-  font-weight: 700;
-}
-
-.staff-number i {
-  font-size: 1.5rem;
-  color: #fff;
-}
-
-.staff-stats i {
-  color: #fff;
-  font-size: 30px;
 }

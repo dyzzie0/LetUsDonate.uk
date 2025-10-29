@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../../../css/user_charity.css';
 import '../../../css/user.css';
 
 export function User_Dashboard() {
@@ -13,8 +14,8 @@ export function User_Dashboard() {
   return (
     <div className="user-dashboard-container">
       <div className="dashboard-left">
-        <div className="user-dashboard">
-          <aside className="user-links">
+        <div className="dashboard">
+          <aside className="links">
             <ul>
               <li>
                 <i className="fa-solid fa-gauge"></i>
@@ -28,10 +29,14 @@ export function User_Dashboard() {
                 <i className="fa-solid fa-user"></i>
                 <a href="/user/profile">My Profile</a>
               </li>
+              <li>
+              <ii class="fa-solid fa-arrow-right-from-bracket"></ii>
+              <button className="logout-btn">Logout </button>
+              </li>
             </ul>
           </aside>
 
-          <main className="user-dashboard-main">
+          <main className="dashboard-main">
             <h2>Welcome User!</h2>
 
             <div className="stats-container">
@@ -157,10 +162,10 @@ export function User_Dashboard() {
 
           <h4>Select Charity</h4>
           <select>
-            <option value="charity1">Charity 1</option>
-            <option value="charity2">Charity 2</option>
-            <option value="charity3">Charity 3</option>
-            <option value="charity4">Charity 4</option>
+            <option value="charity1">WearAgain Foundation</option>
+            <option value="charity2">Threads of Hope UK</option>
+            <option value="charity3">SecondChance Wardrobe</option>
+            <option value="charity4">GreenStitch Collective</option>
           </select>
 
           <button type="submit">Submit Donation</button>
