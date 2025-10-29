@@ -1,0 +1,115 @@
+/* Donation Form*/
+
+.new-donation {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid light-dark(#ccc, #444);
+  border-radius: 6px;
+  padding: 2rem;
+  width: 95%;
+  margin: 50px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+  height: fit-content;
+  background: light-dark(#fffefc, #2c2c2c);
+}
+
+.new-donation h3 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.new-donation h4 {
+  margin: 1rem 0 0.4rem;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+/* Inputs */
+.new-donation input,
+.new-donation select,
+.new-donation textarea,
+.new-donation button {
+  width: 100%;
+  padding: 0.7rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-family: 'Iansui', cursive;
+}
+
+.new-donation input,
+.new-donation select,
+.new-donation textarea {
+  background-color: transparent;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.new-donation select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: none;
+}
+
+.new-donation input:focus,
+.new-donation select:focus,
+.new-donation textarea:focus {
+  border-color: #819688;
+  box-shadow: 0 0 4px rgba(129, 150, 136, 0.3);
+}
+
+.new-donation textarea {
+  resize: vertical;
+  height: 80px;
+}
+
+.new-donation button {
+  background-color: light-dark(#fef7e4, #fef7e4);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  color: #2c2c2c;
+  font-weight: 600;
+}
+
+.new-donation button:hover {
+  background-color: light-dark(#8aa377, #656c5c);
+  color: #ffffff;
+}
+
+/* Mssgs */
+.form-message {
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  font-weight: 600;
+  text-align: center;
+  animation: fadeIn 0.3s ease-in-out;
+  position: relative;
+}
+
+.form-message.success {
+  background-color: #d7f7e0;
+  color: #276738;
+  border: 1px solid #72c283;
+}
+
+.form-message.error {
+  background-color: #fddede;
+  color: #7a1a1a;
+  border: 1px solid #e08b8b;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,17 @@
+.inventory-chart {
+  display: flex;
+  border-radius: 6px;
+  padding: 2rem;
+  width: 100%;
+  margin: 50px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+  height: fit-content;
+  background: light-dark(#fffefc, #2c2c2c);
+}
+
+.inventory-chart h3 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
