@@ -1,25 +1,10 @@
-<<<<<<< HEAD
-import React from "react";
-
-function DonorDashboard() {
-  const user = JSON.parse(localStorage.getItem("user"));
-
-  return (
-    <div className="middle">
-      <h2>Welcome, {user?.name}</h2>
-      <p>You are logged in as a {user?.role}</p>
-
-      <div>
-        <button onClick={() => alert("Add donation feature coming soon!")}>
-          Add Donation
-        </button>
-=======
 import React, { useState } from 'react';
 import '../../../css/user_charity.css';
 import '../../../css/user.css';
 
 export function User_Dashboard() {
   const [status, setStatus] = useState(null);
+  const user = JSON.parse(localStorage.getItem('user'));
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -46,14 +31,15 @@ export function User_Dashboard() {
                 <a href="/user/profile">My Profile</a>
               </li>
               <li>
-              <ii class="fa-solid fa-arrow-right-from-bracket"></ii>
-              <button className="logout-btn">Logout </button>
+                <ii className="fa-solid fa-arrow-right-from-bracket"></ii>
+                <button className="logout-btn">Logout</button>
               </li>
             </ul>
           </aside>
 
           <main className="dashboard-main">
-            <h2>Welcome User!</h2>
+            <h2>Welcome, {user?.name || 'User'}!</h2>
+            <p>You are logged in as a {user?.role}</p>
 
             <div className="stats-container">
               <div className="stat-card">
@@ -186,14 +172,9 @@ export function User_Dashboard() {
 
           <button type="submit">Submit Donation</button>
         </form>
->>>>>>> 1c2712c36529439814554c6d899e071175b5025a
       </div>
     </div>
   );
 }
 
-<<<<<<< HEAD
-export default DonorDashboard;
-=======
 export default User_Dashboard;
->>>>>>> 1c2712c36529439814554c6d899e071175b5025a
