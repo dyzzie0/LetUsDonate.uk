@@ -1,0 +1,26 @@
+h2{
+font-size: 80px;
+  padding: 10px;
+  text-align: center;
+  margin: 20px; 
+}
+
+h3{
+    font-size: 28px;
+    padding: 10px;
+    text-align: center;
+    margin: 0; 
+    font-style: italic;
+}
+
+h4{
+    margin: 18px 0;
+    font-size: 25px;
+    
+  }
+
+  h5{
+    margin: 18px 0;
+    font-size: 19px;
+    
+}
