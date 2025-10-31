@@ -5,7 +5,6 @@ import { Chart } from 'chart.js/auto';
 
 export function Admin_Dashboard() {
   useEffect(() => {
-
     // Donation Trends
 
     const donationCtx = document.getElementById('donationTrends');
@@ -140,10 +139,11 @@ export function Admin_Dashboard() {
           <Link to="/data_reports">Data Reports</Link>
         </li>
         <li>
-        <ii class="fa-solid fa-arrow-right-from-bracket"></ii>
-          <button><div className="admin-button">Logout</div></button>
+          <ii class="fa-solid fa-arrow-right-from-bracket"></ii>
+          <button>
+            <div className="admin-button">Logout</div>
+          </button>
         </li>
-        
       </div>
 
       <div className="admin-overview">

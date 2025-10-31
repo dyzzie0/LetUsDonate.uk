@@ -1,14 +1,89 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../../css/user_charity.css';
 import '../../../css/user.css';
 
 export function User_Dashboard() {
   const [status, setStatus] = useState(null);
+  const [donations, setDonations] = useState([]);
+  const [charities, setCharities] = useState([]);
+  const [loadingCharities, setLoadingCharities] = useState(true);
+  const user = JSON.parse(localStorage.getItem('user'));
 
-  const handleSubmit = (e) => {
+  // 🧩 Fetch user donations
+  useEffect(() => {
+    if (user?.id) {
+      fetch(`http://localhost:8000/get_donations.php?user_id=${user.id}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.status === 'success') {
+            setDonations(data.donations);
+          } else {
+            console.error('Error loading donations:', data.message);
+          }
+        })
+        .catch(() => console.error('Failed to load donations'));
+    }
+  }, [user]);
+
+  // 🧩 Fetch charities
+  useEffect(() => {
+    setLoadingCharities(true);
+    fetch('http://localhost:8000/get_charities.php')
+      .then((res) => res.json())
+      .then((data) => {
+        console.log('Charities loaded:', data);
+        if (data.status === 'success') {
+          setCharities(data.charities);
+        } else {
+          console.error('Error loading charities:', data.message);
+        }
+        setLoadingCharities(false);
+      })
+      .catch((err) => {
+        console.error('Failed to load charities', err);
+        setLoadingCharities(false);
+      });
+  }, []);
+
+  // 🧩 Handle new donation submission
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setStatus({ type: 'success', message: 'Your donation was submitted!' });
-    setTimeout(() => setStatus(null), 7000);
+    const formData = new FormData(e.target);
+    const payload = Object.fromEntries(formData.entries());
+    payload.user_id = user?.id;
+
+    try {
+      const res = await fetch('http://localhost:8000/add_donation.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+
+      if (data.status === 'success') {
+        setStatus({ type: 'success', message: data.message });
+        e.target.reset();
+
+        // Refresh donations after submitting
+        fetch(`http://localhost:8000/get_donations.php?user_id=${user.id}`)
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.status === 'success') {
+              setDonations(data.donations);
+            }
+          });
+      } else {
+        setStatus({ type: 'error', message: data.message });
+      }
+    } catch (err) {
+      setStatus({
+        type: 'error',
+        message: '⚠️ Network error. Please try again.',
+      });
+    }
+
+    setTimeout(() => setStatus(null), 6000);
   };
 
   return (
@@ -23,53 +98,50 @@ export function User_Dashboard() {
               </li>
               <li>
                 <i className="fa-solid fa-inbox"></i>
-                <a href="/user/donations">My Donations</a>
+                <a href="/user/my_donations">My Donations</a>
               </li>
               <li>
                 <i className="fa-solid fa-user"></i>
                 <a href="/user/profile">My Profile</a>
               </li>
               <li>
-              <ii class="fa-solid fa-arrow-right-from-bracket"></ii>
-              <button className="logout-btn">Logout </button>
+                <i className="fa-solid fa-arrow-right-from-bracket"></i>
+                <button
+                  className="logout-btn"
+                  onClick={() => {
+                    localStorage.removeItem('user');
+                    window.location.href = '/login';
+                  }}
+                >
+                  Logout
+                </button>
               </li>
             </ul>
           </aside>
 
           <main className="dashboard-main">
-            <h2>Welcome User!</h2>
+            <h2>Welcome, {user?.name || 'User'}!</h2>
+            <p>You are logged in as a {user?.role || 'Donor'}</p>
 
             <div className="stats-container">
               <div className="stat-card">
                 <i className="fa-solid fa-shirt"></i>
-                <p className="stat-number">20</p>
-                <p className="stat-text">
-                  Total
-                  <br />
-                  Items
-                  <br />
-                  Donated
-                </p>
+                <p className="stat-number">{donations.length}</p>
+                <p className="stat-text">Total Items Donated</p>
               </div>
 
               <div className="stat-card">
                 <i className="fa-solid fa-earth-africa"></i>
-                <p className="stat-number">30kg</p>
-                <p className="stat-text">
-                  Total
-                  <br />
-                  CO2 Saved
+                <p className="stat-number">
+                  {(donations.length * 1.5).toFixed(1)}kg
                 </p>
+                <p className="stat-text">CO₂ Saved</p>
               </div>
 
               <div className="stat-card">
                 <i className="fa-solid fa-heart"></i>
-                <p className="stat-number">10</p>
-                <p className="stat-text">
-                  People
-                  <br />
-                  Helped
-                </p>
+                <p className="stat-number">{donations.length * 2}</p>
+                <p className="stat-text">People Helped</p>
               </div>
             </div>
           </main>
@@ -81,27 +153,28 @@ export function User_Dashboard() {
             <thead>
               <tr>
                 <th>Item</th>
-                <th>Date Donated</th>
+                <th>Date</th>
                 <th>Charity</th>
                 <th>Status</th>
-                <th>Location</th>
+                <th>Pickup</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Jacket</td>
-                <td>2024-05-01</td>
-                <td>Charity A</td>
-                <td>Approved</td>
-                <td>In-Transit</td>
-              </tr>
-              <tr>
-                <td>Shoes</td>
-                <td>2024-05-01</td>
-                <td>Charity B</td>
-                <td>Approved</td>
-                <td>Delivered</td>
-              </tr>
+              {donations.length > 0 ? (
+                donations.map((d) => (
+                  <tr key={d.donation_ID}>
+                    <td>{d.item_name}</td>
+                    <td>{d.donation_date}</td>
+                    <td>{d.charity_name}</td>
+                    <td>{d.donation_status}</td>
+                    <td>{d.pickup_address}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="5">No donations yet.</td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>
@@ -118,10 +191,16 @@ export function User_Dashboard() {
           )}
 
           <h4>Item Name</h4>
-          <input type="text" placeholder="e.g Brown Jacket" required />
+          <input
+            type="text"
+            name="item_name"
+            placeholder="e.g. Brown Jacket"
+            required
+          />
 
           <h4>Category</h4>
-          <select>
+          <select name="category" required>
+            <option value="">-- Select Category --</option>
             <option value="womens">Women's</option>
             <option value="mens">Men's</option>
             <option value="girls">Girl's</option>
@@ -129,7 +208,8 @@ export function User_Dashboard() {
           </select>
 
           <h4>Type</h4>
-          <select>
+          <select name="type" required>
+            <option value="">-- Select Type --</option>
             <option value="shirt">Shirt</option>
             <option value="trouser">Trouser</option>
             <option value="jacket">Jacket</option>
@@ -138,7 +218,8 @@ export function User_Dashboard() {
           </select>
 
           <h4>Condition</h4>
-          <select>
+          <select name="condition" required>
+            <option value="">-- Select Condition --</option>
             <option value="new">New</option>
             <option value="like-new">Like New</option>
             <option value="used-good">Used - Good</option>
@@ -147,26 +228,35 @@ export function User_Dashboard() {
 
           <h4>Description</h4>
           <textarea
+            name="description"
             placeholder="Provide a brief description of the item"
             required
           />
 
-          <h4>Upload Photos</h4>
-          <input type="file" multiple />
-
           <h4>Pickup Address</h4>
-          <input type="text" placeholder="Enter your pickup address" required />
+          <input
+            type="text"
+            name="pickup_address"
+            placeholder="Enter pickup address"
+            required
+          />
 
-          <h4>Preferred Pickup Date & Time</h4>
-          <input type="datetime-local" />
+          <h4>Preferred Pickup Date</h4>
+          <input type="date" name="pickup_time" />
 
           <h4>Select Charity</h4>
-          <select>
-            <option value="charity1">WearAgain Foundation</option>
-            <option value="charity2">Threads of Hope UK</option>
-            <option value="charity3">SecondChance Wardrobe</option>
-            <option value="charity4">GreenStitch Collective</option>
-          </select>
+          {loadingCharities ? (
+            <p>Loading charities...</p>
+          ) : (
+            <select name="charity_name" required>
+              <option value="">-- Select Charity --</option>
+              {charities.map((charity) => (
+                <option key={charity.charity_ID} value={charity.charity_name}>
+                  {charity.charity_name}
+                </option>
+              ))}
+            </select>
+          )}
 
           <button type="submit">Submit Donation</button>
         </form>
