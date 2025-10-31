@@ -1,8 +1,10 @@
-.header {
+.header  {
   padding: 150px 100px;
   background-color: light-dark(#79998d, #556c64);
   position: relative;
+  text-align: left;
 }
+
 
 a:link,
 a:visited {
@@ -41,7 +43,6 @@ li {
 
 .menu_text {
   font-size: 20px;
-  margin-right: 10rem;
   position: relative;
   cursor: pointer;
   display: flex;
@@ -50,7 +51,6 @@ li {
 
 h1 {
   font-size: 60px;
-  margin: 10px;
   text-decoration: none;
   color: #ffffff;
 }
@@ -63,15 +63,18 @@ i {
 
 .header_content {
   text-align: left;
-  padding: 10px 10px;
+  padding: 10px 0;
   color: #ffffff;
 }
 
+
 .header_content h2 {
   font-size: 30px;
+  text-align: left;
 }
 .header_content h3 {
   font-size: 20px;
+  text-align: left;
 }
 
 /* Dropdown Menu Styles */

@@ -4,6 +4,7 @@ import '../../css/faq.css';
 function FAQ() {
   return (
     <div>
+      <div className="faq">
       <h2>FAQ Page</h2>
       <h3>Popular asked question </h3>
       
@@ -31,7 +32,7 @@ function FAQ() {
  </div>
 
  <div className="cont">
-<h4>what can I donate?</h4> 
+<h4>What can I donate?</h4> 
 
 
 <ul>
@@ -80,6 +81,7 @@ function FAQ() {
         
         </div>
       
+    </div>
    
   );
 }

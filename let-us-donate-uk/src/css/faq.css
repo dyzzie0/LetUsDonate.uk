@@ -1,5 +1,18 @@
-h2{
-font-size: 80px;
+.faq{
+
+.cont{
+    padding: 20px;
+    margin: 50px;
+    line-height: 1.7;
+}
+
+li{
+  text-align: left;
+}
+
+
+ h2{
+font-size: 40px;
   padding: 10px;
   text-align: center;
   margin: 20px; 
@@ -22,5 +35,12 @@ h4{
   h5{
     margin: 18px 0;
     font-size: 19px;
-    
 }
+
+
+}
+
+
+
+
+ 
