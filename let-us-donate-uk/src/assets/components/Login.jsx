@@ -37,16 +37,19 @@ function Login() {
   };
 
   return (
+    <div>
     <div className="middle">
       <div className="return_home">
         <Link to="/">Return</Link>
       </div>
 
       <h2>Welcome Back</h2>
-      <p>Sign in to your account</p>
+        <br></br>
+        <p> Sign in to your account</p>
 
       <form onSubmit={handleSubmit}>
         <div className="input-box">
+     
           <input
             type="email"
             placeholder="Email"
@@ -54,6 +57,7 @@ function Login() {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
+             <ii class="fa-solid fa-envelope"></ii>
         </div>
 
         <div className="input-box">
@@ -64,16 +68,18 @@ function Login() {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+                   <ii class="fa-solid fa-lock"></ii>
         </div>
 
         {error && <p style={{ color: 'red' }}>{error}</p>}
-
+<div className="signup_link">
         <Link to="/Sign_Up">Don't have an account?</Link>
-
+</div>
         <div className="sub-btn">
           <button type="submit" className="btn">Login</button>
         </div>
       </form>
+    </div>
     </div>
   );
 }

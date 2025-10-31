@@ -1,67 +1,3 @@
-<<<<<<< HEAD
-.middle {
-    font-size: 35px;
-    cursor: pointer;
-    text-align: center;
-    padding: 10px 60px;
-    border-radius: 5px;
-    background-color: light-dark(#fef7e4, #2a3631);
-    transition: background-color 0.3s ease;
-  }
-  
-  .input-box {
-    position: relative;
-    margin: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 10vh;
-    padding: 0;
-  }
-  
-  .input-box input {
-    width: 70%;
-    padding: 13px 50px 13px 20px;
-    background: #eee;
-    border-radius: 8px;
-    border: none;
-    outline: none;
-    font-size: 16px;
-    color: rgb(92, 84, 84);
-  }
-  
-  .input-box input::placeholder {
-    color: #5f6164;
-    font-style: italic;
-  }
-  
-  .btn {
-    width: 20%;
-    height: 37px;
-    background-color: light-dark(#f1e6c6, #2a3631);
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border: none;
-    outline: none;
-    cursor: pointer;
-    font-size: 16px;
-    color: #0b0a0a;
-  }
-  
-  .sub-btn {
-    position: relative;
-    margin: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 10vh;
-    padding: 0;
-  }
-  
-  .print {
-    font-size: 15px;
-  }
-=======
 /* Container */
 
 .middle {
@@ -185,6 +121,12 @@
   text-decoration: underline;
 }
 
+.signup_link {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
 /* Message */
 
 .error-message {
@@ -198,4 +140,3 @@
   font-size: 14px;
   margin-bottom: 20px;
 }
->>>>>>> 1c2712c36529439814554c6d899e071175b5025a

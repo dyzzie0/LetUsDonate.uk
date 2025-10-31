@@ -23,7 +23,7 @@ function DonorSignUp() {
     setMessage("");
 
     if (formData.password !== formData.confirmPassword) {
-      setMessage("❌ Passwords do not match");
+      setMessage("Passwords do not match");
       return;
     }
 
@@ -37,46 +37,39 @@ function DonorSignUp() {
       const data = await response.json();
 
       if (data.status === "success") {
-        alert("✅ " + data.message);
+        alert(data.message);
         navigate(data.redirect || "/donor-dashboard");
       } else {
-        setMessage("❌ " + data.message);
+        setMessage( data.message);
       }
     } catch (err) {
-      setMessage("⚠️ Error connecting to server");
+      setMessage("Could not connect you to server");
     }
   };
 
   return (
+    <div>
     <div className="middle">
       <div className="return_home">
         <Link to="/">Return</Link>
       </div>
 
-      <h2>Create Donor Account</h2>
-      <p>Sign up to start donating</p>
+      <h2>Create Account</h2>
+        <br></br>
+        <p>Quickly Create An Account</p>
+
 
       <form onSubmit={handleSubmit}>
         <div className="input-box">
           <input
             type="text"
-            name="firstName"
-            placeholder="First Name"
+            name="fullName"
+            placeholder="Full Name"
             value={formData.firstName}
             onChange={handleChange}
             required
           />
-        </div>
-
-        <div className="input-box">
-          <input
-            type="text"
-            name="lastName"
-            placeholder="Last Name"
-            value={formData.lastName}
-            onChange={handleChange}
-            required
-          />
+                      <ii class="fa-solid fa-user"></ii>
         </div>
 
         <div className="input-box">
@@ -88,46 +81,41 @@ function DonorSignUp() {
             onChange={handleChange}
             required
           />
-        </div>
-
-        <div className="input-box">
-          <input
-            type="text"
-            name="address"
-            placeholder="Address"
-            value={formData.address}
-            onChange={handleChange}
-            required
-          />
+           <ii class="fa-solid fa-envelope"></ii>
         </div>
 
         <div className="input-box">
           <input
             type="password"
             name="password"
-            placeholder="Password"
+                      placeholder="Password* (6 characters)"
             value={formData.password}
             onChange={handleChange}
             required
           />
+                <ii class="fa-solid fa-key"></ii>
         </div>
 
         <div className="input-box">
           <input
             type="password"
             name="confirmPassword"
-            placeholder="Confirm Password"
+           placeholder="Confirm Password* (6 characters)"
             value={formData.confirmPassword}
             onChange={handleChange}
             required
+          
           />
+               <ii class="fa-solid fa-lock"></ii>
         </div>
 
         {message && <p style={{ color: "red" }}>{message}</p>}
 
+<div className="signup_link">
         <Link className="print" to="/login">
           Already have an account?
         </Link>
+</div>
 
         <div className="sub-btn">
           <button type="submit" className="btn">
@@ -135,6 +123,7 @@ function DonorSignUp() {
           </button>
         </div>
       </form>
+    </div>
     </div>
   );
 }
