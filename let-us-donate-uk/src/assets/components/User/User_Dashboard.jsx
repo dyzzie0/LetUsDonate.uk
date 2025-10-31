@@ -6,33 +6,46 @@ export function User_Dashboard() {
   const [status, setStatus] = useState(null);
   const [donations, setDonations] = useState([]);
   const [charities, setCharities] = useState([]);
+  const [loadingCharities, setLoadingCharities] = useState(true);
   const user = JSON.parse(localStorage.getItem("user"));
 
+  // 🧩 Fetch user donations
   useEffect(() => {
     if (user?.id) {
-      fetch(`http://localhost/letusdonate/backend/get_donations.php?user_id=${user.id}`)
+      fetch(`http://localhost:8000/get_donations.php?user_id=${user.id}`)
         .then((res) => res.json())
         .then((data) => {
           if (data.status === "success") {
             setDonations(data.donations);
+          } else {
+            console.error("Error loading donations:", data.message);
           }
         })
         .catch(() => console.error("Failed to load donations"));
     }
   }, [user]);
 
+  // 🧩 Fetch charities
   useEffect(() => {
-    fetch("http://localhost/letusdonate/backend/get_charities.php")
+    setLoadingCharities(true);
+    fetch("http://localhost:8000/get_charities.php")
       .then((res) => res.json())
       .then((data) => {
+        console.log("Charities loaded:", data);
         if (data.status === "success") {
           setCharities(data.charities);
+        } else {
+          console.error("Error loading charities:", data.message);
         }
+        setLoadingCharities(false);
       })
-      .catch(() => console.error("Failed to load charities"));
+      .catch((err) => {
+        console.error("Failed to load charities", err);
+        setLoadingCharities(false);
+      });
   }, []);
 
-  // Handle new donation submission
+  // 🧩 Handle new donation submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -40,7 +53,7 @@ export function User_Dashboard() {
     payload.user_id = user?.id;
 
     try {
-      const res = await fetch("http://localhost/letusdonate/backend/add_donation.php", {
+      const res = await fetch("http://localhost:8000/add_donation.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -52,7 +65,8 @@ export function User_Dashboard() {
         setStatus({ type: "success", message: data.message });
         e.target.reset();
 
-        fetch(`http://localhost/letusdonate/backend/get_donations.php?user_id=${user.id}`)
+        // Refresh donations after submitting
+        fetch(`http://localhost:8000/get_donations.php?user_id=${user.id}`)
           .then((res) => res.json())
           .then((data) => {
             if (data.status === "success") {
@@ -63,7 +77,7 @@ export function User_Dashboard() {
         setStatus({ type: "error", message: data.message });
       }
     } catch (err) {
-      setStatus({ type: "error", message: "Network error. Please try again." });
+      setStatus({ type: "error", message: "⚠️ Network error. Please try again." });
     }
 
     setTimeout(() => setStatus(null), 6000);
@@ -110,33 +124,19 @@ export function User_Dashboard() {
               <div className="stat-card">
                 <i className="fa-solid fa-shirt"></i>
                 <p className="stat-number">{donations.length}</p>
-                <p className="stat-text">
-                  Total
-                  <br />
-                  Items
-                  <br />
-                  Donated
-                </p>
+                <p className="stat-text">Total Items Donated</p>
               </div>
 
               <div className="stat-card">
                 <i className="fa-solid fa-earth-africa"></i>
                 <p className="stat-number">{(donations.length * 1.5).toFixed(1)}kg</p>
-                <p className="stat-text">
-                  Total
-                  <br />
-                  CO2 Saved
-                </p>
+                <p className="stat-text">CO₂ Saved</p>
               </div>
 
               <div className="stat-card">
                 <i className="fa-solid fa-heart"></i>
                 <p className="stat-number">{donations.length * 2}</p>
-                <p className="stat-text">
-                  People
-                  <br />
-                  Helped
-                </p>
+                <p className="stat-text">People Helped</p>
               </div>
             </div>
           </main>
@@ -222,18 +222,22 @@ export function User_Dashboard() {
           <h4>Pickup Address</h4>
           <input type="text" name="pickup_address" placeholder="Enter pickup address" required />
 
-          <h4>Preferred Pickup Date & Time</h4>
-          <input type="datetime-local" name="pickup_time" />
+          <h4>Preferred Pickup Date</h4>
+          <input type="date" name="pickup_time" />
 
           <h4>Select Charity</h4>
-          <select name="charity_name" required>
-            <option value="">-- Select Charity --</option>
-            {charities.map((charity) => (
-              <option key={charity.charity_ID} value={charity.charity_name}>
-                {charity.charity_name}
-              </option>
-            ))}
-          </select>
+          {loadingCharities ? (
+            <p>Loading charities...</p>
+          ) : (
+            <select name="charity_name" required>
+              <option value="">-- Select Charity --</option>
+              {charities.map((charity) => (
+                <option key={charity.charity_ID} value={charity.charity_name}>
+                  {charity.charity_name}
+                </option>
+              ))}
+            </select>
+          )}
 
           <button type="submit">Submit Donation</button>
         </form>

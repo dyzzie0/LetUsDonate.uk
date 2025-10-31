@@ -19,7 +19,6 @@ $type           = $data["type"] ?? "";
 $condition      = $data["condition"] ?? "";
 $description    = $data["description"] ?? "";
 $pickup_address = $data["pickup_address"] ?? "";
-$pickup_time    = $data["pickup_time"] ?? "";
 $charity_name   = $data["charity_name"] ?? "";
 
 if (!$user_id || !$item_name || !$category || !$condition || !$charity_name) {
@@ -30,7 +29,7 @@ if (!$user_id || !$item_name || !$category || !$condition || !$charity_name) {
 try {
     $pdo->beginTransaction();
 
-    $stmt = $pdo->prepare("SELECT donor_ID FROM Donor WHERE donor_ID = ?");
+    $stmt = $pdo->prepare("SELECT donor_ID FROM Donor WHERE user_ID = ?");
     $stmt->execute([$user_id]);
     $donor = $stmt->fetch(PDO::FETCH_ASSOC);
     if (!$donor) {
@@ -55,10 +54,18 @@ try {
 
     $stmt = $pdo->prepare("
         INSERT INTO Donation_Item
-        (donation_ID, item_name, item_category, item_size, item_condition, description, pickup_address, pickup_time)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        (donation_ID, item_name, item_category, item_size, item_condition, description, pickup_address)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
     ");
-    $stmt->execute([$donation_ID, $item_name, $category, $type, $condition, $description, $pickup_address, $pickup_time]);
+    $stmt->execute([
+        $donation_ID,
+        $item_name,
+        $category,
+        $type,
+        $condition,
+        $description,
+        $pickup_address
+    ]);
 
     $pdo->commit();
 
