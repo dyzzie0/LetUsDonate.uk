@@ -54,10 +54,7 @@ export function Charity_Dashboard() {
                 <a href="/distribution_records">Distributions</a>
               </li>
               <li>
-              <button className="logout-btn">
-            Logout
-          </button>
-
+                <button className="logout-btn">Logout</button>
               </li>
             </ul>
           </aside>

@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
-import "../../../css/user_charity.css";
-import "../../../css/user.css";
+import React, { useState, useEffect } from 'react';
+import '../../../css/user_charity.css';
+import '../../../css/user.css';
 
 export function User_Dashboard() {
   const [status, setStatus] = useState(null);
   const [donations, setDonations] = useState([]);
   const [charities, setCharities] = useState([]);
   const [loadingCharities, setLoadingCharities] = useState(true);
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(localStorage.getItem('user'));
 
   // 🧩 Fetch user donations
   useEffect(() => {
@@ -15,32 +15,32 @@ export function User_Dashboard() {
       fetch(`http://localhost:8000/get_donations.php?user_id=${user.id}`)
         .then((res) => res.json())
         .then((data) => {
-          if (data.status === "success") {
+          if (data.status === 'success') {
             setDonations(data.donations);
           } else {
-            console.error("Error loading donations:", data.message);
+            console.error('Error loading donations:', data.message);
           }
         })
-        .catch(() => console.error("Failed to load donations"));
+        .catch(() => console.error('Failed to load donations'));
     }
   }, [user]);
 
   // 🧩 Fetch charities
   useEffect(() => {
     setLoadingCharities(true);
-    fetch("http://localhost:8000/get_charities.php")
+    fetch('http://localhost:8000/get_charities.php')
       .then((res) => res.json())
       .then((data) => {
-        console.log("Charities loaded:", data);
-        if (data.status === "success") {
+        console.log('Charities loaded:', data);
+        if (data.status === 'success') {
           setCharities(data.charities);
         } else {
-          console.error("Error loading charities:", data.message);
+          console.error('Error loading charities:', data.message);
         }
         setLoadingCharities(false);
       })
       .catch((err) => {
-        console.error("Failed to load charities", err);
+        console.error('Failed to load charities', err);
         setLoadingCharities(false);
       });
   }, []);
@@ -53,31 +53,34 @@ export function User_Dashboard() {
     payload.user_id = user?.id;
 
     try {
-      const res = await fetch("http://localhost:8000/add_donation.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const res = await fetch('http://localhost:8000/add_donation.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
 
       const data = await res.json();
 
-      if (data.status === "success") {
-        setStatus({ type: "success", message: data.message });
+      if (data.status === 'success') {
+        setStatus({ type: 'success', message: data.message });
         e.target.reset();
 
         // Refresh donations after submitting
         fetch(`http://localhost:8000/get_donations.php?user_id=${user.id}`)
           .then((res) => res.json())
           .then((data) => {
-            if (data.status === "success") {
+            if (data.status === 'success') {
               setDonations(data.donations);
             }
           });
       } else {
-        setStatus({ type: "error", message: data.message });
+        setStatus({ type: 'error', message: data.message });
       }
     } catch (err) {
-      setStatus({ type: "error", message: "⚠️ Network error. Please try again." });
+      setStatus({
+        type: 'error',
+        message: '⚠️ Network error. Please try again.',
+      });
     }
 
     setTimeout(() => setStatus(null), 6000);
@@ -106,8 +109,8 @@ export function User_Dashboard() {
                 <button
                   className="logout-btn"
                   onClick={() => {
-                    localStorage.removeItem("user");
-                    window.location.href = "/login";
+                    localStorage.removeItem('user');
+                    window.location.href = '/login';
                   }}
                 >
                   Logout
@@ -117,8 +120,8 @@ export function User_Dashboard() {
           </aside>
 
           <main className="dashboard-main">
-            <h2>Welcome, {user?.name || "User"}!</h2>
-            <p>You are logged in as a {user?.role || "Donor"}</p>
+            <h2>Welcome, {user?.name || 'User'}!</h2>
+            <p>You are logged in as a {user?.role || 'Donor'}</p>
 
             <div className="stats-container">
               <div className="stat-card">
@@ -129,7 +132,9 @@ export function User_Dashboard() {
 
               <div className="stat-card">
                 <i className="fa-solid fa-earth-africa"></i>
-                <p className="stat-number">{(donations.length * 1.5).toFixed(1)}kg</p>
+                <p className="stat-number">
+                  {(donations.length * 1.5).toFixed(1)}kg
+                </p>
                 <p className="stat-text">CO₂ Saved</p>
               </div>
 
@@ -179,10 +184,19 @@ export function User_Dashboard() {
         <form className="new-donation" onSubmit={handleSubmit}>
           <h3>Make a New Donation</h3>
 
-          {status && <div className={`form-message ${status.type}`}>{status.message}</div>}
+          {status && (
+            <div className={`form-message ${status.type}`}>
+              {status.message}
+            </div>
+          )}
 
           <h4>Item Name</h4>
-          <input type="text" name="item_name" placeholder="e.g. Brown Jacket" required />
+          <input
+            type="text"
+            name="item_name"
+            placeholder="e.g. Brown Jacket"
+            required
+          />
 
           <h4>Category</h4>
           <select name="category" required>
@@ -220,7 +234,12 @@ export function User_Dashboard() {
           />
 
           <h4>Pickup Address</h4>
-          <input type="text" name="pickup_address" placeholder="Enter pickup address" required />
+          <input
+            type="text"
+            name="pickup_address"
+            placeholder="Enter pickup address"
+            required
+          />
 
           <h4>Preferred Pickup Date</h4>
           <input type="date" name="pickup_time" />

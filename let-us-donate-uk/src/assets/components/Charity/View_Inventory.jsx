@@ -135,7 +135,6 @@ export function View_Inventory() {
                     <td>{item.type}</td>
                     <td>{item.condition}</td>
                     <td>{item.quantity}</td>
-                    
                   </tr>
                 ))
               ) : (
