@@ -121,6 +121,12 @@
   text-decoration: underline;
 }
 
+.signup_link {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
 /* Message */
 
 .error-message {
