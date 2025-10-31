@@ -163,7 +163,8 @@ main {
 .status-filter:focus {
   outline: none;
   border-color: light-dark(#555555, #bbbbbb);
-  box-shadow: 0 0 5px light-dark(rgba(85, 85, 85, 0.2), rgba(255, 255, 255, 0.1));
+  box-shadow: 0 0 5px
+    light-dark(rgba(85, 85, 85, 0.2), rgba(255, 255, 255, 0.1));
 }
 
 /* Filter Button */

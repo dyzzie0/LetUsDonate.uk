@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import '../../../css/records.css';
 
 export function View_Users() {

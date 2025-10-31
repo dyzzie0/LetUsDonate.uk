@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from 'react-router-dom';
 import { useEffect } from 'react';
 
 import Footer from './assets/components/Footer.jsx';
@@ -20,11 +25,9 @@ import Approve_Donations from './assets/components/Charity/approve_donations.jsx
 import Admin_Dashboard from './assets/components/Admin/admin_dashboard.jsx';
 import View_Users from './assets/components/Admin/view_users.jsx';
 
-
 import User_Dashboard from './assets/components/User/User_Dashboard.jsx';
 import My_Impact from './assets/components/User/my_impact.jsx';
 import My_Donations from './assets/components/User/my_donations.jsx';
-
 
 function Layout() {
   const location = useLocation();
@@ -65,7 +68,10 @@ function Layout() {
         <Route path="/charity_dashboard" element={<Charity_Dashboard />} />
         <Route path="/view_inventory" element={<View_Inventory />} />
         <Route path="/view_donations" element={<View_Donations />} />
-        <Route path="/distribution_records" element={<Distribution_Records />} />
+        <Route
+          path="/distribution_records"
+          element={<Distribution_Records />}
+        />
         <Route path="/approve_donations" element={<Approve_Donations />} />
 
         <Route path="/admin_dashboard" element={<Admin_Dashboard />} />

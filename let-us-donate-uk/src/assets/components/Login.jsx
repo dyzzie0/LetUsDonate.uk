@@ -9,7 +9,7 @@ function Login() {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     setError('');
 
     try {
@@ -27,7 +27,6 @@ function Login() {
         if (data.user.role === 'donor') navigate('/User_dashboard');
         else if (data.user.role === 'charity') navigate('/Charity_dashboard');
         else if (data.user.role === 'admin') navigate('/Admin_dashboard');
-
       } else {
         setError(data.message || 'Login failed');
       }
@@ -38,48 +37,49 @@ function Login() {
 
   return (
     <div>
-    <div className="middle">
-      <div className="return_home">
-        <Link to="/">Return</Link>
-      </div>
+      <div className="middle">
+        <div className="return_home">
+          <Link to="/">Return</Link>
+        </div>
 
-      <h2>Welcome Back</h2>
+        <h2>Welcome Back</h2>
         <br></br>
         <p> Sign in to your account</p>
 
-      <form onSubmit={handleSubmit}>
-        <div className="input-box">
-     
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-             <ii class="fa-solid fa-envelope"></ii>
-        </div>
+        <form onSubmit={handleSubmit}>
+          <div className="input-box">
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <ii class="fa-solid fa-envelope"></ii>
+          </div>
 
-        <div className="input-box">
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-                   <ii class="fa-solid fa-lock"></ii>
-        </div>
+          <div className="input-box">
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <ii class="fa-solid fa-lock"></ii>
+          </div>
 
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-<div className="signup_link">
-        <Link to="/Sign_Up">Don't have an account?</Link>
-</div>
-        <div className="sub-btn">
-          <button type="submit" className="btn">Login</button>
-        </div>
-      </form>
-    </div>
+          {error && <p style={{ color: 'red' }}>{error}</p>}
+          <div className="signup_link">
+            <Link to="/Sign_Up">Don't have an account?</Link>
+          </div>
+          <div className="sub-btn">
+            <button type="submit" className="btn">
+              Login
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

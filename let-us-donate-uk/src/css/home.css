@@ -21,6 +21,11 @@
   background-color: light-dark(#fef7e4, #2a3631);
   transition: background-color 0.3s ease;
   text-decoration: none;
+  border: none; /* removes border */
+  outline: none; /* removes focus outline */
+  box-shadow: none; /* ensures no faint line remains */
+  color: light-dark(#000000, #ffffff);
+  display: inline-block; /* ensures consistent button-like shape */
 }
 
 .joinus:hover,
