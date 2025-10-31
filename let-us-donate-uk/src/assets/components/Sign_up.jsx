@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../../css/sign_up_login.css";
-import "../../css/mobile.css";
 
 function DonorSignUp() {
   const [formData, setFormData] = useState({

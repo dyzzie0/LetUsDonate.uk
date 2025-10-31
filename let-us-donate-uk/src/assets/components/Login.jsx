@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import '../../css/sign_up_login.css';
-import '../../css/mobile.css';
 
 function Login() {
   const [email, setEmail] = useState('');

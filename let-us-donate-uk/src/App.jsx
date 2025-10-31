@@ -8,7 +8,6 @@ import Header_Alt from './assets/components/Header_Alt.jsx';
 import Home from './assets/components/Home.jsx';
 import Sign_up from './assets/components/Sign_up.jsx';
 import Login from './assets/components/Login.jsx';
-import CharitySign_up from './assets/components/Charity_SignUp.jsx';
 import FAQ from './assets/components/FAQ.jsx';
 import Our_Partners from './assets/components/Our_Partners.jsx';
 
@@ -59,7 +58,6 @@ function Layout() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/sign_up" element={<Sign_up />} />
-        <Route path="/Charitysign_up" element={<CharitySign_up />} />
         <Route path="/login" element={<Login />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/our_partners" element={<Our_Partners />} />
