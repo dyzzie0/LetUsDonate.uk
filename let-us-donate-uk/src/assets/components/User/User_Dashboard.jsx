@@ -98,7 +98,7 @@ export function User_Dashboard() {
               </li>
               <li>
                 <i className="fa-solid fa-inbox"></i>
-                <a href="/user/my_donations">My Donations</a>
+                <a href="/my_donations">My Donations</a>
               </li>
               <li>
                 <i className="fa-solid fa-user"></i>
