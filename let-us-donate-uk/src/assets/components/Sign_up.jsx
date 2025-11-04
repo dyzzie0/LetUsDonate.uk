@@ -8,7 +8,6 @@ function DonorSignUp() {
     email: '',
     password: '',
     confirmPassword: '',
-    address: '',
   });
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
@@ -37,91 +36,85 @@ function DonorSignUp() {
 
       if (data.status === "success") {
         alert(data.message);
-        navigate(data.redirect || "/user_dashboard");
+        navigate("/login"); 
       } else {
-        setMessage(data.message);
         setMessage(data.message);
       }
     } catch (err) {
-      setMessage('Could not connect you to server');
+      setMessage('Could not connect to the server');
     }
   };
 
   return (
-    <div>
-      <div className="middle">
-        <div className="return_home">
-          <Link to="/">Return</Link>
+    <div className="middle">
+      <div className="return_home">
+        <Link to="/">Return</Link>
+      </div>
+
+      <h2>Create Account</h2>
+      <p>Quickly Create An Account</p>
+
+      <form onSubmit={handleSubmit}>
+        <div className="input-box">
+          <input
+            type="text"
+            name="fullName"
+            placeholder="Full Name"
+            value={formData.fullName}
+            onChange={handleChange}
+            required
+          />
+          <i className="fa-solid fa-user"></i>
         </div>
 
-        <h2>Create Account</h2>
-        <br></br>
-        <p>Quickly Create An Account</p>
+        <div className="input-box">
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+          <i className="fa-solid fa-envelope"></i>
+        </div>
 
-        <form onSubmit={handleSubmit}>
-          <div className="input-box">
-            <input
-              type="text"
-              name="fullName"
-              placeholder="Full Name"
-              value={formData.firstName}
-              onChange={handleChange}
-              required
-            />
-            <ii class="fa-solid fa-user"></ii>
-          </div>
+        <div className="input-box">
+          <input
+            type="password"
+            name="password"
+            placeholder="Password (6+ characters)"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
+          <i className="fa-solid fa-key"></i>
+        </div>
 
-          <div className="input-box">
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-            <ii class="fa-solid fa-envelope"></ii>
-          </div>
+        <div className="input-box">
+          <input
+            type="password"
+            name="confirmPassword"
+            placeholder="Confirm Password"
+            value={formData.confirmPassword}
+            onChange={handleChange}
+            required
+          />
+          <i className="fa-solid fa-lock"></i>
+        </div>
 
-          <div className="input-box">
-            <input
-              type="password"
-              name="password"
-              placeholder="Password* (6 characters)"
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
-            <ii class="fa-solid fa-key"></ii>
-          </div>
+        {message && <p style={{ color: 'red' }}>{message}</p>}
 
-          <div className="input-box">
-            <input
-              type="password"
-              name="confirmPassword"
-              placeholder="Confirm Password* (6 characters)"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              required
-            />
-            <ii class="fa-solid fa-lock"></ii>
-          </div>
+        <div className="signup_link">
+          <Link className="print" to="/login">
+            Already have an account?
+          </Link>
+        </div>
 
-          {message && <p style={{ color: 'red' }}>{message}</p>}
-
-          <div className="signup_link">
-            <Link className="print" to="/login">
-              Already have an account?
-            </Link>
-          </div>
-
-          <div className="sub-btn">
-            <button type="submit" className="btn">
-              Register
-            </button>
-          </div>
-        </form>
-      </div>
+        <div className="sub-btn">
+          <button type="submit" className="btn">Register</button>
+        </div>
+      </form>
     </div>
   );
 }

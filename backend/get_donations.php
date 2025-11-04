@@ -21,13 +21,13 @@ try {
             di.item_condition,
             c.charity_name,
             d.donation_status,
-            d.donation_date,
-            di.pickup_address
+            d.donation_date
         FROM Donation d
         JOIN Donation_Item di ON d.donation_ID = di.donation_ID
         JOIN Charity c ON d.charity_ID = c.charity_ID
-        JOIN Donor dn ON d.donor_ID = dn.donor_ID
-        WHERE dn.user_ID = ?
+        JOIN Donor don ON d.donor_ID = don.donor_ID
+        JOIN User u ON don.user_ID = u.user_ID
+        WHERE u.user_ID = ?
         ORDER BY d.donation_date DESC
     ");
     $stmt->execute([$user_id]);

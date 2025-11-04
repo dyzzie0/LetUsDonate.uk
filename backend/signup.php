@@ -8,18 +8,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit(0);
 }
 
-include 'db_connect.php'; 
+include 'db_connect.php';
 
 try {
     $data = json_decode(file_get_contents("php://input"), true);
 
-    $firstName = trim($data['firstName'] ?? '');
-    $lastName  = trim($data['lastName'] ?? '');
-    $email     = trim($data['email'] ?? '');
-    $password  = trim($data['password'] ?? '');
-    $address   = trim($data['address'] ?? '');
+    $name     = trim($data['fullName'] ?? '');
+    $email    = trim($data['email'] ?? '');
+    $password = trim($data['password'] ?? '');
 
-    if (!$firstName || !$lastName || !$email || !$password || !$address) {
+    if (!$name || !$email || !$password) {
         echo json_encode(["status" => "error", "message" => "All fields are required."]);
         exit;
     }
@@ -43,20 +41,19 @@ try {
     $hashed_pw = password_hash($password, PASSWORD_DEFAULT);
 
     $stmt = $pdo->prepare("
-        INSERT INTO User (user_Fname, user_Lname, user_email, user_password, role_id)
-        VALUES (?, ?, ?, ?, ?)
+        INSERT INTO User (user_name, user_email, user_password, role_id)
+        VALUES (?, ?, ?, ?)
     ");
-    $stmt->execute([$firstName, $lastName, $email, $hashed_pw, $role]);
+    $stmt->execute([$name, $email, $hashed_pw, $role]);
 
     $userId = $pdo->lastInsertId();
 
-    $stmt = $pdo->prepare("INSERT INTO Donor (user_ID, donor_address) VALUES (?, ?)");
-    $stmt->execute([$userId, $address]);
-
+    $stmt = $pdo->prepare("INSERT INTO Donor (user_ID) VALUES (?)");
+    $stmt->execute([$userId]);
 
     echo json_encode([
         "status" => "success",
-        "message" => "Donor account created successfully.",
+        "message" => "Account created successfully!",
         "userId" => $userId
     ]);
 

@@ -3,6 +3,7 @@ header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
+
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') exit;
 
 include 'db_connect.php';
@@ -19,7 +20,7 @@ try {
     }
 
     // Get user by email
-    $stmt = $pdo->prepare("SELECT user_ID, user_Fname, user_Lname, user_password, role_id FROM User WHERE user_email = ?");
+    $stmt = $pdo->prepare("SELECT user_ID, user_name, user_email, user_password, role_id FROM User WHERE user_email = ?");
     $stmt->execute([$email]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -44,7 +45,8 @@ try {
         "status" => "success",
         "user" => [
             "id" => $user['user_ID'],
-            "name" => $user['user_Fname'],
+            "name" => $user['user_name'],
+            "email" => $user['user_email'],
             "role" => strtolower($role)
         ]
     ]);
