@@ -54,7 +54,7 @@ export function Charity_Dashboard() {
                 <a href="/distribution_records">Distributions</a>
               </li>
               <li>
-              <button
+                <button
                   className="logout-btn"
                   onClick={() => {
                     localStorage.removeItem('charity');

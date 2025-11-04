@@ -1,6 +1,6 @@
 import React from 'react';
 
-export  function Terms_Conditions() {
+export function Terms_Conditions() {
   return (
     <div>
       <main>
@@ -19,61 +19,60 @@ export  function Terms_Conditions() {
             impair its availability or accessibility.
           </p>
 
-          <h3>2. User Accounts</h3>                         
-            <p>
+          <h3>2. User Accounts</h3>
+          <p>
             If you create an account on our website, you are responsible for
             maintaining the confidentiality of your account information and for
             all activities that occur under your account.
           </p>
-          
+
           <h3>3. Donations</h3>
-            <p>
+          <p>
             By making a donation through our website, you agree to provide
             accurate and complete information about the items you are donating.
             We reserve the right to refuse or cancel any donation at our sole
             discretion.
           </p>
-          
+
           <h3>4. Intellectual Property</h3>
-            <p>
+          <p>
             All content on the website, including text, graphics, logos, and
             images, is the property of Let Us Donate UK and is protected by
             intellectual property laws. You may not use any content from the
             website without our prior written permission.
           </p>
-            
-            <h3>5. Limitation of Liability</h3>
-            <p>
+
+          <h3>5. Limitation of Liability</h3>
+          <p>
             To the fullest extent permitted by law, Let Us Donate UK shall not
             be liable for any direct, indirect, incidental, special,
             consequential, or punitive damages arising out of or related to your
             use of the website.
           </p>
-            
-            <h3>6. Changes to Terms and Conditions</h3>
-            <p>
+
+          <h3>6. Changes to Terms and Conditions</h3>
+          <p>
             We reserve the right to modify these terms and conditions at any
             time. Any changes will be effective immediately upon posting on the
             website. Your continued use of the website after any changes
             constitutes your acceptance of the new terms and conditions.
           </p>
-            
-            <h3>7. Governing Law</h3>
-            <p>
+
+          <h3>7. Governing Law</h3>
+          <p>
             These terms and conditions shall be governed by and construed in
             accordance with the laws of the United Kingdom.
           </p>
-            
-            <p>
+
+          <p>
             If you have any questions or concerns about these terms and
-            conditions, please contact us at    
-            <a href="">
-            </a></p>
+            conditions, please contact us at
+            <a href=""></a>
+          </p>
         </div>
       </main>
     </div>
   );
-}   
-
+}
 
 export default Terms_Conditions;

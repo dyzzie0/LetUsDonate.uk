@@ -20,7 +20,6 @@
 .admin-links h2 {
   font-weight: 600;
   font-size: 1.6rem;
-
 }
 
 .admin-links ul {
@@ -51,8 +50,6 @@
   border-bottom: 2px solid transparent;
   transition: 0.3s;
   padding: 4px;
-  
-
 }
 
 .admin-button:hover {

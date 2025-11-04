@@ -5,7 +5,8 @@ import { Chart } from 'chart.js/auto';
 
 export function Admin_Dashboard() {
   useEffect(() => {
-    // Donation Trends
+
+    // This chart is for donation trends, which is jsut showing how many donations have been made over time.
 
     const donationCtx = document.getElementById('donationTrends');
     const donationChart = new Chart(donationCtx, {
@@ -23,6 +24,8 @@ export function Admin_Dashboard() {
             tension: 0.3,
             pointRadius: 4,
             pointBackgroundColor: '#60a5fa',
+            weight: 'bold',
+            font: { size: 20 },
           },
         ],
       },
@@ -32,7 +35,7 @@ export function Admin_Dashboard() {
       },
     });
 
-    // Monthly User Trends
+    // This chart shows the monthly user trends, so how many users sign up per week, month etc.
 
     const userCtx = document.getElementById('userTrends');
     const userChart = new Chart(userCtx, {
@@ -58,7 +61,7 @@ export function Admin_Dashboard() {
       },
     });
 
-    // Sustainability Impact
+    // This shows the sustainability impact, so the combinaed c02 reduced and items reused.
 
     const sustainCtx = document.getElementById('sustainabilityImpact');
     const sustainChart = new Chart(sustainCtx, {
@@ -85,7 +88,7 @@ export function Admin_Dashboard() {
       },
     });
 
-    // Charity Performance
+    // This chart shows how many people have donated to each charity
 
     const charityCtx = document.getElementById('charityPerformance');
     const charityChart = new Chart(charityCtx, {
@@ -141,14 +144,14 @@ export function Admin_Dashboard() {
         <li>
           <ii class="fa-solid fa-arrow-right-from-bracket"></ii>
           <button
-                  className="admin-button"
-                  onClick={() => {
-                    localStorage.removeItem('admin');
-                    window.location.href = '/login';
-                  }}
-                >
-                  Logout
-                </button>
+            className="admin-button"
+            onClick={() => {
+              localStorage.removeItem('admin');
+              window.location.href = '/login';
+            }}
+          >
+            Logout
+          </button>
         </li>
       </div>
 

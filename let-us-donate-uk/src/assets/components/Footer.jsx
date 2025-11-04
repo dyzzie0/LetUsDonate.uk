@@ -7,15 +7,12 @@ export function Footer() {
     <footer className="footer">
       <div className="footer-content">
         <p>
-          <Link to="/terms_conditions"> Terms and Conditions </Link>
-          /
-          <Link to="/privacy_policy"> Privacy Policy </Link>
-          /
-          <Link to="accessibility"> Accessibility </Link>
-          /
-          <Link to="/cookie_policy"> Cookie Policy </Link>
-          /
-          &copy; {new Date().getFullYear()}Let Us Donate UK <br></br>All rights reserved.
+          <Link to="/terms_conditions"> Terms and Conditions </Link>/
+          <Link to="/privacy_policy"> Privacy Policy </Link>/
+          <Link to="accessibility"> Accessibility </Link>/
+          <Link to="/cookie_policy"> Cookie Policy </Link>/ &copy;{' '}
+          {new Date().getFullYear()}Let Us Donate UK <br></br>All rights
+          reserved.
         </p>
         <div className="footer-logo">
           <i class="fa-solid fa-leaf"></i>

@@ -12,7 +12,7 @@
 }
 
 body {
-  background-color: light-dark (#ffffff, #000000);
+  background-color: light-dark (#ffffff, #3f3f3f);
   color: light-dark (rgba(255, 255, 255, 0.87), rgba(0, 0, 0, 0.87));
 }
 

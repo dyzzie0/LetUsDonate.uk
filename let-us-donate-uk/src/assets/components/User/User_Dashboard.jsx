@@ -13,12 +13,11 @@ export function User_Dashboard() {
   function handleChange(e) {
     console.log(e.target.files);
     setFile(URL.createObjectURL(e.target.files[0]));
-}
+  }
 
-
-function handleDeleteFile(){
+  function handleDeleteFile() {
     setFile(null);
-}
+  }
   // Fetch user donations
   useEffect(() => {
     if (user?.id) {
@@ -34,8 +33,6 @@ function handleDeleteFile(){
         .catch(() => console.error('Failed to load donations'));
     }
   }, [user]);
-
-  
 
   // Fetch charities
   useEffect(() => {
@@ -106,7 +103,7 @@ function handleDeleteFile(){
             <ul>
               <li>
                 <i className="fa-solid fa-gauge"></i>
-                <a href="/user/impact">My Impact</a>
+                <a href="/my_impact">My Impact</a>
               </li>
               <li>
                 <i className="fa-solid fa-inbox"></i>
@@ -114,7 +111,7 @@ function handleDeleteFile(){
               </li>
               <li>
                 <i className="fa-solid fa-user"></i>
-                <a href="/user/profile">My Profile</a>
+                <a href="/my_profile">My Profile</a>
               </li>
               <li>
                 <i className="fa-solid fa-arrow-right-from-bracket"></i>
@@ -166,9 +163,9 @@ function handleDeleteFile(){
               <tr>
                 <th>Item</th>
                 <th>Date</th>
-                <th>Charity</th>
+                <th>Charity Selected</th>
                 <th>Status</th>
-                <th>Pickup</th>
+                <th>Pickup Adress</th>
               </tr>
             </thead>
             <tbody>
@@ -230,12 +227,7 @@ function handleDeleteFile(){
           </select>
 
           <h4>Colour</h4>
-          <input
-            type="text"
-            name="colour"
-            placeholder="e.g. Blue"
-            required
-          />
+          <input type="text" name="colour" placeholder="e.g. Blue" required />
 
           <h4>Quainitity</h4>
           <input
@@ -264,18 +256,25 @@ function handleDeleteFile(){
 
           <h4>Image</h4>
           <input type="file" onChange={handleChange} />
-          {file && <img src={file} alt="Uploaded preview"
-            style={{
-              width: "350px", 
-              height: "auto",
-              borderRadius: "6px",
-              display: "block",
-              marginBottom: "8px",
-            }}
-          />}
-          <div><button type="login-btn" onClick={handleDeleteFile}>Delete File</button>  
-      </div>
-  
+          {file && (
+            <img
+              src={file}
+              alt="Uploaded preview"
+              style={{
+                width: '350px',
+                height: 'auto',
+                borderRadius: '6px',
+                display: 'block',
+                marginBottom: '8px',
+              }}
+            />
+          )}
+          <div>
+            <button type="login-btn" onClick={handleDeleteFile}>
+              Delete File
+            </button>
+          </div>
+
           <h4>Pickup Address</h4>
           <input
             type="text"
@@ -284,7 +283,6 @@ function handleDeleteFile(){
             required
           />
 
-         
           <h4>Select Charity</h4>
           {loadingCharities ? (
             <p>Loading charities...</p>
