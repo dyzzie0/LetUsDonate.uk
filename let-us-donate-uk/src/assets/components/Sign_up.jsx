@@ -23,7 +23,7 @@ function DonorSignUp() {
     setMessage("");
 
     if (formData.password !== formData.confirmPassword) {
-      setMessage("❌ Passwords do not match");
+      setMessage("Passwords do not match");
       return;
     }
 
@@ -37,10 +37,10 @@ function DonorSignUp() {
       const data = await response.json();
 
       if (data.status === "success") {
-        alert("✅ " + data.message);
-        navigate(data.redirect || "/donor-dashboard");
+        alert(data.message);
+        navigate(data.redirect || "/user_dashboard");
       } else {
-        setMessage("❌ " + data.message);
+        setMessage(data.message);
       }
     } catch (err) {
       setMessage("⚠️ Error connecting to server");

@@ -1,70 +1,66 @@
 <?php
+header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type");
-header("Content-Type: application/json");
+header("Access-Control-Allow-Methods: POST, OPTIONS");
 
-include __DIR__ . '/db_connect.php';
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') exit;
 
-$data = json_decode(file_get_contents("php://input"), true);
-
-if (!$data) {
-    echo json_encode(["status" => "error", "message" => "Invalid JSON input"]);
-    exit;
-}
-
-$user_id        = $data["user_id"] ?? null;
-$item_name      = $data["item_name"] ?? "";
-$category       = $data["category"] ?? "";
-$type           = $data["type"] ?? "";
-$condition      = $data["condition"] ?? "";
-$description    = $data["description"] ?? "";
-$pickup_address = $data["pickup_address"] ?? "";
-$charity_name   = $data["charity_name"] ?? "";
-
-if (!$user_id || !$item_name || !$category || !$condition || !$charity_name) {
-    echo json_encode(["status" => "error", "message" => "Missing required fields"]);
-    exit;
-}
+include 'db_connect.php'; 
 
 try {
+    $data = json_decode(file_get_contents("php://input"), true);
+
+    $user_id        = $data['user_id'] ?? null;
+    $item_name      = trim($data['item_name'] ?? '');
+    $category       = trim($data['category'] ?? '');
+    $type           = trim($data['type'] ?? '');
+    $condition      = trim($data['condition'] ?? '');
+    $description    = trim($data['description'] ?? '');
+    $charity_name   = trim($data['charity_name'] ?? '');
+
+    if (!$user_id || !$item_name || !$category || !$type || !$condition || !$charity_name) {
+        echo json_encode(["status" => "error", "message" => "Missing required fields"]);
+        exit;
+    }
+
     $pdo->beginTransaction();
 
+    // Get donor_ID
     $stmt = $pdo->prepare("SELECT donor_ID FROM Donor WHERE user_ID = ?");
     $stmt->execute([$user_id]);
     $donor = $stmt->fetch(PDO::FETCH_ASSOC);
-    if (!$donor) {
-        throw new Exception("Donor account not found.");
-    }
-    $donor_ID = $donor["donor_ID"];
+    if (!$donor) throw new Exception("Donor account not found.");
+    $donor_ID = $donor['donor_ID'];
 
+    // Get charity_ID
     $stmt = $pdo->prepare("SELECT charity_ID FROM Charity WHERE charity_name = ?");
     $stmt->execute([$charity_name]);
     $charity = $stmt->fetch(PDO::FETCH_ASSOC);
-    if (!$charity) {
-        throw new Exception("Charity not found in database.");
-    }
-    $charity_ID = $charity["charity_ID"];
+    if (!$charity) throw new Exception("Charity not found.");
+    $charity_ID = $charity['charity_ID'];
 
+    // Insert donation
     $stmt = $pdo->prepare("
-        INSERT INTO Donation (donor_ID, charity_ID, donation_status, donation_date)
+        INSERT INTO Donation (donor_ID, charity_ID, donation_status, donation_date) 
         VALUES (?, ?, ?, datetime('now'))
     ");
     $stmt->execute([$donor_ID, $charity_ID, "Pending"]);
     $donation_ID = $pdo->lastInsertId();
 
+    // Insert donation item
     $stmt = $pdo->prepare("
-        INSERT INTO Donation_Item
-        (donation_ID, item_name, item_category, item_size, item_condition, description, pickup_address)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO Donation_Item 
+        (donation_ID, item_name, item_category, item_size, item_condition, item_description) 
+        VALUES (?, ?, ?, ?, ?, ?)
     ");
     $stmt->execute([
-        $donation_ID,
-        $item_name,
-        $category,
-        $type,
-        $condition,
-        $description,
-        $pickup_address
+        $donation_ID, 
+        $item_name, 
+        $category, 
+        $type, 
+        $condition, 
+        $description
     ]);
 
     $pdo->commit();

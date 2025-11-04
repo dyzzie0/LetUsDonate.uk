@@ -8,30 +8,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit(0);
 }
 
-include 'db_connect.php';
+include 'db_connect.php'; 
 
 try {
     $data = json_decode(file_get_contents("php://input"), true);
 
     $firstName = trim($data['firstName'] ?? '');
-    $lastName = trim($data['lastName'] ?? '');
-    $email = trim($data['email'] ?? '');
-    $password = trim($data['password'] ?? '');
-    $address = trim($data['address'] ?? '');
+    $lastName  = trim($data['lastName'] ?? '');
+    $email     = trim($data['email'] ?? '');
+    $password  = trim($data['password'] ?? '');
+    $address   = trim($data['address'] ?? '');
 
     if (!$firstName || !$lastName || !$email || !$password || !$address) {
         echo json_encode(["status" => "error", "message" => "All fields are required."]);
         exit;
     }
 
-    $stmt = $db->prepare("SELECT * FROM User WHERE user_email = ?");
+    $stmt = $pdo->prepare("SELECT * FROM User WHERE user_email = ?");
     $stmt->execute([$email]);
     if ($stmt->fetch()) {
         echo json_encode(["status" => "error", "message" => "Email already registered."]);
         exit;
     }
 
-    $roleStmt = $db->prepare("SELECT role_ID FROM Role WHERE role_name = 'donor'");
+    $roleStmt = $pdo->prepare("SELECT role_ID FROM Role WHERE role_name = 'donor'");
     $roleStmt->execute();
     $role = $roleStmt->fetchColumn();
 
@@ -42,22 +42,24 @@ try {
 
     $hashed_pw = password_hash($password, PASSWORD_DEFAULT);
 
-    $stmt = $db->prepare("
+    $stmt = $pdo->prepare("
         INSERT INTO User (user_Fname, user_Lname, user_email, user_password, role_id)
         VALUES (?, ?, ?, ?, ?)
     ");
     $stmt->execute([$firstName, $lastName, $email, $hashed_pw, $role]);
 
-    $userId = $db->lastInsertId();
+    $userId = $pdo->lastInsertId();
 
-    $stmt = $db->prepare("INSERT INTO Donor (donor_address) VALUES (?)");
-    $stmt->execute([$address]);
+    $stmt = $pdo->prepare("INSERT INTO Donor (user_ID, donor_address) VALUES (?, ?)");
+    $stmt->execute([$userId, $address]);
+
 
     echo json_encode([
         "status" => "success",
         "message" => "Donor account created successfully.",
-        "redirect" => "/user_dashboard"
+        "userId" => $userId
     ]);
+
 } catch (PDOException $e) {
     echo json_encode(["status" => "error", "message" => $e->getMessage()]);
 }

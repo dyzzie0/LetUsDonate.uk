@@ -1,25 +1,55 @@
 <?php
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
+header("Access-Control-Allow-Methods: POST, OPTIONS");
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') exit;
 
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') exit();
+include 'db_connect.php';
 
-$data = json_decode(file_get_contents("php://input"), true);
+try {
+    $data = json_decode(file_get_contents("php://input"), true);
 
-$users = [
-    'donor@test.com' => ['name'=>'Test Donor','password'=>'123456','role'=>'donor'],
-    'charity@test.com' => ['name'=>'Test Charity','password'=>'123456','role'=>'charity'],
-    'admin@test.com' => ['name'=>'Test Admin','password'=>'123456','role'=>'admin']
-];
+    $email = trim($data['email'] ?? '');
+    $password = trim($data['password'] ?? '');
 
-$email = $data['email'] ?? '';
-$password = $data['password'] ?? '';
+    if (!$email || !$password) {
+        echo json_encode(["status" => "error", "message" => "Email and password are required"]);
+        exit;
+    }
 
-if(isset($users[$email]) && $users[$email]['password'] === $password){
-    echo json_encode(['status'=>'success','user'=>['email'=>$email]+$users[$email]]);
-} else {
-    echo json_encode(['status'=>'error','message'=>'Invalid email or password']);
+    // Get user by email
+    $stmt = $pdo->prepare("SELECT user_ID, user_Fname, user_Lname, user_password, role_id FROM User WHERE user_email = ?");
+    $stmt->execute([$email]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$user) {
+        echo json_encode(["status" => "error", "message" => "Invalid email or password"]);
+        exit;
+    }
+
+    // Verify password
+    if (!password_verify($password, $user['user_password'])) {
+        echo json_encode(["status" => "error", "message" => "Invalid email or password"]);
+        exit;
+    }
+
+    // Get role name
+    $stmt = $pdo->prepare("SELECT role_name FROM Role WHERE role_ID = ?");
+    $stmt->execute([$user['role_id']]);
+    $role = $stmt->fetchColumn() ?? 'donor';
+
+    // Return user info
+    echo json_encode([
+        "status" => "success",
+        "user" => [
+            "id" => $user['user_ID'],
+            "name" => $user['user_Fname'],
+            "role" => strtolower($role)
+        ]
+    ]);
+
+} catch (PDOException $e) {
+    echo json_encode(["status" => "error", "message" => $e->getMessage()]);
 }
 ?>
