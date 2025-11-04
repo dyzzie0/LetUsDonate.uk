@@ -1,17 +1,16 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import "../../css/sign_up_login.css";
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import '../../css/sign_up_login.css';
 
 function DonorSignUp() {
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    address: "",
+    fullName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    address: '',
   });
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -20,7 +19,7 @@ function DonorSignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setMessage("");
+    setMessage('');
 
     if (formData.password !== formData.confirmPassword) {
       setMessage("Passwords do not match");
@@ -28,9 +27,9 @@ function DonorSignUp() {
     }
 
     try {
-      const response = await fetch("http://localhost:8000/signup.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch('http://localhost:8000/signup.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
 
@@ -41,100 +40,88 @@ function DonorSignUp() {
         navigate(data.redirect || "/user_dashboard");
       } else {
         setMessage(data.message);
+        setMessage(data.message);
       }
     } catch (err) {
-      setMessage("⚠️ Error connecting to server");
+      setMessage('Could not connect you to server');
     }
   };
 
   return (
-    <div className="middle">
-      <div className="return_home">
-        <Link to="/">Return</Link>
+    <div>
+      <div className="middle">
+        <div className="return_home">
+          <Link to="/">Return</Link>
+        </div>
+
+        <h2>Create Account</h2>
+        <br></br>
+        <p>Quickly Create An Account</p>
+
+        <form onSubmit={handleSubmit}>
+          <div className="input-box">
+            <input
+              type="text"
+              name="fullName"
+              placeholder="Full Name"
+              value={formData.firstName}
+              onChange={handleChange}
+              required
+            />
+            <ii class="fa-solid fa-user"></ii>
+          </div>
+
+          <div className="input-box">
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+            <ii class="fa-solid fa-envelope"></ii>
+          </div>
+
+          <div className="input-box">
+            <input
+              type="password"
+              name="password"
+              placeholder="Password* (6 characters)"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+            <ii class="fa-solid fa-key"></ii>
+          </div>
+
+          <div className="input-box">
+            <input
+              type="password"
+              name="confirmPassword"
+              placeholder="Confirm Password* (6 characters)"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              required
+            />
+            <ii class="fa-solid fa-lock"></ii>
+          </div>
+
+          {message && <p style={{ color: 'red' }}>{message}</p>}
+
+          <div className="signup_link">
+            <Link className="print" to="/login">
+              Already have an account?
+            </Link>
+          </div>
+
+          <div className="sub-btn">
+            <button type="submit" className="btn">
+              Register
+            </button>
+          </div>
+        </form>
       </div>
-
-      <h2>Create Donor Account</h2>
-      <p>Sign up to start donating</p>
-
-      <form onSubmit={handleSubmit}>
-        <div className="input-box">
-          <input
-            type="text"
-            name="firstName"
-            placeholder="First Name"
-            value={formData.firstName}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="input-box">
-          <input
-            type="text"
-            name="lastName"
-            placeholder="Last Name"
-            value={formData.lastName}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="input-box">
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="input-box">
-          <input
-            type="text"
-            name="address"
-            placeholder="Address"
-            value={formData.address}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="input-box">
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="input-box">
-          <input
-            type="password"
-            name="confirmPassword"
-            placeholder="Confirm Password"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        {message && <p style={{ color: "red" }}>{message}</p>}
-
-        <Link className="print" to="/login">
-          Already have an account?
-        </Link>
-
-        <div className="sub-btn">
-          <button type="submit" className="btn">
-            Register
-          </button>
-        </div>
-      </form>
     </div>
   );
 }

@@ -24,7 +24,7 @@ export function View_Donations() {
             type="text"
             placeholder="Search by Type..."
             className="search-input"
-         />   
+          />
           <select className="status-filter">
             <option value="">All Statuses</option>
             <option value="approved">Approved</option>
