@@ -140,29 +140,35 @@ export function Admin_Dashboard() {
         </li>
         <li>
           <ii class="fa-solid fa-arrow-right-from-bracket"></ii>
-          <button>
-            <div className="admin-button">Logout</div>
-          </button>
+          <button
+                  className="admin-button"
+                  onClick={() => {
+                    localStorage.removeItem('admin');
+                    window.location.href = '/login';
+                  }}
+                >
+                  Logout
+                </button>
         </li>
       </div>
 
       <div className="admin-overview">
         <div className="Stats">
           <div>
-            <h4>Total Donated</h4>
-            <p>1,900</p>
+            <h4>Total Items Donated</h4>
+            <p>0</p>
           </div>
           <div>
             <h4>Total Items Accepted</h4>
-            <p>1,024</p>
+            <p>0</p>
           </div>
           <div>
             <h4>Total CO₂ Saved</h4>
-            <p>15,000kg</p>
+            <p>0kg</p>
           </div>
           <div>
             <h4>Active Users</h4>
-            <p>978</p>
+            <p>0</p>
           </div>
         </div>
       </div>

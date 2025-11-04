@@ -11,43 +11,32 @@ export function View_Inventory() {
   const [inventory] = useState([
     {
       id: 1,
-      name: 'Brown Jacket',
+      name: 'Shirt',
       category: "Men's",
-      type: 'Jacket',
+      type: 'Shirt',
       condition: 'Like New',
-      quantity: 2,
-    },
+      quantity: 1,
+      colour: 'Blue'
+    }
+    ,
     {
       id: 2,
-      name: 'Blue Shirt',
+      name: 'Trousers',
       category: "Women's",
-      type: 'Shirt',
-      condition: 'New',
-      quantity: 4,
-    },
-    {
-      id: 3,
-      name: 'Kids Shoes',
-      category: "Boy's",
-      type: 'Shoes',
+      type: 'Trouser',
       condition: 'Used - Good',
-      quantity: 3,
-    },
-    {
-      id: 4,
-      name: 'Winter Coat',
-      category: "Men's",
-      type: 'Jacket',
-      condition: 'Used - Fair',
-      quantity: 1,
-    },
+      quantity: 2,
+      colour: 'Black'
+    }
+ 
+   
   ]);
 
   const filteredInventory = inventory.filter((item) => {
     return (
-      (filters.category == '' || item.category == filters.category) &&
-      (filters.type == '' || item.type == filters.type) &&
-      (filters.condition == '' || item.condition == filters.condition)
+      (filters.category === '' || item.category === filters.category) &&
+      (filters.type === '' || item.type === filters.type) &&
+      (filters.condition === '' || item.condition === filters.condition)
     );
   });
 
@@ -56,12 +45,25 @@ export function View_Inventory() {
     setFilters({ ...filters, [name]: value });
   };
 
+  const categoryCounts = filteredInventory.reduce((acc, item) => {
+    acc[item.category] = (acc[item.category] || 0) + item.quantity;
+    return acc;
+  }, {});
+
   return (
     <div>
       <main>
         <div className="records-container">
           <div className="header-left">
             <h2>Inventory</h2>
+
+            <div className="category-counts">
+              {Object.entries(categoryCounts).map(([category, count]) => (
+                <div key={category} className="category-count">
+                  <strong>{category}:</strong> {count}
+                </div>
+              ))}
+            </div>
           </div>
 
           <div className="return-right">
@@ -74,11 +76,7 @@ export function View_Inventory() {
         </div>
 
         <div className="filter-bar">
-          <select
-            name="category"
-            value={filters.category}
-            onChange={handleFilterChange}
-          >
+          <select name="category" value={filters.category} onChange={handleFilterChange}>
             <option value="">All Categories</option>
             <option value="Women's">Women's</option>
             <option value="Men's">Men's</option>
@@ -86,11 +84,7 @@ export function View_Inventory() {
             <option value="Boy's">Boy's</option>
           </select>
 
-          <select
-            name="type"
-            value={filters.type}
-            onChange={handleFilterChange}
-          >
+          <select name="type" value={filters.type} onChange={handleFilterChange}>
             <option value="">All Types</option>
             <option value="Shirt">Shirt</option>
             <option value="Trouser">Trouser</option>
@@ -99,11 +93,7 @@ export function View_Inventory() {
             <option value="Other">Other</option>
           </select>
 
-          <select
-            name="condition"
-            value={filters.condition}
-            onChange={handleFilterChange}
-          >
+          <select name="condition" value={filters.condition} onChange={handleFilterChange}>
             <option value="">All Conditions</option>
             <option value="New">New</option>
             <option value="Like New">Like New</option>
@@ -122,7 +112,8 @@ export function View_Inventory() {
                 <th>Type</th>
                 <th>Condition</th>
                 <th>Quantity</th>
-                <th>C02 Saved Per Item</th>
+                <th>Colour</th>
+                
               </tr>
             </thead>
             <tbody>
@@ -135,6 +126,7 @@ export function View_Inventory() {
                     <td>{item.type}</td>
                     <td>{item.condition}</td>
                     <td>{item.quantity}</td>
+                    <td>{item.colour}</td>
                   </tr>
                 ))
               ) : (
@@ -145,6 +137,8 @@ export function View_Inventory() {
             </tbody>
           </table>
         </div>
+
+    
       </main>
     </div>
   );
