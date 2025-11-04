@@ -8,8 +8,18 @@ export function User_Dashboard() {
   const [charities, setCharities] = useState([]);
   const [loadingCharities, setLoadingCharities] = useState(true);
   const user = JSON.parse(localStorage.getItem('user'));
+  const [file, setFile] = useState(null);
 
-  // 🧩 Fetch user donations
+  function handleChange(e) {
+    console.log(e.target.files);
+    setFile(URL.createObjectURL(e.target.files[0]));
+}
+
+
+function handleDeleteFile(){
+    setFile(null);
+}
+  // Fetch user donations
   useEffect(() => {
     if (user?.id) {
       fetch(`http://localhost:8000/get_donations.php?user_id=${user.id}`)
@@ -25,7 +35,9 @@ export function User_Dashboard() {
     }
   }, [user]);
 
-  // 🧩 Fetch charities
+  
+
+  // Fetch charities
   useEffect(() => {
     setLoadingCharities(true);
     fetch('http://localhost:8000/get_charities.php')
@@ -45,7 +57,7 @@ export function User_Dashboard() {
       });
   }, []);
 
-  // 🧩 Handle new donation submission
+  // Handle new donation submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -79,7 +91,7 @@ export function User_Dashboard() {
     } catch (err) {
       setStatus({
         type: 'error',
-        message: '⚠️ Network error. Please try again.',
+        message: 'Network error. Please try again.',
       });
     }
 
@@ -217,6 +229,23 @@ export function User_Dashboard() {
             <option value="other">Other</option>
           </select>
 
+          <h4>Colour</h4>
+          <input
+            type="text"
+            name="colour"
+            placeholder="e.g. Blue"
+            required
+          />
+
+          <h4>Quainitity</h4>
+          <input
+            type="number"
+            name="quantity"
+            min="1"
+            placeholder="Enter quantity"
+            required
+          />
+
           <h4>Condition</h4>
           <select name="condition" required>
             <option value="">-- Select Condition --</option>
@@ -233,6 +262,20 @@ export function User_Dashboard() {
             required
           />
 
+          <h4>Image</h4>
+          <input type="file" onChange={handleChange} />
+          {file && <img src={file} alt="Uploaded preview"
+            style={{
+              width: "350px", 
+              height: "auto",
+              borderRadius: "6px",
+              display: "block",
+              marginBottom: "8px",
+            }}
+          />}
+          <div><button type="login-btn" onClick={handleDeleteFile}>Delete File</button>  
+      </div>
+  
           <h4>Pickup Address</h4>
           <input
             type="text"
@@ -241,9 +284,7 @@ export function User_Dashboard() {
             required
           />
 
-          <h4>Preferred Pickup Date</h4>
-          <input type="date" name="pickup_time" />
-
+         
           <h4>Select Charity</h4>
           {loadingCharities ? (
             <p>Loading charities...</p>

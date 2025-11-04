@@ -24,7 +24,7 @@ function Header() {
 
         <div className="nav_right">
           <div className="how">
-            <a href="#howitworks">How does this work?</a>
+            <a href="/#howitworks">How does this work?</a>
           </div>
           <div className="menu_text" onClick={() => setMenuOpen(!menuOpen)}>
             {menuOpen ? 'Close ✕' : 'Menu'}
