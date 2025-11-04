@@ -2,6 +2,21 @@ import React, { useState } from 'react';
 import '../../../css/records.css';
 
 export function View_Inventory() {
+  const role = localStorage.getItem('role');
+  const getReturnLink = () => {
+    switch (role) {
+      case 'charity':
+        return '/Charity_dashboard';
+      case 'admin':
+        return '/Admin_dashboard';
+      case 'donor':
+      case 'user':
+        return '/User_dashboard';
+      default:
+        return '/';
+    }
+  };
+
   const [filters, setFilters] = useState({
     category: '',
     type: '',
@@ -16,9 +31,8 @@ export function View_Inventory() {
       type: 'Shirt',
       condition: 'Like New',
       quantity: 1,
-      colour: 'Blue'
-    }
-    ,
+      colour: 'Blue',
+    },
     {
       id: 2,
       name: 'Trousers',
@@ -26,10 +40,8 @@ export function View_Inventory() {
       type: 'Trouser',
       condition: 'Used - Good',
       quantity: 2,
-      colour: 'Black'
-    }
- 
-   
+      colour: 'Black',
+    },
   ]);
 
   const filteredInventory = inventory.filter((item) => {
@@ -69,14 +81,20 @@ export function View_Inventory() {
           <div className="return-right">
             <ul>
               <li>
-                <a href="/charity_dashboard">Return</a>
+                <li>
+                  <a href={getReturnLink()}>Return</a>
+                </li>
               </li>
             </ul>
           </div>
         </div>
 
         <div className="filter-bar">
-          <select name="category" value={filters.category} onChange={handleFilterChange}>
+          <select
+            name="category"
+            value={filters.category}
+            onChange={handleFilterChange}
+          >
             <option value="">All Categories</option>
             <option value="Women's">Women's</option>
             <option value="Men's">Men's</option>
@@ -84,7 +102,11 @@ export function View_Inventory() {
             <option value="Boy's">Boy's</option>
           </select>
 
-          <select name="type" value={filters.type} onChange={handleFilterChange}>
+          <select
+            name="type"
+            value={filters.type}
+            onChange={handleFilterChange}
+          >
             <option value="">All Types</option>
             <option value="Shirt">Shirt</option>
             <option value="Trouser">Trouser</option>
@@ -93,7 +115,11 @@ export function View_Inventory() {
             <option value="Other">Other</option>
           </select>
 
-          <select name="condition" value={filters.condition} onChange={handleFilterChange}>
+          <select
+            name="condition"
+            value={filters.condition}
+            onChange={handleFilterChange}
+          >
             <option value="">All Conditions</option>
             <option value="New">New</option>
             <option value="Like New">Like New</option>
@@ -110,10 +136,10 @@ export function View_Inventory() {
                 <th>Item Name</th>
                 <th>Category</th>
                 <th>Type</th>
-                <th>Condition</th>
-                <th>Quantity</th>
                 <th>Colour</th>
-                
+                <th>Quantity</th>
+                <th>Condition</th>
+                <th>Image</th>
               </tr>
             </thead>
             <tbody>
@@ -137,8 +163,6 @@ export function View_Inventory() {
             </tbody>
           </table>
         </div>
-
-    
       </main>
     </div>
   );

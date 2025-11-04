@@ -32,10 +32,8 @@ import My_Donations from './assets/components/User/my_donations.jsx';
 
 import Terms_Conditions from './assets/components/Footer_Content/Terms_Conditions.jsx';
 import Privacy_Policy from './assets/components/Footer_Content/Privacy_Policy.jsx';
-import Accessibility from './assets/components/Footer_Content/Accessibility.jsx'; 
+import Accessibility from './assets/components/Footer_Content/Accessibility.jsx';
 import Cookie_Policy from './assets/components/Footer_Content/Cookie_Policy.jsx';
-
-
 
 function Layout() {
   const location = useLocation();
@@ -85,7 +83,7 @@ function Layout() {
 
         <Route path="/admin_dashboard" element={<Admin_Dashboard />} />
         <Route path="/view_users" element={<View_Users />} />
-        <Route path= "/data_reports" element={<Data_Reports/>}/>
+        <Route path="/data_reports" element={<Data_Reports />} />
 
         <Route path="/user_dashboard" element={<User_Dashboard />} />
         <Route path="/my_impact" element={<My_Impact />} />
@@ -95,7 +93,6 @@ function Layout() {
         <Route path="/privacy_policy" element={<Privacy_Policy />} />
         <Route path="/accessibility" element={<Accessibility />} />
         <Route path="/cookie_policy" element={<Cookie_Policy />} />
-
       </Routes>
 
       {!showNothing && <Footer />}

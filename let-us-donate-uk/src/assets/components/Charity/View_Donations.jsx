@@ -2,6 +2,21 @@ import React from 'react';
 import '../../../css/records.css';
 
 export function View_Donations() {
+  const role = localStorage.getItem('role');
+  const getReturnLink = () => {
+    switch (role) {
+      case 'charity':
+        return '/Charity_dashboard';
+      case 'admin':
+        return '/Admin_dashboard';
+      case 'donor':
+      case 'user':
+        return '/User_dashboard';
+      default:
+        return '/';
+    }
+  };
+
   return (
     <div>
       <main>
@@ -13,7 +28,7 @@ export function View_Donations() {
           <div className="return-right">
             <ul>
               <li>
-                <a href="/charity_dashboard">Return</a>
+                <a href={getReturnLink()}>Return</a>
               </li>
             </ul>
           </div>
@@ -44,6 +59,7 @@ export function View_Donations() {
                   <th>Type</th>
                   <th>Quantity</th>
                   <th>Date Donated</th>
+                  <th>Charity Selected</th>
                   <th>Status</th>
                 </tr>
               </thead>
