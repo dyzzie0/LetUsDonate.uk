@@ -171,7 +171,6 @@ export function User_Dashboard() {
                 <th>Date</th>
                 <th>Charity</th>
                 <th>Status</th>
-                <th>Pickup</th>
               </tr>
             </thead>
             <tbody>
@@ -182,7 +181,6 @@ export function User_Dashboard() {
                     <td>{d.donation_date}</td>
                     <td>{d.charity_name}</td>
                     <td>{d.donation_status}</td>
-                    <td>{d.pickup_address}</td>
                   </tr>
                 ))
               ) : (
