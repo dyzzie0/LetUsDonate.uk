@@ -103,7 +103,7 @@ export function User_Dashboard() {
             <ul>
               <li>
                 <i className="fa-solid fa-gauge"></i>
-                <a href="/user/impact">My Impact</a>
+                <a href="/my_impact">My Impact</a>
               </li>
               <li>
                 <i className="fa-solid fa-inbox"></i>
@@ -111,7 +111,7 @@ export function User_Dashboard() {
               </li>
               <li>
                 <i className="fa-solid fa-user"></i>
-                <a href="/user/profile">My Profile</a>
+                <a href="/my_profile">My Profile</a>
               </li>
               <li>
                 <i className="fa-solid fa-arrow-right-from-bracket"></i>

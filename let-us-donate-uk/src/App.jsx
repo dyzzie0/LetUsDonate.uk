@@ -18,17 +18,18 @@ import Our_Partners from './assets/components/Our_Partners.jsx';
 
 import Charity_Dashboard from './assets/components/Charity/Charity_Dashboard.jsx';
 import { View_Inventory } from './assets/components/Charity/View_Inventory.jsx';
-import View_Donations from './assets/components/Charity/view_donations.jsx';
+import View_Donations from './assets/components/Charity/View_Donations.jsx';
 import Distribution_Records from './assets/components/Charity/Distribution_Records.jsx';
 import Approve_Donations from './assets/components/Charity/approve_donations.jsx';
 
-import Admin_Dashboard from './assets/components/Admin/admin_dashboard.jsx';
-import View_Users from './assets/components/Admin/view_users.jsx';
+import Admin_Dashboard from './assets/components/Admin/Admin_Dashboard.jsx';
+import View_Users from './assets/components/Admin/View_Users.jsx';
 import Data_Reports from './assets/components/Admin/Data_Reports.jsx';
 
 import User_Dashboard from './assets/components/User/User_Dashboard.jsx';
-import My_Impact from './assets/components/User/my_impact.jsx';
-import My_Donations from './assets/components/User/my_donations.jsx';
+import My_Impact from './assets/components/User/My_Impact.jsx';
+import My_Donations from './assets/components/User/My_Donations.jsx';
+import My_Profile from './assets/components/User/My_Profile.jsx';
 
 import Terms_Conditions from './assets/components/Footer_Content/Terms_Conditions.jsx';
 import Privacy_Policy from './assets/components/Footer_Content/Privacy_Policy.jsx';
@@ -52,6 +53,7 @@ function Layout() {
     '/admin_dashboard',
     '/view_users',
     '/data_reports',
+    '/my_profile',
   ];
 
   const showNothing = noHeaderFooterPaths.includes(path);
@@ -88,6 +90,7 @@ function Layout() {
         <Route path="/user_dashboard" element={<User_Dashboard />} />
         <Route path="/my_impact" element={<My_Impact />} />
         <Route path="/my_donations" element={<My_Donations />} />
+        <Route path="/my_profile" element={<My_Profile />} />
 
         <Route path="/terms_conditions" element={<Terms_Conditions />} />
         <Route path="/privacy_policy" element={<Privacy_Policy />} />
