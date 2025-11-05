@@ -2,6 +2,21 @@ import React, { useState } from 'react';
 import '../../../css/records.css';
 
 export function View_Inventory() {
+  const role = localStorage.getItem('role');
+  const getReturnLink = () => {
+    switch (role) {
+      case 'charity':
+        return '/Charity_dashboard';
+      case 'admin':
+        return '/Admin_dashboard';
+      case 'donor':
+      case 'user':
+        return '/User_dashboard';
+      default:
+        return '/';
+    }
+  };
+
   const [filters, setFilters] = useState({
     category: '',
     type: '',
@@ -11,43 +26,29 @@ export function View_Inventory() {
   const [inventory] = useState([
     {
       id: 1,
-      name: 'Brown Jacket',
+      name: 'Shirt',
       category: "Men's",
-      type: 'Jacket',
+      type: 'Shirt',
       condition: 'Like New',
-      quantity: 2,
+      quantity: 1,
+
     },
     {
       id: 2,
-      name: 'Blue Shirt',
+      name: 'Trousers',
       category: "Women's",
-      type: 'Shirt',
-      condition: 'New',
-      quantity: 4,
-    },
-    {
-      id: 3,
-      name: 'Kids Shoes',
-      category: "Boy's",
-      type: 'Shoes',
+      type: 'Trouser',
       condition: 'Used - Good',
-      quantity: 3,
-    },
-    {
-      id: 4,
-      name: 'Winter Coat',
-      category: "Men's",
-      type: 'Jacket',
-      condition: 'Used - Fair',
-      quantity: 1,
+      quantity: 2,
+
     },
   ]);
 
   const filteredInventory = inventory.filter((item) => {
     return (
-      (filters.category == '' || item.category == filters.category) &&
-      (filters.type == '' || item.type == filters.type) &&
-      (filters.condition == '' || item.condition == filters.condition)
+      (filters.category === '' || item.category === filters.category) &&
+      (filters.type === '' || item.type === filters.type) &&
+      (filters.condition === '' || item.condition === filters.condition)
     );
   });
 
@@ -56,18 +57,33 @@ export function View_Inventory() {
     setFilters({ ...filters, [name]: value });
   };
 
+  const categoryCounts = filteredInventory.reduce((acc, item) => {
+    acc[item.category] = (acc[item.category] || 0) + item.quantity;
+    return acc;
+  }, {});
+
   return (
     <div>
       <main>
         <div className="records-container">
           <div className="header-left">
             <h2>Inventory</h2>
+
+            <div className="category-counts">
+              {Object.entries(categoryCounts).map(([category, count]) => (
+                <div key={category} className="category-count">
+                  <strong>{category}:</strong> {count}
+                </div>
+              ))}
+            </div>
           </div>
 
           <div className="return-right">
             <ul>
               <li>
-                <a href="/charity_dashboard">Return</a>
+                <li>
+                  <a href={getReturnLink()}>Return</a>
+                </li>
               </li>
             </ul>
           </div>
@@ -120,9 +136,10 @@ export function View_Inventory() {
                 <th>Item Name</th>
                 <th>Category</th>
                 <th>Type</th>
-                <th>Condition</th>
+   
                 <th>Quantity</th>
-                <th>C02 Saved Per Item</th>
+                <th>Condition</th>
+                <th>Image</th>
               </tr>
             </thead>
             <tbody>
@@ -135,6 +152,7 @@ export function View_Inventory() {
                     <td>{item.type}</td>
                     <td>{item.condition}</td>
                     <td>{item.quantity}</td>
+                    <td>{item.colour}</td>
                   </tr>
                 ))
               ) : (

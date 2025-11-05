@@ -43,7 +43,6 @@ export function View_Users() {
                 <th>Email</th>
                 <th>Role</th>
                 <th>Date Joined</th>
-                <th>Status</th>
               </tr>
             </thead>
             <tbody>
@@ -53,7 +52,6 @@ export function View_Users() {
                 <td>gmail.com</td>
                 <td>Donor</td>
                 <td>2024-01-15</td>
-                <td>Active</td>
               </tr>
               <tr>
                 <td>2</td>
@@ -61,7 +59,6 @@ export function View_Users() {
                 <td>yahoo.com</td>
                 <td>Charity Staff</td>
                 <td>2023-11-22</td>
-                <td>Inactive</td>
               </tr>
             </tbody>
           </table>

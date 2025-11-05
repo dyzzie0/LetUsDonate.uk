@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../../css/footer.css';
 
 export function Footer() {
@@ -6,9 +7,12 @@ export function Footer() {
     <footer className="footer">
       <div className="footer-content">
         <p>
-          <a href="#">Terms and conditions</a> / <a href="#">Accessibility</a> /{' '}
-          <a href="#">Cookie policy</a> / <a href="#">Privacy Policy</a> / ©
-          Copyright <strong>2025</strong> / All Rights Reserved
+          <Link to="/terms_conditions"> Terms and Conditions </Link>/
+          <Link to="/privacy_policy"> Privacy Policy </Link>/
+          <Link to="accessibility"> Accessibility </Link>/
+          <Link to="/cookie_policy"> Cookie Policy </Link>/ &copy;{' '}
+          {new Date().getFullYear()}Let Us Donate UK <br></br>All rights
+          reserved.
         </p>
         <div className="footer-logo">
           <i class="fa-solid fa-leaf"></i>
