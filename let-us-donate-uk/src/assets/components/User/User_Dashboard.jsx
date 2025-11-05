@@ -226,9 +226,7 @@ export function User_Dashboard() {
             <option value="other">Other</option>
           </select>
 
-          <h4>Colour</h4>
-          <input type="text" name="colour" placeholder="e.g. Blue" required />
-
+         
           <h4>Quainitity</h4>
           <input
             type="number"

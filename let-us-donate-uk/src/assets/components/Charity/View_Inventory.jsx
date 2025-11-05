@@ -31,7 +31,7 @@ export function View_Inventory() {
       type: 'Shirt',
       condition: 'Like New',
       quantity: 1,
-      colour: 'Blue',
+
     },
     {
       id: 2,
@@ -40,7 +40,7 @@ export function View_Inventory() {
       type: 'Trouser',
       condition: 'Used - Good',
       quantity: 2,
-      colour: 'Black',
+
     },
   ]);
 
@@ -136,7 +136,7 @@ export function View_Inventory() {
                 <th>Item Name</th>
                 <th>Category</th>
                 <th>Type</th>
-                <th>Colour</th>
+   
                 <th>Quantity</th>
                 <th>Condition</th>
                 <th>Image</th>
