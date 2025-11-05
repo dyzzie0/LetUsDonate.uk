@@ -23,6 +23,17 @@ export function User_Dashboard() {
     
   }, []);
 
+  const user = JSON.parse(localStorage.getItem('user'));
+  const [file, setFile] = useState(null);
+
+  function handleChange(e) {
+    console.log(e.target.files);
+    setFile(URL.createObjectURL(e.target.files[0]));
+  }
+
+  function handleDeleteFile() {
+    setFile(null);
+  }
   // Fetch user donations
   useEffect(() => {
     if (user?.id) {
@@ -96,6 +107,11 @@ export function User_Dashboard() {
       }
     } catch {
       setStatus({ type: "error", message: "⚠️ Network error. Please try again." });
+    } catch (err) {
+      setStatus({
+        type: 'error',
+        message: 'Network error. Please try again.',
+      });
     }
 
     setTimeout(() => setStatus(null), 6000);
@@ -109,15 +125,15 @@ export function User_Dashboard() {
             <ul>
               <li>
                 <i className="fa-solid fa-gauge"></i>
-                <a href="/user/impact">My Impact</a>
+                <a href="/my_impact">My Impact</a>
               </li>
               <li>
                 <i className="fa-solid fa-inbox"></i>
-                <a href="/user/my_donations">My Donations</a>
+                <a href="/my_donations">My Donations</a>
               </li>
               <li>
                 <i className="fa-solid fa-user"></i>
-                <a href="/user/profile">My Profile</a>
+                <a href="/my_profile">My Profile</a>
               </li>
               <li>
                 <i className="fa-solid fa-arrow-right-from-bracket"></i>
@@ -169,8 +185,9 @@ export function User_Dashboard() {
               <tr>
                 <th>Item</th>
                 <th>Date</th>
-                <th>Charity</th>
+                <th>Charity Selected</th>
                 <th>Status</th>
+                <th>Pickup Adress</th>
               </tr>
             </thead>
             <tbody>
@@ -230,6 +247,16 @@ export function User_Dashboard() {
             <option value="other">Other</option>
           </select>
 
+         
+          <h4>Quainitity</h4>
+          <input
+            type="number"
+            name="quantity"
+            min="1"
+            placeholder="Enter quantity"
+            required
+          />
+
           <h4>Condition</h4>
           <select name="condition" required>
             <option value="">-- Select Condition --</option>
@@ -243,6 +270,35 @@ export function User_Dashboard() {
           <textarea
             name="description"
             placeholder="Provide a brief description of the item"
+            required
+          />
+
+          <h4>Image</h4>
+          <input type="file" onChange={handleChange} />
+          {file && (
+            <img
+              src={file}
+              alt="Uploaded preview"
+              style={{
+                width: '350px',
+                height: 'auto',
+                borderRadius: '6px',
+                display: 'block',
+                marginBottom: '8px',
+              }}
+            />
+          )}
+          <div>
+            <button type="login-btn" onClick={handleDeleteFile}>
+              Delete File
+            </button>
+          </div>
+
+          <h4>Pickup Address</h4>
+          <input
+            type="text"
+            name="pickup_address"
+            placeholder="Enter pickup address"
             required
           />
 
