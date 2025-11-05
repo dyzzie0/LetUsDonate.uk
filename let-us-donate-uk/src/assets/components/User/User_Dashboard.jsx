@@ -7,6 +7,22 @@ export function User_Dashboard() {
   const [donations, setDonations] = useState([]);
   const [charities, setCharities] = useState([]);
   const [loadingCharities, setLoadingCharities] = useState(true);
+
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    let storedUser = null;
+    try {
+      const item = localStorage.getItem("user");
+      if (item) storedUser = JSON.parse(item);
+    } catch {
+      storedUser = null;
+    }
+    setUser(storedUser);
+
+    
+  }, []);
+
   const user = JSON.parse(localStorage.getItem('user'));
   const [file, setFile] = useState(null);
 
@@ -24,11 +40,8 @@ export function User_Dashboard() {
       fetch(`http://localhost:8000/get_donations.php?user_id=${user.id}`)
         .then((res) => res.json())
         .then((data) => {
-          if (data.status === 'success') {
-            setDonations(data.donations);
-          } else {
-            console.error('Error loading donations:', data.message);
-          }
+          if (data.status === "success") setDonations(data.donations);
+          else console.error("Error loading donations:", data.message);
         })
         .catch(() => console.error('Failed to load donations'));
     }
@@ -40,12 +53,8 @@ export function User_Dashboard() {
     fetch('http://localhost:8000/get_charities.php')
       .then((res) => res.json())
       .then((data) => {
-        console.log('Charities loaded:', data);
-        if (data.status === 'success') {
-          setCharities(data.charities);
-        } else {
-          console.error('Error loading charities:', data.message);
-        }
+        if (data.status === "success") setCharities(data.charities);
+        else console.error("Error loading charities:", data.message);
         setLoadingCharities(false);
       })
       .catch((err) => {
@@ -59,7 +68,21 @@ export function User_Dashboard() {
     e.preventDefault();
     const formData = new FormData(e.target);
     const payload = Object.fromEntries(formData.entries());
-    payload.user_id = user?.id;
+
+    if (!user || !user.id) {
+      setStatus({ type: "error", message: "⚠️ User not logged in." });
+      return;
+    }
+
+    payload.user_id = Number(user.id);
+
+    const requiredFields = ["item_name", "category", "type", "condition", "charity_name"];
+    for (let field of requiredFields) {
+      if (!payload[field] || payload[field].trim() === "") {
+        setStatus({ type: "error", message: `⚠️ Please fill the ${field} field.` });
+        return;
+      }
+    }
 
     try {
       const res = await fetch('http://localhost:8000/add_donation.php', {
@@ -74,17 +97,16 @@ export function User_Dashboard() {
         setStatus({ type: 'success', message: data.message });
         e.target.reset();
 
-        // Refresh donations after submitting
         fetch(`http://localhost:8000/get_donations.php?user_id=${user.id}`)
           .then((res) => res.json())
           .then((data) => {
-            if (data.status === 'success') {
-              setDonations(data.donations);
-            }
+            if (data.status === "success") setDonations(data.donations);
           });
       } else {
         setStatus({ type: 'error', message: data.message });
       }
+    } catch {
+      setStatus({ type: "error", message: "⚠️ Network error. Please try again." });
     } catch (err) {
       setStatus({
         type: 'error',
@@ -129,8 +151,8 @@ export function User_Dashboard() {
           </aside>
 
           <main className="dashboard-main">
-            <h2>Welcome, {user?.name || 'User'}!</h2>
-            <p>You are logged in as a {user?.role || 'Donor'}</p>
+            <h2>Welcome, {user?.name || "User"}!</h2>
+            <p>You are logged in as a { "Donor"}</p>
 
             <div className="stats-container">
               <div className="stat-card">
@@ -176,7 +198,6 @@ export function User_Dashboard() {
                     <td>{d.donation_date}</td>
                     <td>{d.charity_name}</td>
                     <td>{d.donation_status}</td>
-                    <td>{d.pickup_address}</td>
                   </tr>
                 ))
               ) : (
