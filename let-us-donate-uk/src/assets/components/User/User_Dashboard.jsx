@@ -7,36 +7,54 @@ export function User_Dashboard() {
   const [donations, setDonations] = useState([]);
   const [charities, setCharities] = useState([]);
   const [loadingCharities, setLoadingCharities] = useState(true);
-  const user = JSON.parse(localStorage.getItem('user'));
 
-  // 🧩 Fetch user donations
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    let storedUser = null;
+    try {
+      const item = localStorage.getItem("user");
+      if (item) storedUser = JSON.parse(item);
+    } catch {
+      storedUser = null;
+    }
+    setUser(storedUser);
+
+    
+  }, []);
+
+  const user = JSON.parse(localStorage.getItem('user'));
+  const [file, setFile] = useState(null);
+
+  function handleChange(e) {
+    console.log(e.target.files);
+    setFile(URL.createObjectURL(e.target.files[0]));
+  }
+
+  function handleDeleteFile() {
+    setFile(null);
+  }
+  // Fetch user donations
   useEffect(() => {
     if (user?.id) {
       fetch(`http://localhost:8000/get_donations.php?user_id=${user.id}`)
         .then((res) => res.json())
         .then((data) => {
-          if (data.status === 'success') {
-            setDonations(data.donations);
-          } else {
-            console.error('Error loading donations:', data.message);
-          }
+          if (data.status === "success") setDonations(data.donations);
+          else console.error("Error loading donations:", data.message);
         })
         .catch(() => console.error('Failed to load donations'));
     }
   }, [user]);
 
-  // 🧩 Fetch charities
+  // Fetch charities
   useEffect(() => {
     setLoadingCharities(true);
     fetch('http://localhost:8000/get_charities.php')
       .then((res) => res.json())
       .then((data) => {
-        console.log('Charities loaded:', data);
-        if (data.status === 'success') {
-          setCharities(data.charities);
-        } else {
-          console.error('Error loading charities:', data.message);
-        }
+        if (data.status === "success") setCharities(data.charities);
+        else console.error("Error loading charities:", data.message);
         setLoadingCharities(false);
       })
       .catch((err) => {
@@ -45,12 +63,26 @@ export function User_Dashboard() {
       });
   }, []);
 
-  // 🧩 Handle new donation submission
+  // Handle new donation submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const payload = Object.fromEntries(formData.entries());
-    payload.user_id = user?.id;
+
+    if (!user || !user.id) {
+      setStatus({ type: "error", message: "⚠️ User not logged in." });
+      return;
+    }
+
+    payload.user_id = Number(user.id);
+
+    const requiredFields = ["item_name", "category", "type", "condition", "charity_name"];
+    for (let field of requiredFields) {
+      if (!payload[field] || payload[field].trim() === "") {
+        setStatus({ type: "error", message: `⚠️ Please fill the ${field} field.` });
+        return;
+      }
+    }
 
     try {
       const res = await fetch('http://localhost:8000/add_donation.php', {
@@ -65,21 +97,20 @@ export function User_Dashboard() {
         setStatus({ type: 'success', message: data.message });
         e.target.reset();
 
-        // Refresh donations after submitting
         fetch(`http://localhost:8000/get_donations.php?user_id=${user.id}`)
           .then((res) => res.json())
           .then((data) => {
-            if (data.status === 'success') {
-              setDonations(data.donations);
-            }
+            if (data.status === "success") setDonations(data.donations);
           });
       } else {
         setStatus({ type: 'error', message: data.message });
       }
+    } catch {
+      setStatus({ type: "error", message: "⚠️ Network error. Please try again." });
     } catch (err) {
       setStatus({
         type: 'error',
-        message: '⚠️ Network error. Please try again.',
+        message: 'Network error. Please try again.',
       });
     }
 
@@ -94,7 +125,7 @@ export function User_Dashboard() {
             <ul>
               <li>
                 <i className="fa-solid fa-gauge"></i>
-                <a href="/My_Impact">My Impact</a>
+                <a href="/my_impact">My Impact</a>
               </li>
               <li>
                 <i className="fa-solid fa-inbox"></i>
@@ -102,7 +133,7 @@ export function User_Dashboard() {
               </li>
               <li>
                 <i className="fa-solid fa-user"></i>
-                <a href="/user/profile">My Profile</a>
+                <a href="/my_profile">My Profile</a>
               </li>
               <li>
                 <i className="fa-solid fa-arrow-right-from-bracket"></i>
@@ -120,8 +151,8 @@ export function User_Dashboard() {
           </aside>
 
           <main className="dashboard-main">
-            <h2>Welcome, {user?.name || 'User'}!</h2>
-            <p>You are logged in as a {user?.role || 'Donor'}</p>
+            <h2>Welcome, {user?.name || "User"}!</h2>
+            <p>You are logged in as a { "Donor"}</p>
 
             <div className="stats-container">
               <div className="stat-card">
@@ -154,9 +185,9 @@ export function User_Dashboard() {
               <tr>
                 <th>Item</th>
                 <th>Date</th>
-                <th>Charity</th>
+                <th>Charity Selected</th>
                 <th>Status</th>
-                <th>Pickup</th>
+                <th>Pickup Adress</th>
               </tr>
             </thead>
             <tbody>
@@ -167,7 +198,6 @@ export function User_Dashboard() {
                     <td>{d.donation_date}</td>
                     <td>{d.charity_name}</td>
                     <td>{d.donation_status}</td>
-                    <td>{d.pickup_address}</td>
                   </tr>
                 ))
               ) : (
@@ -217,6 +247,16 @@ export function User_Dashboard() {
             <option value="other">Other</option>
           </select>
 
+         
+          <h4>Quainitity</h4>
+          <input
+            type="number"
+            name="quantity"
+            min="1"
+            placeholder="Enter quantity"
+            required
+          />
+
           <h4>Condition</h4>
           <select name="condition" required>
             <option value="">-- Select Condition --</option>
@@ -233,6 +273,27 @@ export function User_Dashboard() {
             required
           />
 
+          <h4>Image</h4>
+          <input type="file" onChange={handleChange} />
+          {file && (
+            <img
+              src={file}
+              alt="Uploaded preview"
+              style={{
+                width: '350px',
+                height: 'auto',
+                borderRadius: '6px',
+                display: 'block',
+                marginBottom: '8px',
+              }}
+            />
+          )}
+          <div>
+            <button type="login-btn" onClick={handleDeleteFile}>
+              Delete File
+            </button>
+          </div>
+
           <h4>Pickup Address</h4>
           <input
             type="text"
@@ -240,9 +301,6 @@ export function User_Dashboard() {
             placeholder="Enter pickup address"
             required
           />
-
-          <h4>Preferred Pickup Date</h4>
-          <input type="date" name="pickup_time" />
 
           <h4>Select Charity</h4>
           {loadingCharities ? (
