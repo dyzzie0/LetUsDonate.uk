@@ -94,7 +94,7 @@ export function User_Dashboard() {
             <ul>
               <li>
                 <i className="fa-solid fa-gauge"></i>
-                <a href="/user/impact">My Impact</a>
+                <a href="/My_Impact">My Impact</a>
               </li>
               <li>
                 <i className="fa-solid fa-inbox"></i>
