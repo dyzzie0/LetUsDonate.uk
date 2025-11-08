@@ -5,7 +5,6 @@ import { Chart } from 'chart.js/auto';
 
 export function Admin_Dashboard() {
   useEffect(() => {
-
     // This chart is for donation trends, which is jsut showing how many donations have been made over time.
 
     const donationCtx = document.getElementById('donationTrends');

@@ -60,8 +60,8 @@ export function Data_Reports() {
             <p>Download Donation Report:</p>
             <button
               onClick={generateReportDonations}
-              className="generate-report-btn" >
-            </button>
+              className="generate-report-btn"
+            ></button>
           </div>
 
           <div className="report-buttons">

@@ -1,0 +1,72 @@
+.my-impact {
+.h2{
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  
+}
+  
+}
+
+
+.center-wrap {
+  display: flex;
+padding : 20px;
+margin: 50px;
+  justify-content: center;
+
+  align-items: center;
+
+  height: 80vh;
+
+
+
+
+}
+
+.container {
+  position: relative;
+
+  width: 90%;
+
+  max-width: 850px;
+
+  min-height: 550px;
+
+  background-color: light-dark(#f8faf5, #343a38);
+
+  border-radius: 2cqb;
+
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+
+  overflow: hidden;
+
+  padding: 70px;
+
+ 
+  h3{
+    text-align: center;
+    margin-bottom: 20px;
+    
+  }
+
+  
+
+
+
+right {
+  position: absolute;
+
+  right: 50px;
+}
+
+right a:hover {
+  border-bottom: 1px solid light-dark(#000000, #ffffff);
+}
+
+
+ 
+}
+
+
+ 
