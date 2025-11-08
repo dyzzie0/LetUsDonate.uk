@@ -5,13 +5,13 @@ header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    exit(0); // Handle CORS preflight
+    exit(0);
 }
 
-include 'db_connect.php'; // this defines $db, not $pdo
+include 'db_connect.php'; 
 
 try {
-    // Decode JSON body
+   
     $data = json_decode(file_get_contents("php://input"), true);
 
     $charity_name = trim($data['charity_name'] ?? '');

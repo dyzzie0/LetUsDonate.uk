@@ -64,7 +64,7 @@ function DonorSignUp() {
             onChange={handleChange}
             required
           />
-          <i className="fa-solid fa-user"></i>
+          <ii className="fa-solid fa-user"></ii>
         </div>
 
         <div className="input-box">
@@ -76,7 +76,7 @@ function DonorSignUp() {
             onChange={handleChange}
             required
           />
-          <i className="fa-solid fa-envelope"></i>
+          <ii className="fa-solid fa-envelope"></ii>
         </div>
 
         <div className="input-box">
@@ -88,7 +88,7 @@ function DonorSignUp() {
             onChange={handleChange}
             required
           />
-          <i className="fa-solid fa-key"></i>
+          <ii className="fa-solid fa-key"></ii>
         </div>
 
         <div className="input-box">
@@ -100,7 +100,7 @@ function DonorSignUp() {
             onChange={handleChange}
             required
           />
-          <i className="fa-solid fa-lock"></i>
+          <ii className="fa-solid fa-lock"></ii>
         </div>
 
         {message && <p style={{ color: 'red' }}>{message}</p>}

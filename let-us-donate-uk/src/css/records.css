@@ -187,3 +187,74 @@ main {
 .status-filter {
   border: 1px solid light-dark(#eeeeee, #444444);
 }
+
+/* Profile Form(by theo) */
+.profile-form-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto 40px auto;
+  padding: 20px 30px;
+  border-radius: 12px;
+  background-color: light-dark(#f1f1f1, #1e1e1e);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.profile-form label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  font-weight: 500;
+  color: light-dark(#222222, #cccccc);
+}
+
+.profile-form input {
+  padding: 10px 12px;
+  margin-top: 5px;
+  border: 1px solid light-dark(#cccccc, #555555);
+  border-radius: 6px;
+  font-size: 1rem;
+  background-color: light-dark(#ffffff, #1a1a1a);
+  color: light-dark(#000000, #ffffff);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.profile-form input:focus {
+  outline: none;
+  border-color: light-dark(#555555, #bbbbbb);
+  box-shadow: 0 0 5px light-dark(rgba(85, 85, 85, 0.2), rgba(255, 255, 255, 0.1));
+}
+
+.profile-form button {
+  margin-top: 15px;
+  background-color: light-dark(#9faca2, #5a5a5a);
+  color: #ffffff;
+  padding: 10px 18px;
+  border-radius: 6px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.profile-form button:hover {
+  background-color: light-dark(#8c998f, #6b6b6b);
+}
+
+.form-message {
+  margin-bottom: 15px;
+  padding: 10px 15px;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.form-message.success {
+  background-color: light-dark(#e6f4ea, #2a4d2a);
+  color: light-dark(#1e7a27, #81c784);
+}
+
+.form-message.error {
+  background-color: light-dark(#fdecea, #4a1a1a);
+  color: light-dark(#a72828, #ff9999);
+}
+

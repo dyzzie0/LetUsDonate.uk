@@ -3,6 +3,7 @@ import '../../../css/records.css';
 
 export function View_Inventory() {
   const role = localStorage.getItem('role');
+
   const getReturnLink = () => {
     switch (role) {
       case 'charity':
@@ -31,7 +32,7 @@ export function View_Inventory() {
       type: 'Shirt',
       condition: 'Like New',
       quantity: 1,
-
+      image: 'https://via.placeholder.com/50',
     },
     {
       id: 2,
@@ -40,7 +41,7 @@ export function View_Inventory() {
       type: 'Trouser',
       condition: 'Used - Good',
       quantity: 2,
-
+      image: 'https://via.placeholder.com/50',
     },
   ]);
 
@@ -57,6 +58,7 @@ export function View_Inventory() {
     setFilters({ ...filters, [name]: value });
   };
 
+  // ✅ Category totals
   const categoryCounts = filteredInventory.reduce((acc, item) => {
     acc[item.category] = (acc[item.category] || 0) + item.quantity;
     return acc;
@@ -68,7 +70,6 @@ export function View_Inventory() {
         <div className="records-container">
           <div className="header-left">
             <h2>Inventory</h2>
-
             <div className="category-counts">
               {Object.entries(categoryCounts).map(([category, count]) => (
                 <div key={category} className="category-count">
@@ -81,14 +82,13 @@ export function View_Inventory() {
           <div className="return-right">
             <ul>
               <li>
-                <li>
-                  <a href={getReturnLink()}>Return</a>
-                </li>
+                <a href={getReturnLink()}>Return</a>
               </li>
             </ul>
           </div>
         </div>
 
+        {/* Filter bar */}
         <div className="filter-bar">
           <select
             name="category"
@@ -128,6 +128,7 @@ export function View_Inventory() {
           </select>
         </div>
 
+        {/* Table */}
         <div className="table-container">
           <table className="table">
             <thead>
@@ -136,10 +137,8 @@ export function View_Inventory() {
                 <th>Item Name</th>
                 <th>Category</th>
                 <th>Type</th>
-   
                 <th>Quantity</th>
                 <th>Condition</th>
-                <th>Image</th>
               </tr>
             </thead>
             <tbody>
@@ -150,14 +149,13 @@ export function View_Inventory() {
                     <td>{item.name}</td>
                     <td>{item.category}</td>
                     <td>{item.type}</td>
-                    <td>{item.condition}</td>
                     <td>{item.quantity}</td>
-                    <td>{item.colour}</td>
+                    <td>{item.condition}</td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan="6">No items match the selected filters.</td>
+                  <td colSpan="7">No items match the selected filters.</td>
                 </tr>
               )}
             </tbody>
