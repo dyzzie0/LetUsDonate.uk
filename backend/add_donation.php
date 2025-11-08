@@ -4,24 +4,39 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 
+// Handle preflight requests
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') exit;
 
-include 'db_connect.php'; 
+include 'db_connect.php';
 
 try {
-    $data = json_decode(file_get_contents("php://input"), true);
-
-    $user_id        = $data['user_id'] ?? null;
-    $item_name      = trim($data['item_name'] ?? '');
-    $category       = trim($data['category'] ?? '');
-    $type           = trim($data['type'] ?? '');
-    $condition      = trim($data['condition'] ?? '');
-    $description    = trim($data['description'] ?? '');
-    $charity_name   = trim($data['charity_name'] ?? '');
+    // Use $_POST for FormData
+    $user_id      = $_POST['user_id'] ?? null;
+    $item_name    = trim($_POST['item_name'] ?? '');
+    $category     = trim($_POST['category'] ?? '');
+    $type         = trim($_POST['type'] ?? '');
+    $condition    = trim($_POST['condition'] ?? '');
+    $description  = trim($_POST['description'] ?? '');
+    $charity_name = trim($_POST['charity_name'] ?? '');
 
     if (!$user_id || !$item_name || !$category || !$type || !$condition || !$charity_name) {
         echo json_encode(["status" => "error", "message" => "Missing required fields"]);
         exit;
+    }
+
+    // Handle file upload
+    $image_path = null;
+    if (isset($_FILES['item_image']) && $_FILES['item_image']['error'] === UPLOAD_ERR_OK) {
+        $uploads_dir = __DIR__ . '/uploads';
+        if (!is_dir($uploads_dir)) mkdir($uploads_dir, 0777, true);
+
+        $tmp_name = $_FILES['item_image']['tmp_name'];
+        $name = basename($_FILES['item_image']['name']);
+        $target_file = $uploads_dir . '/' . uniqid() . '_' . $name;
+
+        if (move_uploaded_file($tmp_name, $target_file)) {
+            $image_path = 'uploads/' . basename($target_file); // relative path to store in DB
+        }
     }
 
     $pdo->beginTransaction();
@@ -51,16 +66,17 @@ try {
     // Insert donation item
     $stmt = $pdo->prepare("
         INSERT INTO Donation_Item 
-        (donation_ID, item_name, item_category, item_size, item_condition, item_description) 
-        VALUES (?, ?, ?, ?, ?, ?)
+        (donation_ID, item_name, item_category, item_size, item_condition, item_description, item_image) 
+        VALUES (?, ?, ?, ?, ?, ?, ?)
     ");
     $stmt->execute([
-        $donation_ID, 
-        $item_name, 
-        $category, 
-        $type, 
-        $condition, 
-        $description
+        $donation_ID,
+        $item_name,
+        $category,
+        $type,
+        $condition,
+        $description,
+        $image_path
     ]);
 
     $pdo->commit();
