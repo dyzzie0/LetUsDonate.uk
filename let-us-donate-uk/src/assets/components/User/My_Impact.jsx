@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import '../../../css/my_impact.css';
 
-import React, { useState } from 'react';
-import '../../../css/my_impact.css';
 export function My_Impact() {
   const [donations, setDonations] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -27,9 +25,8 @@ export function My_Impact() {
       });
   }, [user.id]);
 
-  // Calculate totals
   const totalItems = donations.length;
-  const totalCO2 = (totalItems * 1.5).toFixed(1); // kg CO2
+  const totalCO2 = (totalItems * 1.5).toFixed(1); 
   const peopleHelped = totalItems * 2;
 
   return (
