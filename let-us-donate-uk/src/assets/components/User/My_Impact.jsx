@@ -26,7 +26,7 @@ export function My_Impact() {
   }, [user.id]);
 
   const totalItems = donations.length;
-  const totalCO2 = (totalItems * 1.5).toFixed(1); // kg CO2
+  const totalCO2 = (totalItems * 1.5).toFixed(1); 
   const peopleHelped = totalItems * 2;
 
   return (
