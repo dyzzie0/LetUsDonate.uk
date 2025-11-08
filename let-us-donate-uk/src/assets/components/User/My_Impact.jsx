@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import '../../../css/my_impact.css';
 
+import React, { useState } from 'react';
+import '../../../css/my_impact.css';
 export function My_Impact() {
   const [donations, setDonations] = useState([]);
   const [loading, setLoading] = useState(true);
