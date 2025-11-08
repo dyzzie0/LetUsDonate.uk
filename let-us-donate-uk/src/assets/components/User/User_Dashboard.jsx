@@ -11,6 +11,7 @@ export function User_Dashboard() {
   const [file, setFile] = useState(null);
 
   // Load user from localStorage
+  // Load user from localStorage
   useEffect(() => {
     let storedUser = null;
     try {
@@ -32,6 +33,7 @@ export function User_Dashboard() {
   function handleDeleteFile() {
     setFile(null);
   }
+
 
   // Fetch user donations
   useEffect(() => {
@@ -96,7 +98,9 @@ export function User_Dashboard() {
         setStatus({ type: 'success', message: data.message });
         e.target.reset();
         setFile(null);
+        setFile(null);
 
+        // Refresh donations
         // Refresh donations
         fetch(`http://localhost:8000/get_donations.php?user_id=${user.id}`)
           .then((res) => res.json())
@@ -136,6 +140,7 @@ export function User_Dashboard() {
                 <i className="fa-solid fa-arrow-right-from-bracket"></i>
                 <button
                   className="logout-btn"
+                  type="button"
                   onClick={() => {
                     localStorage.removeItem('user');
                     window.location.href = '/login';
@@ -160,9 +165,7 @@ export function User_Dashboard() {
 
               <div className="stat-card">
                 <i className="fa-solid fa-earth-africa"></i>
-                <p className="stat-number">
-                  {(donations.length * 1.5).toFixed(1)}kg
-                </p>
+                <p className="stat-number">{(donations.length * 1.5).toFixed(1)}kg</p>
                 <p className="stat-text">CO₂ Saved</p>
               </div>
 
@@ -184,6 +187,7 @@ export function User_Dashboard() {
                 <th>Date</th>
                 <th>Charity Selected</th>
                 <th>Status</th>
+                <th>Pickup Address</th>
                 <th>Pickup Address</th>
               </tr>
             </thead>
@@ -219,12 +223,7 @@ export function User_Dashboard() {
           )}
 
           <h4>Item Name</h4>
-          <input
-            type="text"
-            name="item_name"
-            placeholder="e.g. Brown Jacket"
-            required
-          />
+          <input type="text" name="item_name" placeholder="e.g. Brown Jacket" required />
 
           <h4>Category</h4>
           <select name="category" required>
@@ -264,11 +263,7 @@ export function User_Dashboard() {
           </select>
 
           <h4>Description</h4>
-          <textarea
-            name="description"
-            placeholder="Provide a brief description of the item"
-            required
-          />
+          <textarea name="description" placeholder="Provide a brief description of the item" required />
 
           <h4>Image</h4>
           <input type="file" onChange={handleChange} />
@@ -296,12 +291,7 @@ export function User_Dashboard() {
           )}
 
           <h4>Pickup Address</h4>
-          <input
-            type="text"
-            name="pickup_address"
-            placeholder="Enter pickup address"
-            required
-          />
+          <input type="text" name="pickup_address" placeholder="Enter pickup address" required />
 
           <h4>Select Charity</h4>
           {loadingCharities ? (
