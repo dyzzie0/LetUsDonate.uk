@@ -7,9 +7,10 @@ export function User_Dashboard() {
   const [donations, setDonations] = useState([]);
   const [charities, setCharities] = useState([]);
   const [loadingCharities, setLoadingCharities] = useState(true);
-
   const [user, setUser] = useState(null);
+  const [file, setFile] = useState(null);
 
+  // Load user from localStorage
   useEffect(() => {
     let storedUser = null;
     try {
@@ -19,21 +20,19 @@ export function User_Dashboard() {
       storedUser = null;
     }
     setUser(storedUser);
-
-    
   }, []);
 
-  const user = JSON.parse(localStorage.getItem('user'));
-  const [file, setFile] = useState(null);
-
+  // Handle file upload
   function handleChange(e) {
-    console.log(e.target.files);
-    setFile(URL.createObjectURL(e.target.files[0]));
+    if (e.target.files?.[0]) {
+      setFile(URL.createObjectURL(e.target.files[0]));
+    }
   }
 
   function handleDeleteFile() {
     setFile(null);
   }
+
   // Fetch user donations
   useEffect(() => {
     if (user?.id) {
@@ -96,7 +95,9 @@ export function User_Dashboard() {
       if (data.status === 'success') {
         setStatus({ type: 'success', message: data.message });
         e.target.reset();
+        setFile(null);
 
+        // Refresh donations
         fetch(`http://localhost:8000/get_donations.php?user_id=${user.id}`)
           .then((res) => res.json())
           .then((data) => {
@@ -105,13 +106,9 @@ export function User_Dashboard() {
       } else {
         setStatus({ type: 'error', message: data.message });
       }
-    } catch {
-      setStatus({ type: "error", message: "⚠️ Network error. Please try again." });
     } catch (err) {
-      setStatus({
-        type: 'error',
-        message: 'Network error. Please try again.',
-      });
+      console.error("Donation submission failed:", err);
+      setStatus({ type: "error", message: "⚠️ Network error. Please try again." });
     }
 
     setTimeout(() => setStatus(null), 6000);
@@ -152,7 +149,7 @@ export function User_Dashboard() {
 
           <main className="dashboard-main">
             <h2>Welcome, {user?.name || "User"}!</h2>
-            <p>You are logged in as a { "Donor"}</p>
+            <p>You are logged in as a {"Donor"}</p>
 
             <div className="stats-container">
               <div className="stat-card">
@@ -187,7 +184,7 @@ export function User_Dashboard() {
                 <th>Date</th>
                 <th>Charity Selected</th>
                 <th>Status</th>
-                <th>Pickup Adress</th>
+                <th>Pickup Address</th>
               </tr>
             </thead>
             <tbody>
@@ -198,6 +195,7 @@ export function User_Dashboard() {
                     <td>{d.donation_date}</td>
                     <td>{d.charity_name}</td>
                     <td>{d.donation_status}</td>
+                    <td>{d.pickup_address || "N/A"}</td>
                   </tr>
                 ))
               ) : (
@@ -247,8 +245,7 @@ export function User_Dashboard() {
             <option value="other">Other</option>
           </select>
 
-         
-          <h4>Quainitity</h4>
+          <h4>Quantity</h4>
           <input
             type="number"
             name="quantity"
@@ -288,11 +285,15 @@ export function User_Dashboard() {
               }}
             />
           )}
-          <div>
-            <button type="login-btn" onClick={handleDeleteFile}>
+          {file && (
+            <button
+              type="button"
+              className="delete-file-btn"
+              onClick={handleDeleteFile}
+            >
               Delete File
             </button>
-          </div>
+          )}
 
           <h4>Pickup Address</h4>
           <input
