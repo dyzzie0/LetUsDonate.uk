@@ -4,11 +4,6 @@
   color: light-dark(#1e1e1e, #f1f1f1);
 }
 
-.charities h2 {
-  font-size: 48px;
-  margin-bottom: 10px;
-}
-
 .charities_intro {
   font-size: 18px;
   max-width: 700px;
@@ -40,7 +35,7 @@
 }
 
 .cont h3 {
-  font-size: 26px;
+  font-size: 22px;
   color: light-dark(#23452c, #b7d3bf);
   margin-bottom: 10px;
 }

@@ -1,91 +1,35 @@
-.dashboard-main {
-    min-height: 100vh;
-    padding: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: light-dark(#000000, #ffffff);
-  }
-  
-  .stats-container {
-    display: flex;
-    gap: 30px;
-    justify-content: center;
-    margin-top: 50px;
-    flex-wrap: wrap;
-  }
-  
-  .stat-card {
-    background-color: light-dark(#f1f1f1, #1e1e1e);
-    border-radius: 12px;
-    padding: 30px 20px;
-    width: 200px;
-    text-align: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-  
-  .stat-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  }
-  
-  .stat-card i {
-    font-size: 36px;
-    margin-bottom: 15px;
-    color: light-dark(#1e7a27, #81c784);
-  }
-  
-  .stat-number {
-    font-size: 28px;
-    font-weight: 600;
-    margin-bottom: 5px;
-  }
-  
-  .stat-text {
-    font-size: 16px;
-    font-weight: 500;
-    color: light-dark(#555555, #cccccc);
-  }
-  
-h2 {
-    font-size: 40px;
-    padding: 10px;
-    text-align: center;
-    margin: 20px;
-  }
-
-.center-wrap {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 80vh;
-    
-    
-   
- }
- 
- .container{
-    position:relative;
-    width: 90%;
-    max-width: 850px;
-    min-height: 550px;
-    background-color: light-dark(#f8faf5, #343a38);
-    border-radius: 30px;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-    padding: 70px;
+.impact-grid {
+  display: grid;
  
   
-  }
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
 
-  .right{
-   position: absolute;
-   right: 50px;
-  
-   
- }
-  
- .right a:hover {
-    border-bottom: 1px solid light-dark(#000000, #ffffff);
-  }
+.impact-card {
+  background: #f8f9fa;
+  border-radius: 10px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+
+.impact-card:hover {
+  transform: translateY(-5px);
+}
+
+.impact-card i {
+  color: #50bb1b;
+  margin-bottom: 0.5rem;
+}
+
+.impact-card h3 {
+  margin: 0.5rem 0;
+  font-size: 1.8rem;
+}
+
+.impact-card p {
+  font-size: 0.95rem;
+  color: #555;
+}

@@ -8,7 +8,7 @@ import DonateImg4 from '../../images/Donate4.png';
 
 function Home() {
   const comment = [
-    'I had so many clothes I never wore — this made it easy to donate them!',
+    'I had so many clothes I never wore, this made it easy to donate them!',
     'Super convenient and I love that it helps real charities!',
     'No more plastic bags through the door. So much better!',
   ];

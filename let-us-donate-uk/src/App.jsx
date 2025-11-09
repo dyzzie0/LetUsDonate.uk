@@ -36,6 +36,8 @@ import Privacy_Policy from './assets/components/Footer_Content/Privacy_Policy.js
 import Accessibility from './assets/components/Footer_Content/Accessibility.jsx';
 import Cookie_Policy from './assets/components/Footer_Content/Cookie_Policy.jsx';
 
+import NotFound from './404.jsx';
+
 function Layout() {
   const location = useLocation();
   const path = location.pathname.toLowerCase();
@@ -96,6 +98,7 @@ function Layout() {
         <Route path="/privacy_policy" element={<Privacy_Policy />} />
         <Route path="/accessibility" element={<Accessibility />} />
         <Route path="/cookie_policy" element={<Cookie_Policy />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
 
       {!showNothing && <Footer />}

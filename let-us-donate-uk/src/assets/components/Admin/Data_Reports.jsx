@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import '../../../css/data_reports.css';
+import React from 'react';
+import '../../../css/records.css';
 import Papa from 'papaparse';
 import { saveAs } from 'file-saver';
 import { Link } from 'react-router-dom';
@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 export function Data_Reports() {
   const generateReportDonations = () => {
     const donationData = [{ Period: '1D', Donations: 1 }];
-
     const csv = Papa.unparse(donationData);
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
     saveAs(blob, 'donation_report.csv');
@@ -15,7 +14,6 @@ export function Data_Reports() {
 
   const generateReportUsers = () => {
     const userData = [{ Period: '1D', New_Users: 2 }];
-
     const csv = Papa.unparse(userData);
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
     saveAs(blob, 'users_report.csv');
@@ -23,7 +21,6 @@ export function Data_Reports() {
 
   const generateReportSustainability = () => {
     const sustainabilityData = [{ Period: '1D', CO2_Reduced_kg: 0.5 }];
-
     const csv = Papa.unparse(sustainabilityData);
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
     saveAs(blob, 'sustainability_report.csv');
@@ -31,7 +28,6 @@ export function Data_Reports() {
 
   const generateReportCharities = () => {
     const charityData = [{ Charity: 'Charity A', Donations_Received: 50 }];
-
     const csv = Papa.unparse(charityData);
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
     saveAs(blob, 'charity_report.csv');
@@ -45,66 +41,101 @@ export function Data_Reports() {
   };
 
   return (
-    <div className="main">
-      <h2> Generate Reports</h2>
-      <div className="return-link">
-        <li>
-          <Link to="/admin_dashboard"> Return</Link>
-        </li>
-      </div>
-
-      <div className="report-info">
-        <div className="report-download">
-          <div className="report-buttons">
-            <ii class="fa-solid fa-file-arrow-down"></ii>
-            <p>Download Donation Report:</p>
-            <button
-              onClick={generateReportDonations}
-              className="generate-report-btn" >
-            </button>
-          </div>
-
-          <div className="report-buttons">
-            <ii class="fa-solid fa-file-arrow-down"></ii>
-            <p>Download User Report:</p>
-            <button
-              onClick={generateReportUsers}
-              className="generate-report-btn"
-            ></button>
-          </div>
-        </div>
-        <div className="report-download">
-          <div className="report-buttons">
-            <ii class="fa-solid fa-file-arrow-down"></ii>
-            <p>Download Sustainability Report:</p>
-            <button
-              onClick={generateReportSustainability}
-              className="generate-report-btn"
-            ></button>
-          </div>
-
-          <div className="report-buttons">
-            <ii class="fa-solid fa-file-arrow-down"></ii>
-            <p>Download Charity Report:</p>
-            <button
-              onClick={generateReportCharities}
-              className="generate-report-btn"
-            ></button>
-          </div>
+    <main>
+      <div className="records-container">
+        <div className="header-left">
+          <h2>Generate Reports</h2>
         </div>
 
-        <div className="report-download">
-          <div className="report-buttons">
-            <ii class="fa-solid fa-file-arrow-down"></ii>
-            <p>Download All Reports:</p>
-            <button
-              onClick={generateAllReports}
-              className="generate-report-btn"
-            ></button>
-          </div>
+        <div className="return-right">
+          <ul>
+            <li>
+              <Link to="/admin_dashboard">Return</Link>
+            </li>
+          </ul>
         </div>
       </div>
-    </div>
+
+      <div className="table-container">
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Report Type</th>
+              <th>Description</th>
+              <th>Download</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Donations Report</td>
+              <td>Shows number of donations per day.</td>
+              <td>
+                <button
+                  onClick={generateReportDonations}
+                  className="donation-button"
+                >
+                  Download
+                </button>
+              </td>
+            </tr>
+
+            <tr>
+              <td>User Report</td>
+              <td>Lists new registered users for the period.</td>
+              <td>
+                <button
+                  onClick={generateReportUsers}
+                  className="donation-button"
+                >
+                  Download
+                </button>
+              </td>
+            </tr>
+
+            <tr>
+              <td>Sustainability Report</td>
+              <td>Displays total CO₂ reduced through donations.</td>
+              <td>
+                <button
+                  onClick={generateReportSustainability}
+                  className="donation-button"
+                >
+                  Download
+                </button>
+              </td>
+            </tr>
+
+            <tr>
+              <td>Charity Report</td>
+              <td>Shows each charity’s total donations received.</td>
+              <td>
+                <button
+                  onClick={generateReportCharities}
+                  className="donation-button"
+                >
+                  Download
+                </button>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <strong>All Reports</strong>
+              </td>
+              <td>Generate and download all reports at once.</td>
+              <td>
+                <button
+                  onClick={generateAllReports}
+                  className="donation-button"
+                >
+                  Download All
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
   );
 }
 
