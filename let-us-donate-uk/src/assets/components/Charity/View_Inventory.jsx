@@ -10,13 +10,11 @@ export function View_Inventory() {
         return '/Charity_dashboard';
       case 'admin':
         return '/Admin_dashboard';
-      case 'donor':
-      case 'user':
-        return '/User_dashboard';
       default:
         return '/';
     }
   };
+
 
   const [filters, setFilters] = useState({
     category: '',
@@ -58,7 +56,6 @@ export function View_Inventory() {
     setFilters({ ...filters, [name]: value });
   };
 
-  // ✅ Category totals
   const categoryCounts = filteredInventory.reduce((acc, item) => {
     acc[item.category] = (acc[item.category] || 0) + item.quantity;
     return acc;
@@ -82,13 +79,12 @@ export function View_Inventory() {
           <div className="return-right">
             <ul>
               <li>
-                <a href={getReturnLink()}>Return</a>
+              <a href={getReturnLink()}>Return</a>
               </li>
             </ul>
           </div>
         </div>
 
-        {/* Filter bar */}
         <div className="filter-bar">
           <select
             name="category"

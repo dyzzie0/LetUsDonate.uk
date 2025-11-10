@@ -5,7 +5,25 @@ import { Chart } from 'chart.js/auto';
 
 export function Admin_Dashboard() {
   const [donations, setDonations] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);const [userData, setUserData] = useState(null);
+  const [loadingUser, setLoadingUser] = useState(true);
+  
+  // Admin authentication control if its broken when logging in please juts hash out //
+
+ // const admin = JSON.parse(localStorage.getItem('admin') || '{}'); 
+  
+ // useEffect(() => {
+ //   const item = localStorage.getItem("admin");
+ //   if (item) setUser(JSON.parse(item));
+//    setLoadingUser(false);
+//  }, []);
+  
+// useEffect(() => {
+//    if (!loadingUser && !admin?.id) {
+ //     window.location.href = '/login';
+//    }
+ // }, [loadingUser, admin]);
+  //
 
   useEffect(() => {
     // Fetch all donations (for admin)
@@ -28,12 +46,14 @@ export function Admin_Dashboard() {
   useEffect(() => {
     if (loading || donations.length === 0) return;
 
-    // === Donation Trends Chart ===
+    //This chart shows all the donations //
     const donationCtx = document.getElementById('donationTrends');
     const donationChart = new Chart(donationCtx, {
       type: 'line',
       data: {
-        labels: donations.slice(0, 10).map(d => d.donation_date.split(' ')[0]),
+        labels: donations
+          .slice(0, 10)
+          .map((d) => d.donation_date.split(' ')[0]),
         datasets: [
           {
             label: 'Total Donations',
@@ -54,7 +74,7 @@ export function Admin_Dashboard() {
       },
     });
 
-    // === User Trends Chart ===
+    //  This chart shows number of user over the weeks etc. //
     const userCtx = document.getElementById('userTrends');
     const userChart = new Chart(userCtx, {
       type: 'line',
@@ -79,7 +99,7 @@ export function Admin_Dashboard() {
       },
     });
 
-    // === Sustainability Impact Chart ===
+    // This chart is showing the impact on peoples donations liek c02 saved and items reused //
     const sustainCtx = document.getElementById('sustainabilityImpact');
     const sustainChart = new Chart(sustainCtx, {
       type: 'bar',
@@ -100,7 +120,7 @@ export function Admin_Dashboard() {
       },
     });
 
-    // === Charity Performance Chart ===
+    // This chart is showing the number of donations taht have been set to each charity //
     const charities = {};
     donations.forEach((d) => {
       charities[d.charity_name] = (charities[d.charity_name] || 0) + 1;
@@ -132,7 +152,7 @@ export function Admin_Dashboard() {
     };
   }, [donations, loading]);
 
-  // === Simple Dashboard Stats ===
+  //  Dashboard Stats //
   const totalDonations = donations.length;
   const totalCO2Saved = (totalDonations * 1.5).toFixed(1);
   const activeUsers = new Set(donations.map((d) => d.charity_name)).size;

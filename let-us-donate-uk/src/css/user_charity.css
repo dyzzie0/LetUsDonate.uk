@@ -63,6 +63,7 @@
 .dashboard-main {
   flex: 1;
   padding: 2rem 3rem;
+  background-color: #fffefc;
 }
 
 .dashboard-main h2 {
@@ -159,8 +160,9 @@
   justify-content: space-between;
   align-items: flex-start;
   gap: 2rem;
-  width: 95%;
-  margin: 40px auto;
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
 }
 
 .dashboard-left {

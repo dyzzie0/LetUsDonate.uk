@@ -9,7 +9,6 @@ export function My_Donations() {
 
   const user = JSON.parse(localStorage.getItem('user') || '{}');
 
-  // Fetch user's donations
   useEffect(() => {
     if (!user.id) return;
 
@@ -26,7 +25,8 @@ export function My_Donations() {
       });
   }, [user.id]);
 
-  // Filter donations
+  // Filter donations // 
+
   const filteredDonations = donations.filter((d) => {
     const matchesSearch =
       d.item_name?.toLowerCase().includes(search.toLowerCase()) ||
@@ -71,7 +71,9 @@ export function My_Donations() {
           <option value="pending">Pending</option>
           <option value="rejected">Rejected</option>
         </select>
-        <button className="filter-button" onClick={() => {}}>Filter</button>
+        <button className="filter-button" onClick={() => {}}>
+          Filter
+        </button>
       </div>
 
       <div className="table-container">
@@ -83,7 +85,7 @@ export function My_Donations() {
                 <th>Item Name</th>
                 <th>Description</th>
                 <th>Condition</th>
-                <th>Image</th> {/* New column */}
+                <th>Image</th>
                 <th>Date Donated</th>
                 <th>Status</th>
               </tr>
@@ -110,10 +112,16 @@ export function My_Donations() {
                           <img
                             src={`http://localhost:8000/uploads/${d.item_image}`}
                             alt={d.item_name}
-                            style={{ width: '50px', height: 'auto', borderRadius: '4px' }}
+                            style={{
+                              width: '50px',
+                              height: 'auto',
+                              borderRadius: '4px',
+                            }}
                           />
                         </a>
-                      ) : 'N/A'}
+                      ) : (
+                        'N/A'
+                      )}
                     </td>
                     <td>{d.donation_date}</td>
                     <td>{d.donation_status}</td>
