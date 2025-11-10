@@ -43,7 +43,7 @@ export function View_Users() {
       );
     }
 
-    setFilteredUsers(results);
+    setFilteredUsers(results);   
   };
 
   return (
@@ -61,6 +61,12 @@ export function View_Users() {
               </li>
             </ul>
           </div>
+        </div>
+
+        <div className="add-admin-bar" style={{ marginBottom: '15px' }}>
+          <a href="/add_charity" className="donation-button">
+            + Add Admin
+          </a>
         </div>
 
         <div className="filter-bar">

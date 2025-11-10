@@ -105,12 +105,12 @@ export function My_Donations() {
                     <td>
                       {d.item_image ? (
                         <a
-                          href={`http://localhost:8000/uploads/${d.item_image}`}
+                          href={`http://localhost:8000/${d.item_image}`}
                           target="_blank"
                           rel="noopener noreferrer"
                         >
                           <img
-                            src={`http://localhost:8000/uploads/${d.item_image}`}
+                            src={`http://localhost:8000/${d.item_image}`}
                             alt={d.item_name}
                             style={{
                               width: '50px',

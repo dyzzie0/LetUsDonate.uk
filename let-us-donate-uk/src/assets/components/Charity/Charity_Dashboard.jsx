@@ -8,28 +8,25 @@ export function Charity_Dashboard() {
   const [stats, setStats] = useState({ items: 0, co2: 0, people: 0 });
   const [loading, setLoading] = useState(true);
 
-  //This is controlling charity log in if you cannot access the dashboard hash this section out //
-
-  const charity = JSON.parse(localStorage.getItem('charity') || '{}'); 
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
+  const role = localStorage.getItem('role');
 
   useEffect(() => {
-    if (!charity.id) {
+    if (!user.id || role !== 'charity') {
       window.location.href = '/login';
       return;
     }
 
-  //
-
-    // Fetch donations for this charity
     const fetchData = async () => {
       try {
+        // Fetch donations for this charity
         const donationRes = await fetch(
-          `http://localhost:8000/get_donations.php?charity_id=${charity.id}`
+          `http://localhost:8000/get_donations.php?charity_id=${user.id}`
         );
         const donationData = await donationRes.json();
 
         const inventoryRes = await fetch(
-          `http://localhost:8000/get_inventory.php?charity_id=${charity.id}`
+          `http://localhost:8000/get_inventory.php?charity_id=${user.id}`
         );
         const inventoryData = await inventoryRes.json();
 
@@ -45,14 +42,15 @@ export function Charity_Dashboard() {
 
         setLoading(false);
       } catch (err) {
-        console.error('Couldnt fetch charity data:', err);
+        console.error('Could not fetch charity data:', err);
         setLoading(false);
       }
     };
 
     fetchData();
-  }, [charity.id]);
+  }, [user.id, role]);
 
+  // Inventory Chart
   useEffect(() => {
     if (inventory.length && window.Chart) {
       const xValues = inventory.map((item) => item.type);
@@ -107,7 +105,8 @@ export function Charity_Dashboard() {
               <button
                 className="logout-btn"
                 onClick={() => {
-                  localStorage.removeItem('charity');
+                  localStorage.removeItem('user');
+                  localStorage.removeItem('role');
                   window.location.href = '/login';
                 }}
               >
@@ -118,7 +117,7 @@ export function Charity_Dashboard() {
         </aside>
 
         <main className="dashboard-main">
-          <h2>Welcome, {charity.name} Staff!</h2>
+          <h2>Welcome, {user.name} Staff!</h2>
 
           {loading ? (
             <p>Loading dashboard...</p>
@@ -170,11 +169,11 @@ export function Charity_Dashboard() {
                     {donations.length ? (
                       donations.map((d) => (
                         <tr key={d.donation_ID}>
-                          <td>{d.user_id}</td>
-                          <td>{d.user_name}</td>
-                          <td>{d.user_email}</td>
-                          <td>{d.category}</td>
-                          <td>{d.type}</td>
+                          <td>{d.user_id || 'N/A'}</td>
+                          <td>{d.user_name || d.donor_name || 'N/A'}</td>
+                          <td>{d.user_email || 'N/A'}</td>
+                          <td>{d.category || d.item_category}</td>
+                          <td>{d.type || d.item_name}</td>
                           <td>{d.donation_date.split(' ')[0]}</td>
                           <td>{d.donation_status}</td>
                           <td>{d.pickup_address || 'N/A'}</td>

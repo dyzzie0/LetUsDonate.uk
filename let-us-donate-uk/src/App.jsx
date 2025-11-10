@@ -21,6 +21,7 @@ import { View_Inventory } from './assets/components/Charity/View_Inventory.jsx';
 import View_Donations from './assets/components/Charity/View_Donations.jsx';
 import Distribution_Records from './assets/components/Charity/Distribution_Records.jsx';
 import Approve_Donations from './assets/components/Charity/approve_donations.jsx';
+import Add_Charity from './assets/components/Admin/Add_Charity';
 
 import Admin_Dashboard from './assets/components/Admin/Admin_Dashboard.jsx';
 import View_Users from './assets/components/Admin/View_Users.jsx';
@@ -84,6 +85,7 @@ function Layout() {
           element={<Distribution_Records />}
         />
         <Route path="/approve_donations" element={<Approve_Donations />} />
+        <Route path="/add_charity" element={<Add_Charity />} />
 
         <Route path="/admin_dashboard" element={<Admin_Dashboard />} />
         <Route path="/view_users" element={<View_Users />} />

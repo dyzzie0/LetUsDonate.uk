@@ -40,7 +40,15 @@ try {
     $stmt->execute([$user['role_id']]);
     $role = $stmt->fetchColumn() ?? 'donor';
 
-    // Return user info
+    // Determine redirect based on role
+    $redirect = '/user_dashboard'; 
+    if ($user['role_id'] == 12) {
+        $redirect = '/admin_dashboard';
+    } elseif ($user['role_id'] == 11) {
+        $redirect = '/charity_dashboard';
+    }
+
+    // Return user info with redirect
     echo json_encode([
         "status" => "success",
         "user" => [
@@ -48,7 +56,8 @@ try {
             "name" => $user['user_name'],
             "email" => $user['user_email'],
             "role" => strtolower($role)
-        ]
+        ],
+        "redirect" => $redirect
     ]);
 
 } catch (PDOException $e) {
