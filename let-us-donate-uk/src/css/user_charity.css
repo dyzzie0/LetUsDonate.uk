@@ -63,7 +63,7 @@
 .dashboard-main {
   flex: 1;
   padding: 2rem 3rem;
-  background-color: #fffefc;
+  background: light-dark(#fffefc, #2c2c2c);
 }
 
 .dashboard-main h2 {
