@@ -15,7 +15,6 @@ export function View_Inventory() {
     }
   };
 
-
   const [filters, setFilters] = useState({
     category: '',
     type: '',
@@ -79,7 +78,7 @@ export function View_Inventory() {
           <div className="return-right">
             <ul>
               <li>
-              <a href={getReturnLink()}>Return</a>
+                <a href={getReturnLink()}>Return</a>
               </li>
             </ul>
           </div>

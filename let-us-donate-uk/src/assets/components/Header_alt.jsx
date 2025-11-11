@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../css/header.css';
+import '../../css/mobile.css';
 
 export default function Header_Alt({ onLogout }) {
   return (

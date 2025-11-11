@@ -34,16 +34,21 @@ export function My_Impact() {
       <div className="records-container">
         <div className="header-left">
           <h2>My Impact</h2>
-        
-        </div>
-        
-        <div className="return-right">
-          <a href="/User_dashboard" className="return-link">Return</a>
         </div>
 
-        
+        <div className="return-right">
+          <a href="/User_dashboard" className="return-link">
+            Return
+          </a>
+        </div>
       </div>
-  <h3>  <p>Track your contributions and see how your donations help the community and environment.</p></h3>
+      <h3>
+        {' '}
+        <p>
+          Track your contributions and see how your donations help the community
+          and environment.
+        </p>
+      </h3>
 
       {loading ? (
         <p>Loading your impact...</p>
@@ -55,14 +60,16 @@ export function My_Impact() {
             <h3>{totalItems}</h3>
             <p>Total items you've donated so far.</p>
           </div>
-  
+
           {/* CO₂ Saved */}
           <div className="impact-card">
             <i className="fa-solid fa-earth-africa fa-2x"></i>
             <h3>{totalCO2} kg</h3>
-            <p>Estimated CO₂ saved by donating items instead of discarding them.</p>
+            <p>
+              Estimated CO₂ saved by donating items instead of discarding them.
+            </p>
           </div>
-  
+
           {/* People Helped */}
           <div className="impact-card">
             <i className="fa-solid fa-heart fa-2x"></i>
@@ -73,7 +80,6 @@ export function My_Impact() {
       )}
     </main>
   );
+}
 
-  }
-  
 export default My_Impact;

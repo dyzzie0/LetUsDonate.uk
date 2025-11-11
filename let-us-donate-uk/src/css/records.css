@@ -164,15 +164,14 @@ main {
   border: 1px solid light-dark(#eeeeee, #444444);
 }
 
-/* Profile Form(by theo) */
+/* Profile Form  */
 .profile-form-container {
   width: 100%;
-  max-width: 600px;
-  margin: 0 auto 40px auto;
+  max-width: 800px;
   padding: 20px 30px;
-  border-radius: 12px;
-  background-color: light-dark(#f1f1f1, #1e1e1e);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  background-color: light-dark(#fffefc, #1e1e1e);
+  box-shadow: 0 6px 18px rgba(48, 45, 45, 0.15);
 }
 
 .profile-form label {
@@ -180,7 +179,6 @@ main {
   flex-direction: column;
   margin-bottom: 15px;
   font-weight: 500;
-  color: light-dark(#222222, #cccccc);
 }
 
 .profile-form input {
@@ -190,7 +188,6 @@ main {
   border-radius: 6px;
   font-size: 1rem;
   background-color: light-dark(#ffffff, #1a1a1a);
-  color: light-dark(#000000, #ffffff);
   transition:
     border-color 0.3s,
     box-shadow 0.3s;
@@ -206,7 +203,6 @@ main {
 .profile-form button {
   margin-top: 15px;
   background-color: light-dark(#9faca2, #5a5a5a);
-  color: #ffffff;
   padding: 10px 18px;
   border-radius: 6px;
   border: none;

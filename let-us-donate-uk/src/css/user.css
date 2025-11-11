@@ -68,7 +68,7 @@
 }
 
 .new-donation button {
-  background-color: light-dark(#fef7e4, #fef7e4);
+  background-color: light-dark(#fef7e4, #2c8d56);
   border: none;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
@@ -77,7 +77,6 @@
 
 .new-donation button:hover {
   background-color: light-dark(#8aa377, #656c5c);
-  color: #ffffff;
 }
 
 .description {
@@ -146,7 +145,7 @@
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
-    margin: 0;
+  margin: 0;
 }
 
 .image-preview img.thumbnail:hover {
