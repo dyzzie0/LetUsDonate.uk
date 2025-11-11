@@ -15,6 +15,14 @@ export function User_Dashboard() {
   const [loadingUser, setLoadingUser] = useState(true);
 
   // User authentication control
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user"); 
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+    setLoadingUser(false);
+  }, []);
+  
 
   //useEffect(() => {
   // const item = localStorage.getItem("donor");
@@ -204,11 +212,7 @@ export function User_Dashboard() {
               <option value="used-fair">Used - Fair</option>
             </select>
 
-            <textarea
-              className="description"
-              placeholder="Description"
-              required
-            />
+            <textarea name= "description" className="description" placeholder="Description" required />
 
             <div className="file-upload">
               <input type="file" accept="image/*" onChange={handleChange} />
@@ -308,20 +312,25 @@ export function User_Dashboard() {
                   <td>{d.item_name}</td>
                   <td>
                     {d.item_image ? (
+                      <a
+                      href={`http://localhost:8000/${d.item_image}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <img
-                        src={`http://localhost:8000/uploads/${d.item_image}`}
+                        src={`http://localhost:8000/${d.item_image}`}
                         alt={d.item_name}
                         style={{
                           width: '50px',
-                          height: '50px',
-                          objectFit: 'cover',
+                          height: 'auto',
                           borderRadius: '4px',
                         }}
                       />
-                    ) : (
-                      'n/a'
-                    )}
-                  </td>
+                    </a>
+                  ) : (
+                    'N/A'
+                  )}
+                </td>
                   <td>{d.donation_date.split(' ')[0]}</td>
                   <td>{d.charity_name}</td>
                   <td>{d.donation_status}</td>
