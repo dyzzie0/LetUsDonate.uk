@@ -1,28 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../../../css/admin.css';
+import '../../../css/mobile.css';
 import { Chart } from 'chart.js/auto';
 
 export function Admin_Dashboard() {
   const [donations, setDonations] = useState([]);
-  const [loading, setLoading] = useState(true);const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [userData, setUserData] = useState(null);
   const [loadingUser, setLoadingUser] = useState(true);
-  
+
   // Admin authentication control if its broken when logging in please juts hash out //
 
- // const admin = JSON.parse(localStorage.getItem('admin') || '{}'); 
-  
- // useEffect(() => {
- //   const item = localStorage.getItem("admin");
- //   if (item) setUser(JSON.parse(item));
-//    setLoadingUser(false);
-//  }, []);
-  
-// useEffect(() => {
-//    if (!loadingUser && !admin?.id) {
- //     window.location.href = '/login';
-//    }
- // }, [loadingUser, admin]);
+  // const admin = JSON.parse(localStorage.getItem('admin') || '{}');
+
+  // useEffect(() => {
+  //   const item = localStorage.getItem("admin");
+  //   if (item) setUser(JSON.parse(item));
+  //    setLoadingUser(false);
+  //  }, []);
+
+  // useEffect(() => {
+  //    if (!loadingUser && !admin?.id) {
+  //     window.location.href = '/login';
+  //    }
+  // }, [loadingUser, admin]);
   //
 
   useEffect(() => {

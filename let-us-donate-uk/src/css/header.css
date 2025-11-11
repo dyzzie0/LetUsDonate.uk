@@ -1,8 +1,10 @@
 .header {
   padding: 150px 100px;
-  background-color: light-dark(#79998d, #556c64);
+  background-color: light-dark(#668670, #1e2c29);
   position: relative;
   text-align: left;
+  overflow: hidden;
+  clip-path: polygon(0 0, 0 100%, 100% 90%, 100% 0%);
 }
 
 a:link,
@@ -27,7 +29,7 @@ li {
   list-style: none;
   display: inline-block;
   padding: 0 20px;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 500;
 }
 
@@ -72,7 +74,7 @@ i {
   text-align: left;
 }
 .header_content h3 {
-  font-size: 20px;
+  font-size: 22px;
   text-align: left;
 }
 
@@ -88,7 +90,7 @@ i {
   box-shadow: -2px 0 10px rgba(0, 0, 0, 0.15);
   transition: right 0.4s ease;
   padding: 40px 20px;
-  z-index: 1000;
+  z-index: 1;
 }
 
 .DropdownMenu.open {

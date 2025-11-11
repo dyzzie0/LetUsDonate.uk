@@ -77,7 +77,6 @@
 
 .new-donation button:hover {
   background-color: light-dark(#8aa377, #656c5c);
-
 }
 
 .description {
@@ -146,7 +145,7 @@
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
-    margin: 0;
+  margin: 0;
 }
 
 .image-preview img.thumbnail:hover {
