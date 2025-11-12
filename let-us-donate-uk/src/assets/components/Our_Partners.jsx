@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import '../../css/our_partners.css';
 
 function Our_Partners() {

@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import '../../../css/admin.css';
-import '../../../css/mobile.css';
 import { Chart } from 'chart.js/auto';
+import '../../../css/admin.css';
 
 export function Admin_Dashboard() {
   const [donations, setDonations] = useState([]);

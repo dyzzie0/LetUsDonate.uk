@@ -139,3 +139,18 @@
   margin-bottom: 20px;
 }
 
+@media screen and (max-width: 768px) {
+  .middle {
+    margin: 20px;
+    padding: 30px 20px 40px 20px;
+  }
+
+  .input-box input {
+    width: 80%;
+  }
+
+  .btn {
+    width: 60%;
+  }
+  
+}

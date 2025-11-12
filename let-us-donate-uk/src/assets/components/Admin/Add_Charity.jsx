@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import '../../../css/records.css';
 
 export function Add_Charity() {
