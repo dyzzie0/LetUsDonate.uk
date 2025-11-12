@@ -150,5 +150,14 @@
     }
   }
   
-
-
+  @media (max-width: 768px) {
+    .records-container {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+    }
+  
+    .table-container {
+      overflow-x: scroll;
+    }
+  }

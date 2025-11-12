@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import '../../../css/user_charity.css';
 import '../../../css/user.css';
 
 export function User_Dashboard() {
@@ -112,19 +111,19 @@ export function User_Dashboard() {
             <aside className="links">
               <ul>
                 <li>
-                  <ii className="fa-solid fa-gauge"></ii>
+                  <i className="fa-solid fa-gauge"></i>
                   <a href="/my_impact">My Impact</a>
                 </li>
                 <li>
-                  <ii className="fa-solid fa-inbox"></ii>
+                  <i className="fa-solid fa-inbox"></i>
                   <a href="/my_donations">My Donations</a>
                 </li>
                 <li>
-                  <ii className="fa-solid fa-user"></ii>
+                  <i className="fa-solid fa-user"></i>
                   <a href="/my_profile">My Profile</a>
                 </li>
                 <li>
-                  <ii className="fa-solid fa-arrow-right-from-bracket"></ii>
+                  <i className="fa-solid fa-arrow-right-from-bracket"></i>
                   <button
                     className="logout-btn"
                     type="button"
@@ -140,20 +139,21 @@ export function User_Dashboard() {
             </aside>
 
             <main className="dashboard-main">
-              <h2>Welcome, {user?.name || 'User'}!</h2>
+              <h2>Welcome, {user?.name} </h2>
 
               <div className="stats-container">
-                <div className="stat-card">
-                  <ii className="fa-solid fa-shirt"></ii>
-                  <p className="stat-number">{donations.length}</p>
-                  <p className="stat-text">Total Items Donated</p>
-                </div>
                 <div className="stat-card">
                   <ii className="fa-solid fa-earth-africa"></ii>
                   <p className="stat-number">
                     {(donations.length * 1.5).toFixed(1)}kg
                   </p>
                   <p className="stat-text">CO₂ Saved</p>
+                </div>
+
+                <div className="stat-card">
+                  <ii className="fa-solid fa-shirt"></ii>
+                  <p className="stat-number">{donations.length}</p>
+                  <p className="stat-text">Total Items Donated</p>
                 </div>
                 <div className="stat-card">
                   <ii className="fa-solid fa-heart"></ii>
