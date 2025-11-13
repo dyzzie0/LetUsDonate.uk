@@ -18,8 +18,8 @@ CREATE TABLE IF NOT EXISTS "Charity_Staff" (
 	"charity_ID"	INTEGER NOT NULL,
 	"user_ID"	INTEGER NOT NULL,
 	PRIMARY KEY("staff_ID" AUTOINCREMENT),
-	FOREIGN KEY("charity_ID") REFERENCES "Charity"("charity_ID"),
-	FOREIGN KEY("user_ID") REFERENCES "User"("user_ID")
+	FOREIGN KEY("user_ID") REFERENCES "User"("user_ID"),
+	FOREIGN KEY("charity_ID") REFERENCES "Charity"("charity_ID")
 );
 CREATE TABLE IF NOT EXISTS "Donation" (
 	"donation_ID"	INTEGER NOT NULL,
@@ -28,19 +28,8 @@ CREATE TABLE IF NOT EXISTS "Donation" (
 	"donation_status"	TEXT NOT NULL,
 	"donation_date"	TEXT NOT NULL,
 	PRIMARY KEY("donation_ID" AUTOINCREMENT),
-	FOREIGN KEY("charity_ID") REFERENCES "Charity"("charity_ID"),
-	FOREIGN KEY("donor_ID") REFERENCES "Donor"("donor_ID")
-);
-CREATE TABLE IF NOT EXISTS "Donation_Item" (
-	"item_ID"	INTEGER NOT NULL,
-	"donation_ID"	INTEGER NOT NULL,
-	"item_name"	TEXT NOT NULL,
-	"item_category"	TEXT NOT NULL,
-	"item_size"	TEXT NOT NULL,
-	"item_condition"	TEXT NOT NULL,
-	"item_description"	TEXT NOT NULL,
-	PRIMARY KEY("item_ID" AUTOINCREMENT),
-	FOREIGN KEY("donation_ID") REFERENCES "Donation"("donation_ID")
+	FOREIGN KEY("donor_ID") REFERENCES "Donor"("donor_ID"),
+	FOREIGN KEY("charity_ID") REFERENCES "Charity"("charity_ID")
 );
 CREATE TABLE IF NOT EXISTS "Inventory" (
 	"inventory_ID"	INTEGER NOT NULL,
@@ -67,6 +56,18 @@ CREATE TABLE IF NOT EXISTS "Donor" (
 	"user_ID"	INTEGER,
 	PRIMARY KEY("donor_ID" AUTOINCREMENT)
 );
+CREATE TABLE IF NOT EXISTS "Donation_Item" (
+	"item_ID"	INTEGER NOT NULL,
+	"donation_ID"	INTEGER NOT NULL,
+	"item_name"	TEXT NOT NULL,
+	"item_category"	TEXT NOT NULL,
+	"item_size"	TEXT NOT NULL,
+	"item_condition"	TEXT NOT NULL,
+	"item_description"	TEXT NOT NULL,
+	"item_image"	TEXT,
+	PRIMARY KEY("item_ID" AUTOINCREMENT),
+	FOREIGN KEY("donation_ID") REFERENCES "Donation"("donation_ID")
+);
 INSERT INTO "Role" VALUES (10,'donor','A person who donates clothing or items.');
 INSERT INTO "Role" VALUES (11,'charity','A registered charity receiving donations.');
 INSERT INTO "Role" VALUES (12,'admin','System administrator managing users and charities.');
@@ -76,13 +77,22 @@ INSERT INTO "Donation" VALUES (2,3,2,'Pending','2025-10-31 14:38:15');
 INSERT INTO "Donation" VALUES (3,3,2,'Pending','2025-11-04 20:28:10');
 INSERT INTO "Donation" VALUES (4,3,2,'Pending','2025-11-04 20:28:47');
 INSERT INTO "Donation" VALUES (5,3,2,'Pending','2025-11-04 20:36:08');
-INSERT INTO "Donation_Item" VALUES (1,1,'jacket','mens','trouser','new','ss');
-INSERT INTO "Donation_Item" VALUES (2,2,'shirt','girls','trouser','like-new','hh');
-INSERT INTO "Donation_Item" VALUES (3,3,'jacket','womens','shirt','like-new','ee');
-INSERT INTO "Donation_Item" VALUES (4,4,'jacket','womens','jacket','like-new','mm');
-INSERT INTO "Donation_Item" VALUES (5,5,'shirt','girls','shirt','like-new','rr');
+INSERT INTO "Donation" VALUES (6,4,2,'Pending','2025-11-04 20:59:35');
+INSERT INTO "Donation" VALUES (7,3,2,'Pending','2025-11-05 17:16:21');
+INSERT INTO "Donation" VALUES (8,3,2,'Pending','2025-11-05 17:40:31');
 INSERT INTO "User" VALUES (1,'th','donor@test.com','$2y$12$YJx7qK2FlpZpjEnyaj9AR.8YOud/.IIART09jOhIGmf4VlZoDOCM2',10);
 INSERT INTO "User" VALUES (4,'test','test1@example.com','$2y$12$1w7fqzvFbZV5KjHoXXbGX.NASz2GcCkuGuil/joOAD9ibA882WGPK',10);
 INSERT INTO "User" VALUES (5,'test2','tast2@mail.com','$2y$12$kFgQBwW8S/85CDgkNv2Mz.L1kTsZgAGgCxy9jHEI30noUFqG1iggK',10);
+INSERT INTO "User" VALUES (6,'test3','tast3@mail.com','$2y$12$fPxbH8pUiJR2/3vtYMVxAeHNM3sF3TqXsVx0T0vsbXgxnN0lpBrNu',10);
+INSERT INTO "User" VALUES (7,'Test Admin','testadmin@example.com','$2y$12$QOh4Zea7TQBBmxBfK5NGrOkLb/quKyN/0K19gTgt7JEBgxJ58VZeO',12);
 INSERT INTO "Donor" VALUES (3,'12345',4);
+INSERT INTO "Donor" VALUES (4,NULL,6);
+INSERT INTO "Donation_Item" VALUES (1,1,'jacket','mens','trouser','new','ss',NULL);
+INSERT INTO "Donation_Item" VALUES (2,2,'shirt','girls','trouser','like-new','hh',NULL);
+INSERT INTO "Donation_Item" VALUES (3,3,'jacket','womens','shirt','like-new','ee',NULL);
+INSERT INTO "Donation_Item" VALUES (4,4,'jacket','womens','jacket','like-new','mm',NULL);
+INSERT INTO "Donation_Item" VALUES (5,5,'shirt','girls','shirt','like-new','rr',NULL);
+INSERT INTO "Donation_Item" VALUES (6,6,'jacket','mens','shirt','like-new','ss',NULL);
+INSERT INTO "Donation_Item" VALUES (7,7,'gg','mens','shoe','new','44',NULL);
+INSERT INTO "Donation_Item" VALUES (8,8,'shirt','mens','jacket','new','mm',NULL);
 COMMIT;

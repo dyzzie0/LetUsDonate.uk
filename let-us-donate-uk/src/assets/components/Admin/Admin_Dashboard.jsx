@@ -1,21 +1,64 @@
-import React, { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import '../../../css/admin.css';
 import { Chart } from 'chart.js/auto';
+import '../../../css/admin.css';
 
 export function Admin_Dashboard() {
-  useEffect(() => {
-    // This chart is for donation trends, which is jsut showing how many donations have been made over time.
+  const [donations, setDonations] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [userData, setUserData] = useState(null);
+  const [loadingUser, setLoadingUser] = useState(true);
 
+  // Admin authentication control if its broken when logging in please juts hash out //
+
+  // const admin = JSON.parse(localStorage.getItem('admin') || '{}');
+
+  // useEffect(() => {
+  //   const item = localStorage.getItem("admin");
+  //   if (item) setUser(JSON.parse(item));
+  //    setLoadingUser(false);
+  //  }, []);
+
+  // useEffect(() => {
+  //    if (!loadingUser && !admin?.id) {
+  //     window.location.href = '/login';
+  //    }
+  // }, [loadingUser, admin]);
+  //
+
+  useEffect(() => {
+    // Fetch all donations (for admin)
+    fetch('http://localhost:8000/get_donations.php')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === 'success') {
+          setDonations(data.donations);
+        } else {
+          console.error('Error loading donations:', data.message);
+        }
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error('Network error:', err);
+        setLoading(false);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (loading || donations.length === 0) return;
+
+    //This chart shows all the donations //
     const donationCtx = document.getElementById('donationTrends');
     const donationChart = new Chart(donationCtx, {
       type: 'line',
       data: {
-        labels: ['1D', '1W', '1M', '3M', '6M', '1Y', 'Max'],
+        labels: donations
+          .slice(0, 10)
+          .map((d) => d.donation_date.split(' ')[0]),
         datasets: [
           {
             label: 'Total Donations',
-            data: [10, 20, 30, 40, 50, 60],
+            data: donations.map((_, i) => i + 1),
             borderColor: '#60a5fa',
             backgroundColor: '#60a5fa10',
             borderWidth: 2,
@@ -23,8 +66,6 @@ export function Admin_Dashboard() {
             tension: 0.3,
             pointRadius: 4,
             pointBackgroundColor: '#60a5fa',
-            weight: 'bold',
-            font: { size: 20 },
           },
         ],
       },
@@ -34,8 +75,7 @@ export function Admin_Dashboard() {
       },
     });
 
-    // This chart shows the monthly user trends, so how many users sign up per week, month etc.
-
+    //  This chart shows number of user over the weeks etc. //
     const userCtx = document.getElementById('userTrends');
     const userChart = new Chart(userCtx, {
       type: 'line',
@@ -60,23 +100,17 @@ export function Admin_Dashboard() {
       },
     });
 
-    // This shows the sustainability impact, so the combinaed c02 reduced and items reused.
-
+    // This chart is showing the impact on peoples donations liek c02 saved and items reused //
     const sustainCtx = document.getElementById('sustainabilityImpact');
     const sustainChart = new Chart(sustainCtx, {
       type: 'bar',
       data: {
-        labels: ['1D', '1W', '1M', '3M', '6M', '1Y', 'Max'],
+        labels: ['Items Reused', 'CO₂ Reduced (kg)'],
         datasets: [
           {
-            label: 'Items Reused',
-            data: [15, 25, 40, 45, 55, 65],
-            backgroundColor: '#cca2e9',
-          },
-          {
-            label: 'CO₂ Reduced',
-            data: [20, 30, 50, 45, 60, 100],
-            backgroundColor: '#22d3ee',
+            label: 'Impact',
+            data: [donations.length, donations.length * 1.5],
+            backgroundColor: ['#cca2e9', '#22d3ee'],
           },
         ],
       },
@@ -87,21 +121,20 @@ export function Admin_Dashboard() {
       },
     });
 
-    // This chart shows how many people have donated to each charity
+    // This chart is showing the number of donations taht have been set to each charity //
+    const charities = {};
+    donations.forEach((d) => {
+      charities[d.charity_name] = (charities[d.charity_name] || 0) + 1;
+    });
 
     const charityCtx = document.getElementById('charityPerformance');
     const charityChart = new Chart(charityCtx, {
       type: 'pie',
       data: {
-        labels: [
-          'WearAgain Foundation',
-          'Threads of Hope UK',
-          'SecondChance Wardrobe',
-          'GreenStitch Collective',
-        ],
+        labels: Object.keys(charities),
         datasets: [
           {
-            data: [10, 15, 20, 25],
+            data: Object.values(charities),
             backgroundColor: ['#60a5fa', '#22d3ee', '#34d399', '#a7f3d0'],
           },
         ],
@@ -118,30 +151,35 @@ export function Admin_Dashboard() {
       sustainChart.destroy();
       charityChart.destroy();
     };
-  }, []);
+  }, [donations, loading]);
+
+  //  Dashboard Stats //
+  const totalDonations = donations.length;
+  const totalCO2Saved = (totalDonations * 1.5).toFixed(1);
+  const activeUsers = new Set(donations.map((d) => d.charity_name)).size;
 
   return (
     <div className="admin-dashboard">
       <div className="admin-links">
         <h2>Welcome Admin!</h2>
         <li>
-          <ii className="fa-solid fa-users"></ii>
+          <i className="fa-solid fa-users"></i>
           <Link to="/view_users">View Users</Link>
         </li>
         <li>
-          <ii className="fa-solid fa-database"></ii>
+          <i className="fa-solid fa-database"></i>
           <Link to="/view_inventory">View Inventory</Link>
         </li>
         <li>
-          <ii className="fa-solid fa-hand-holding-heart"></ii>
+          <i className="fa-solid fa-hand-holding-heart"></i>
           <Link to="/view_donations">Donations</Link>
         </li>
         <li>
-          <ii className="fa-solid fa-chart-line"></ii>
+          <i className="fa-solid fa-chart-line"></i>
           <Link to="/data_reports">Data Reports</Link>
         </li>
         <li>
-          <ii class="fa-solid fa-arrow-right-from-bracket"></ii>
+          <i className="fa-solid fa-arrow-right-from-bracket"></i>
           <button
             className="admin-button"
             onClick={() => {
@@ -158,40 +196,46 @@ export function Admin_Dashboard() {
         <div className="Stats">
           <div>
             <h4>Total Items Donated</h4>
-            <p>0</p>
+            <p>{totalDonations}</p>
           </div>
           <div>
             <h4>Total Items Accepted</h4>
-            <p>0</p>
+            <p>{totalDonations}</p>
           </div>
           <div>
             <h4>Total CO₂ Saved</h4>
-            <p>0kg</p>
+            <p>{totalCO2Saved} kg</p>
           </div>
           <div>
-            <h4>Active Users</h4>
-            <p>0</p>
+            <h4>Active Charities</h4>
+            <p>{activeUsers}</p>
           </div>
         </div>
       </div>
 
       <div className="data-reports">
-        <div className="chart-card">
-          <h3>Donation Trends</h3>
-          <canvas id="donationTrends"></canvas>
-        </div>
-        <div className="chart-card">
-          <h3>Monthly User Trends</h3>
-          <canvas id="userTrends"></canvas>
-        </div>
-        <div className="chart-card">
-          <h3>Sustainability Impact</h3>
-          <canvas id="sustainabilityImpact"></canvas>
-        </div>
-        <div className="chart-card">
-          <h3>Charity Performance Comparison</h3>
-          <canvas id="charityPerformance"></canvas>
-        </div>
+        {loading ? (
+          <p>Loading data...</p>
+        ) : (
+          <>
+            <div className="chart-card">
+              <h3>Donation Trends</h3>
+              <canvas id="donationTrends"></canvas>
+            </div>
+            <div className="chart-card">
+              <h3>Monthly User Trends</h3>
+              <canvas id="userTrends"></canvas>
+            </div>
+            <div className="chart-card">
+              <h3>Sustainability Impact</h3>
+              <canvas id="sustainabilityImpact"></canvas>
+            </div>
+            <div className="chart-card">
+              <h3>Charity Performance Comparison</h3>
+              <canvas id="charityPerformance"></canvas>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

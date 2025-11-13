@@ -1,7 +1,51 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import '../../../css/records.css';
 
 export function View_Users() {
+  const [users, setUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [roleFilter, setRoleFilter] = useState('');
+  const [loading, setLoading] = useState(true);
+
+  // Fetch users from backend
+  useEffect(() => {
+    fetch('http://localhost:8000/get_users.php')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === 'success') {
+          setUsers(data.users);
+          setFilteredUsers(data.users);
+        } else {
+          console.error('Error fetching users:', data.message);
+        }
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error('Network error:', err);
+        setLoading(false);
+      });
+  }, []);
+
+  // Handle filtering
+  const handleFilter = () => {
+    let results = users;
+
+    if (searchTerm.trim()) {
+      results = results.filter((u) =>
+        u.user_name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    if (roleFilter.trim()) {
+      results = results.filter(
+        (u) => u.role_name.toLowerCase() === roleFilter.toLowerCase()
+      );
+    }
+
+    setFilteredUsers(results);   
+  };
+
   return (
     <div>
       <main>
@@ -15,53 +59,71 @@ export function View_Users() {
               <li>
                 <a href="/admin_dashboard">Return</a>
               </li>
+              <li>
+              <a href="/add_charity"> Add Charity</a>
+              </li>
             </ul>
           </div>
         </div>
 
+       
+       
         <div className="filter-bar">
           <input
             type="text"
             placeholder="Search by name..."
             className="search-input"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <select className="status-filter">
+          <select
+            className="status-filter"
+            value={roleFilter}
+            onChange={(e) => setRoleFilter(e.target.value)}
+          >
             <option value="">All Roles</option>
             <option value="donor">Donor</option>
             <option value="charity_staff">Charity Staff</option>
             <option value="admin">Admin</option>
           </select>
-          <button className="filter-button">Filter</button>
+          <button className="filter-button" onClick={handleFilter}>
+            Filter
+          </button>
         </div>
 
         <div className="table-container">
-          <table className="table">
-            <thead>
-              <tr>
-                <th>User ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Date Joined</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>John Doe</td>
-                <td>gmail.com</td>
-                <td>Donor</td>
-                <td>2024-01-15</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Jane Smith</td>
-                <td>yahoo.com</td>
-                <td>Charity Staff</td>
-                <td>2023-11-22</td>
-              </tr>
-            </tbody>
-          </table>
+          {loading ? (
+            <p>Loading users...</p>
+          ) : (
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>User ID</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Role</th>
+                  <th>Date Joined</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredUsers.length > 0 ? (
+                  filteredUsers.map((user) => (
+                    <tr key={user.user_ID}>
+                      <td>{user.user_ID}</td>
+                      <td>{user.user_name}</td>
+                      <td>{user.user_email}</td>
+                      <td>{user.role_name}</td>
+                      <td>{user.created_at || 'N/A'}</td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="5">No users found.</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          )}
         </div>
       </main>
     </div>

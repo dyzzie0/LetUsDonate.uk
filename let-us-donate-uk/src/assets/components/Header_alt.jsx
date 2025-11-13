@@ -1,8 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import '../../css/header.css';
 
-export default function Header_Alt({ onLogout }) {
+export default function Header_Alt() {
   return (
     <header className="header">
       <div className="navbar">

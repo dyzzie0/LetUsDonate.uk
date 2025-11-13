@@ -1,9 +1,11 @@
 .footer {
   padding: 150px 100px;
-  background-color: light-dark(#79998d, #556c64);
+  background-color: light-dark(#668670, #1e2c29);
   position: relative;
   text-align: center;
-  /*clip-path: polygon(0 15%, 100% 0, 100% 85%, 0 100%);*/
+  width: 100%;
+  display: flex;
+  clip-path: polygon(0 12%, 100% 0, 100% 100%, 0 100%);
 }
 
 .footer-content {
@@ -25,4 +27,17 @@
 
 .footer-content a:hover {
   text-decoration: underline;
+}
+
+
+
+@media screen and (max-width: 768px) {
+  .footer {
+    padding: 80px 20px; 
+  }
+
+  .footer-content p {
+    font-size: 16px; 
+    
+  }
 }

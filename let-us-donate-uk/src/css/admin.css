@@ -38,6 +38,11 @@
 .admin-links a:hover {
   border-bottom: 2px solid #111;
 }
+.admin-links i {
+  margin-right: 8px;
+  color: inherit;
+  font-size: 20px;
+}
 
 /* Buttons */
 .admin-button {
@@ -139,6 +144,8 @@
   height: 300px;
 }
 
+
+
 /* Grid layout for reports */
 
 .data-reports {
@@ -150,3 +157,27 @@
   margin-bottom: 30px;
   padding: 0;
 }
+
+
+/* Mobile Design */
+@media (max-width: 768px) {
+  .data-reports {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, 400px);
+  }
+
+  .admin-dashboard {
+    flex: 1;
+    margin-bottom:200%; 
+  }
+
+.admin-links {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .Stats {
+    grid-template-columns: 1fr 1fr;
+  }
+ }
