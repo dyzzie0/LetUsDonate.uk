@@ -165,9 +165,18 @@ main {
 }
 
 /* Profile Form  */
+
+.dashboard-main{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 80px;
+  border-radius: 8px;
+}
 .profile-form-container {
   width: 100%;
-  max-width: 800px;
+  max-width: 600px;
   padding: 20px 30px;
   border-radius: 8px;
   background-color: light-dark(#fffefc, #1e1e1e);
@@ -232,3 +241,5 @@ main {
   background-color: light-dark(#fdecea, #4a1a1a);
   color: light-dark(#a72828, #ff9999);
 }
+
+

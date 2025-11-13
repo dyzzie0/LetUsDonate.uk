@@ -4,7 +4,8 @@
   position: relative;
   text-align: left;
   overflow: hidden;
-  clip-path: polygon(0 0, 0 100%, 100% 90%, 100% 0%);
+  clip-path: polygon(0 0, 0 100%, 100% 80%, 100% 0%);
+
 }
 
 a:link,

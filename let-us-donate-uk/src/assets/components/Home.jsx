@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import '../../css/home.css';
-import '../../css/mobile.css';
 import DonateImg from '../../images/Donate.png';
 import DonateImg2 from '../../images/Donate2.png';
 import DonateImg3 from '../../images/Donate3.png';
 import DonateImg4 from '../../images/Donate4.png';
+import '../../css/home.css';
 
 function Home() {
   const comment = [

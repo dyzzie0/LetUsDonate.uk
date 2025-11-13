@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import '../../../css/user_charity.css';
+import { useEffect, useState } from 'react';
 import '../../../css/charity.css';
 
 export function Charity_Dashboard() {
@@ -19,7 +18,6 @@ export function Charity_Dashboard() {
 
     const fetchData = async () => {
       try {
-        // Fetch donations for this charity
         const donationRes = await fetch(
           `http://localhost:8000/get_donations.php?charity_id=${user.id}`
         );
@@ -81,117 +79,117 @@ export function Charity_Dashboard() {
 
   return (
     <div className="charity-dashboard-container">
-      <div className="dashboard-left">
-        <aside className="links">
-          <ul>
-            <li>
+  <div className="dashboard">
+  <aside className="links">
+            <ul>
+              <li>
               <i className="fa-solid fa-shirt"></i>
-              <a href="/view_donations">Donations</a>
-            </li>
-            <li>
+                <a href="/view_donations">Donations</a>
+              </li>
+              <li>
               <i className="fa-solid fa-warehouse"></i>
-              <a href="/view_inventory">Inventory</a>
-            </li>
-            <li>
+                <a href="/view inventory">Inventory</a>
+              </li>
+              <li>
               <i className="fa-solid fa-hand-holding-heart"></i>
-              <a href="/approve_donations">Approve Donations</a>
-            </li>
-            <li>
+                <a href="/approve_donations">Approve Donations</a>
+              </li>
+              <li>
               <i className="fa-solid fa-truck"></i>
-              <a href="/distribution_records">Distributions</a>
-            </li>
-            <li>
-              <i className="fa-solid fa-arrow-right-from-bracket"></i>
-              <button
-                className="logout-btn"
-                onClick={() => {
-                  localStorage.removeItem('user');
-                  localStorage.removeItem('role');
-                  window.location.href = '/login';
-                }}
-              >
-                Logout
-              </button>
-            </li>
-          </ul>
-        </aside>
+                <a href="/distribution_records">Distributions</a>
+              </li>
+              <li>
+                <i className="fa-solid fa-arrow-right-from-bracket"></i>
+                <button
+                  className="logout-btn"
+                  type="button"
+                  onClick={() => {
+                    localStorage.removeItem('user');
+                    window.location.href = '/login';
+                  }}
+                >
+                  Logout
+                </button>
+              </li>
+            </ul>
+          </aside>
 
-        <main className="dashboard-main">
-          <h2>Welcome, {user.name} Staff!</h2>
+    <main className="dashboard-main">
+      <h2>Welcome, {user.name} Staff!</h2>
 
-          {loading ? (
-            <p>Loading dashboard...</p>
-          ) : (
-            <>
-              <div className="stats-container">
-                <div className="stat-card">
-                  <i className="fa-solid fa-shirt"></i>
-                  <p className="stat-number">{stats.items}</p>
-                  <p className="stat-text">Items Donated</p>
-                </div>
+      {loading ? (
+        <p>Loading dashboard...</p>
+      ) : (
+        <>
+          <div className="stats-container">
+           
 
-                <div className="stat-card">
-                  <i className="fa-solid fa-leaf"></i>
-                  <p className="stat-number">{stats.co2} kg</p>
-                  <p className="stat-text">CO₂ Saved</p>
-                </div>
+            <div className="stat-card">
+              <i className="fa-solid fa-leaf"></i>
+              <p className="stat-number">{stats.co2} kg</p>
+              <p className="stat-text">CO₂ Saved Today</p>
+            </div>
 
-                <div className="stat-card">
-                  <i className="fa-solid fa-people-group"></i>
-                  <p className="stat-number">{stats.people}</p>
-                  <p className="stat-text">People Helped</p>
-                </div>
-              </div>
+            <div className="stat-card">
+              <i className="fa-solid fa-shirt"></i>
+              <p className="stat-number">{stats.items}</p>
+              <p className="stat-text">Items Donated Today</p>
+            </div>
 
-              <div className="dashboard-right">
-                <div className="inventory-chart">
-                  <h3>Inventory Overview</h3>
-                  <canvas id="myChart" style={{ width: '100%', maxWidth: '700px' }}></canvas>
-                </div>
-              </div>
+            <div className="stat-card">
+              <i className="fa-solid fa-people-group"></i>
+              <p className="stat-number">{stats.people}</p>
+              <p className="stat-text">People Helped Today</p>
+            </div>
+          </div>
 
-              <div className="donation-history">
-                <h3>Recent Donations</h3>
-                <table>
-                  <thead>
-                    <tr>
-                      <th>User ID</th>
-                      <th>Name</th>
-                      <th>Email</th>
-                      <th>Category</th>
-                      <th>Type</th>
-                      <th>Date Donated</th>
-                      <th>Status</th>
-                      <th>Location</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {donations.length ? (
-                      donations.map((d) => (
-                        <tr key={d.donation_ID}>
-                          <td>{d.user_id || 'N/A'}</td>
-                          <td>{d.user_name || d.donor_name || 'N/A'}</td>
-                          <td>{d.user_email || 'N/A'}</td>
-                          <td>{d.category || d.item_category}</td>
-                          <td>{d.type || d.item_name}</td>
-                          <td>{d.donation_date.split(' ')[0]}</td>
-                          <td>{d.donation_status}</td>
-                          <td>{d.pickup_address || 'N/A'}</td>
-                        </tr>
-                      ))
-                    ) : (
-                      <tr>
-                        <td colSpan="8">No donations yet.</td>
-                      </tr>
-                    )}
-                  </tbody>
-                </table>
-              </div>
-            </>
-          )}
-        </main>
-      </div>
-    </div>
+          <div className="inventory-chart">
+            <h3>Inventory Overview</h3>
+            <canvas id="myChart" style={{ width: '100%', maxWidth: '700px' }}></canvas>
+          </div>
+        </>
+      )}
+    </main>
+  </div>
+
+  <div className="donation-history">
+    <h3>Recent Donations</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>User ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Category</th>
+          <th>Type</th>
+          <th>Date Donated</th>
+          <th>Status</th>
+          <th>Location</th>
+        </tr>
+      </thead>
+      <tbody>
+        {donations.length ? (
+          donations.map((d) => (
+            <tr key={d.donation_ID}>
+              <td>{d.user_id || 'N/A'}</td>
+              <td>{d.user_name || d.donor_name || 'N/A'}</td>
+              <td>{d.user_email || 'N/A'}</td>
+              <td>{d.category || d.item_category}</td>
+              <td>{d.type || d.item_name}</td>
+              <td>{d.donation_date.split(' ')[0]}</td>
+              <td>{d.donation_status}</td>
+              <td>{d.pickup_address || 'N/A'}</td>
+            </tr>
+          ))
+        ) : (
+          <tr>
+            <td colSpan="8">No donations yet.</td>
+          </tr>
+        )}
+      </tbody>
+    </table>
+  </div>
+</div>
   );
 }
 

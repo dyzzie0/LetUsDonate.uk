@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import '../../../css/admin.css';
-import '../../../css/mobile.css';
 import { Chart } from 'chart.js/auto';
+import '../../../css/admin.css';
 
 export function Admin_Dashboard() {
   const [donations, setDonations] = useState([]);
@@ -164,23 +163,23 @@ export function Admin_Dashboard() {
       <div className="admin-links">
         <h2>Welcome Admin!</h2>
         <li>
-          <ii className="fa-solid fa-users"></ii>
+          <i className="fa-solid fa-users"></i>
           <Link to="/view_users">View Users</Link>
         </li>
         <li>
-          <ii className="fa-solid fa-database"></ii>
+          <i className="fa-solid fa-database"></i>
           <Link to="/view_inventory">View Inventory</Link>
         </li>
         <li>
-          <ii className="fa-solid fa-hand-holding-heart"></ii>
+          <i className="fa-solid fa-hand-holding-heart"></i>
           <Link to="/view_donations">Donations</Link>
         </li>
         <li>
-          <ii className="fa-solid fa-chart-line"></ii>
+          <i className="fa-solid fa-chart-line"></i>
           <Link to="/data_reports">Data Reports</Link>
         </li>
         <li>
-          <ii className="fa-solid fa-arrow-right-from-bracket"></ii>
+          <i className="fa-solid fa-arrow-right-from-bracket"></i>
           <button
             className="admin-button"
             onClick={() => {
