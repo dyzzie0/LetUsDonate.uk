@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import '../../../css/records.css'; 
+import { useEffect, useState } from 'react';
+import '../../../css/records.css';
 
 export function My_Profile() {
   const [user, setUser] = useState(null);
-  const [formData, setFormData] = useState({ name: '', email: '', password: '' });
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
   const [status, setStatus] = useState(null);
 
   // Load user info from localStorage
@@ -54,9 +58,7 @@ export function My_Profile() {
       </div>
 
       {status && (
-        <div className={`form-message ${status.type}`}>
-          {status.message}
-        </div>
+        <div className={`form-message ${status.type}`}>{status.message}</div>
       )}
 
       <div className="table-container profile-form-container">

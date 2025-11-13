@@ -1,11 +1,10 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import '../../css/faq.css';
+
 function FAQ() {
   return (
     <div>
       <div className="faq">
-        <h2>FAQ Page</h2>
         <h3>Popular asked question </h3>
 
         <div className="cont">

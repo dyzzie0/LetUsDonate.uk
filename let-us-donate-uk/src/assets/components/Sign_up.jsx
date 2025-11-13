@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../../css/sign_up_login.css';
 
@@ -21,7 +21,7 @@ function DonorSignUp() {
     setMessage('');
 
     if (formData.password !== formData.confirmPassword) {
-      setMessage("Passwords do not match");
+      setMessage('Passwords do not match');
       return;
     }
 
@@ -34,9 +34,9 @@ function DonorSignUp() {
 
       const data = await response.json();
 
-      if (data.status === "success") {
+      if (data.status === 'success') {
         alert(data.message);
-        navigate("/login"); 
+        navigate('/login');
       } else {
         setMessage(data.message);
       }
@@ -112,7 +112,9 @@ function DonorSignUp() {
         </div>
 
         <div className="sub-btn">
-          <button type="submit" className="btn">Register</button>
+          <button type="submit" className="btn">
+            Register
+          </button>
         </div>
       </form>
     </div>

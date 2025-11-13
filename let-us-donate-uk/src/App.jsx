@@ -21,6 +21,7 @@ import { View_Inventory } from './assets/components/Charity/View_Inventory.jsx';
 import View_Donations from './assets/components/Charity/View_Donations.jsx';
 import Distribution_Records from './assets/components/Charity/Distribution_Records.jsx';
 import Approve_Donations from './assets/components/Charity/approve_donations.jsx';
+import Add_Charity from './assets/components/Admin/Add_Charity';
 
 import Admin_Dashboard from './assets/components/Admin/Admin_Dashboard.jsx';
 import View_Users from './assets/components/Admin/View_Users.jsx';
@@ -35,6 +36,8 @@ import Terms_Conditions from './assets/components/Footer_Content/Terms_Condition
 import Privacy_Policy from './assets/components/Footer_Content/Privacy_Policy.jsx';
 import Accessibility from './assets/components/Footer_Content/Accessibility.jsx';
 import Cookie_Policy from './assets/components/Footer_Content/Cookie_Policy.jsx';
+
+import NotFound from './404.jsx';
 
 function Layout() {
   const location = useLocation();
@@ -82,6 +85,7 @@ function Layout() {
           element={<Distribution_Records />}
         />
         <Route path="/approve_donations" element={<Approve_Donations />} />
+        <Route path="/add_charity" element={<Add_Charity />} />
 
         <Route path="/admin_dashboard" element={<Admin_Dashboard />} />
         <Route path="/view_users" element={<View_Users />} />
@@ -96,6 +100,7 @@ function Layout() {
         <Route path="/privacy_policy" element={<Privacy_Policy />} />
         <Route path="/accessibility" element={<Accessibility />} />
         <Route path="/cookie_policy" element={<Cookie_Policy />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
 
       {!showNothing && <Footer />}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import '../../../css/records.css';
 
 export function View_Users() {
@@ -43,7 +43,7 @@ export function View_Users() {
       );
     }
 
-    setFilteredUsers(results);
+    setFilteredUsers(results);   
   };
 
   return (
@@ -59,10 +59,15 @@ export function View_Users() {
               <li>
                 <a href="/admin_dashboard">Return</a>
               </li>
+              <li>
+              <a href="/add_charity"> Add Charity</a>
+              </li>
             </ul>
           </div>
         </div>
 
+       
+       
         <div className="filter-bar">
           <input
             type="text"

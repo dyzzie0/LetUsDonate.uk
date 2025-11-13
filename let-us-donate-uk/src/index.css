@@ -9,10 +9,11 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
 }
 
 body {
-  background-color: light-dark (#ffffff, #3f3f3f);
+  background-color: light-dark(#ffffff, #1d1d1d);
   color: light-dark (rgba(255, 255, 255, 0.87), rgba(0, 0, 0, 0.87));
 }
 
@@ -28,3 +29,4 @@ body {
 html {
   scroll-behavior: smooth;
 }
+

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import '../../../css/records.css';
 
 export function View_Donations() {
@@ -121,22 +121,26 @@ export function View_Donations() {
                       <td>{d.donor_name}</td>
                       <td>{d.item_name}</td>
                       <td>
-                      {d.item_image ? (
-                        <a
-                          href={`http://localhost:8000/${d.item_image}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <img
-                            src={`http://localhost:8000/${d.item_image}`}
-                            alt={d.item_name}
-                            style={{ width: '50px', height: 'auto', borderRadius: '4px' }}
-                          />
-                        </a>
-                      ) : (
-                        'N/A'
-                      )}
-                    </td>
+                        {d.item_image ? (
+                          <a
+                            href={`http://localhost:8000/${d.item_image}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <img
+                              src={`http://localhost:8000/${d.item_image}`}
+                              alt={d.item_name}
+                              style={{
+                                width: '50px',
+                                height: 'auto',
+                                borderRadius: '4px',
+                              }}
+                            />
+                          </a>
+                        ) : (
+                          'N/A'
+                        )}
+                      </td>
 
                       <td>{d.quantity}</td>
                       <td>{d.donation_date}</td>

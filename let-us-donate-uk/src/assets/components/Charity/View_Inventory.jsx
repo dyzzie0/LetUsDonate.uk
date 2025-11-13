@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import '../../../css/records.css';
 
 export function View_Inventory() {
@@ -10,9 +10,6 @@ export function View_Inventory() {
         return '/Charity_dashboard';
       case 'admin':
         return '/Admin_dashboard';
-      case 'donor':
-      case 'user':
-        return '/User_dashboard';
       default:
         return '/';
     }
@@ -58,7 +55,6 @@ export function View_Inventory() {
     setFilters({ ...filters, [name]: value });
   };
 
-  // ✅ Category totals
   const categoryCounts = filteredInventory.reduce((acc, item) => {
     acc[item.category] = (acc[item.category] || 0) + item.quantity;
     return acc;
@@ -88,7 +84,6 @@ export function View_Inventory() {
           </div>
         </div>
 
-        {/* Filter bar */}
         <div className="filter-bar">
           <select
             name="category"

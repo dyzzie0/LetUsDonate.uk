@@ -1,5 +1,3 @@
-import React from 'react';
-
 export function Privacy_Policy() {
   return (
     <div>
