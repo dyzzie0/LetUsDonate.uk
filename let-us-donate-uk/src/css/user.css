@@ -248,7 +248,7 @@
 }
 
 .new-donation button {
-  background-color: light-dark(#fef7e4, #2c8d56);
+  background-color: light-dark(#fef7e4, #2a4b38);
   border: none;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
