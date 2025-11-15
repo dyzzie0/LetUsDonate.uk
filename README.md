@@ -51,7 +51,7 @@ Frontend (React)
 -- cd let-us-donate-uk
 -- npm install
 -- npm run dev
--- open localhost:
+-- open [localhost:](http://localhost:5173/)
 
 Backend (Laravel)
 
