@@ -1,13 +1,14 @@
-# Smart Clothes Donation & Sustainability Platform
+## LetUsDonate.uk
 
-A responsive web application that streamlines clothing donations, categorisation, and redistribution.  
-The platform connects **donors, charity staff, and administrators** to make clothing donation more efficient, transparent, and impactful.
+A smart clothes donation platform that helps donors, charity staff, and administrators manage clothing collection, approval, categorisation, and sustainability insights.
 
----
+This project was developed for university and demonstrates modern full-stack development using React + Vite, Laravel, and MySQL.
+
+===============================================================================
 
 ## Features
 
--- Donors can log donations (with optional images).
+-- Donors can log and view their donations .
 
 -- Charity staff can approve/decline donations and manage inventory.
 
@@ -15,42 +16,82 @@ The platform connects **donors, charity staff, and administrators** to make clot
 
 -- Dashboards tailored to each role.
 
--- Analytics: CO₂ saving, charities supported.
+-- Analytics: CO₂ saving, charities supported
 
--- mResponsive design (desktop + mobile).
+-- AI sorting 
 
----
+-- Responsive design (desktop + mobile).
+
+===============================================================================
 
 ## Tech Stack
 
 -- Frontend: React.js + Vite
 
--- Backend: PHP
+-- Backend: PHP + Laravel
 
 -- Database: MySQL
 
--- Version Control: Git & GitHub
+-- Version Control: Git + GitHub
+
+-- Tools: VS Code + Prettier (npx prettier . --write)
 
 -- Methodology: Agile (Scrum)
 
----
+===============================================================================
 
 ## Set Up
 
 -- Open Visual Studio Code
 
--- Press clone repisitory - git clone https://github.com/dyzzie0/LetUsDonate.uk
+-- git clone https://github.com/dyzzie0/LetUsDonate.uk
 
--- Select folder and open it
+Frontend (React)
 
--- Open terminal type cd let-us-donate-uk
-
--- npm install react-router-dom
-
+-- cd let-us-donate-uk
 -- npm install
-
 -- npm run dev
+-- open localhost:
 
----
+Backend (Laravel)
 
-npx prettier . --write
+-- cd backend
+-- composer install
+-- cp .env.example .env
+-- php artisan key:generate
+-- php artisan serve
+
+Configure MySQL in .env:
+
+-- DB_DATABASE=letusdonate
+-- DB_USERNAME=root
+-- DB_PASSWORD=
+
+Build the Frontend for Production inside the React folder:
+
+-- npm run build
+
+===============================================================================
+
+## Project Structure 
+
+LetUsDonate.uk/
+│
+├── let-us-donate-uk/      # React frontend
+│   └── dist/              # Build output copied to Laravel
+│
+└── backend/               # Laravel backend (API)
+    ├── public/            # Hosts React build files
+    ├── routes/            # API + web routes
+    └── app/               # Controllers, Models, etc.
+
+===============================================================================
+
+## Developers
+
+-- @dyzzie0
+-- @Theo-Asamp
+-- @ZarkaHussain
+-- @lk34567
+
+===============================================================================
