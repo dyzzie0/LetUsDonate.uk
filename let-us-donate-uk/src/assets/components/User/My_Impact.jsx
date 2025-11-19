@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../../css/my_impact.css';
 
 export function My_Impact() {
